@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { Study } from "../core/types";
 
 type Pair = { de: string; sr: string; visual?: string; note?: string };
@@ -40,6 +40,42 @@ function scramble<T>(items:T[], seed:number):T[]{
  for(let i=copy.length-1;i>0;i--){x=(Math.imul(x,1664525)+1013904223)>>>0;const j=x%(i+1);[copy[i],copy[j]]=[copy[j],copy[i]]}
  return copy;
 }
+// Plays pronunciation on demand, including on mobile browsers that require a tap.
+function Pronounce({ text }: { text: string }) {
+ const [error, setError] = useState("");
+ const spoken = text.replace(/\s*\([^)]*\)/g, "").trim();
+ useEffect(() => () => {
+   if (typeof window !== "undefined" && "speechSynthesis" in window) window.speechSynthesis.cancel();
+ }, []);
+ function play() {
+   setError("");
+   if (!("speechSynthesis" in window)) {
+     setError("Izgovor nije podržan u ovom pregledaču.");
+     return;
+   }
+   try {
+     window.speechSynthesis.cancel();
+     const u = new SpeechSynthesisUtterance(spoken);
+     u.lang = "de-DE";
+     u.rate = 0.85;
+     u.pitch = 1;
+     const german = window.speechSynthesis.getVoices().filter(v => v.lang.toLowerCase().startsWith("de"));
+     u.voice = german.find(v => /natural|neural|premium|enhanced/i.test(v.name)) || german[0] || null;
+     u.onerror = e => {
+       if (e.error !== "canceled" && e.error !== "interrupted") setError("Zvuk nije dostupan. Proveri glasove telefona.");
+     };
+     window.speechSynthesis.speak(u);
+   } catch {
+     setError("Nije moguće pustiti izgovor.");
+   }
+ }
+ return <span style={{display:"inline-flex",alignItems:"center",gap:4}}>
+   <button type="button" onClick={play} aria-label={`Poslušaj izgovor: ${spoken}`} title={`Izgovor: ${spoken}`}
+     style={{minWidth:44,minHeight:44,padding:"6px 10px",borderRadius:12,border:"1px solid currentColor",background:"transparent",color:"inherit",cursor:"pointer"}}>🔊</button>
+   {error && <small role="alert">{error}</small>}
+ </span>;
+}
+
 export type BasicsRecord=Record<string,{score:number;date:string}>;
 export default function BeginnerBasics({state,onComplete}:{state:Study;onComplete:(unitId:string,score:number)=>void}){
  const completed:BasicsRecord=state.basics||{};
@@ -69,9 +105,9 @@ export default function BeginnerBasics({state,onComplete}:{state:Study;onComplet
   <h2>{unit.title}</h2><p className="muted">{unit.description}</p>
   {stage==="study"&&<>
     <div className="picture" style={{minHeight:125}}><span style={{fontSize:60}} aria-hidden="true">{unit.pairs[card].visual||"📘"}</span></div>
-    <h2 lang="de" style={{textAlign:"center",marginTop:16}}>{unit.pairs[card].de}</h2>
+    <div style={{display:"flex",alignItems:"center",justifyContent:"center",gap:12,flexWrap:"wrap",marginTop:16}}><h2 lang="de" style={{margin:0}}>{unit.pairs[card].de}</h2><Pronounce text={unit.pairs[card].de}/></div>
     <p style={{textAlign:"center",fontSize:20}}>{unit.pairs[card].sr}</p>
-    {unit.pairs[card].note&&<p lang="de" style={{textAlign:"center"}}>{unit.pairs[card].note}</p>}
+    {unit.pairs[card].note&&<div style={{display:"flex",alignItems:"center",justifyContent:"center",gap:8}}><p lang="de">{unit.pairs[card].note}</p><Pronounce text={unit.pairs[card].note}/></div>}
     <div className="line" style={{marginTop:18}}><button type="button" className="secondary" disabled={card===0} onClick={()=>setCard(card-1)}>← Prethodna</button><span>{card+1}/{unit.pairs.length}</span><button type="button" className="secondary" disabled={card===unit.pairs.length-1} onClick={()=>setCard(card+1)}>Sledeća →</button></div>
     <button type="button" className="primary" style={{marginTop:16}} onClick={()=>{setStage(unit.id==="objects"||unit.id==="colors"?"match":"quiz");setIndex(0);setCorrect(0);setSelected(null);setSubmitted(false);setMatched({});setMatchingIndex(null)}}>Proveri znanje</button>
   </>}
@@ -83,11 +119,14 @@ export default function BeginnerBasics({state,onComplete}:{state:Study;onComplet
       </button>)}
     </div>
     <div className="tiles" style={{marginTop:12}}>
-      {scramble(unit.pairs.slice(0,4),unitIndex+99).map(pair=><button key={pair.de} type="button" className="tile" disabled={Object.values(matched).includes(pair.de)} onClick={()=>{
-        if(matchingIndex===null)return;
-        if(unit.pairs[matchingIndex].de===pair.de){setMatched(old=>({...old,[matchingIndex]:pair.de}));setMatchingIndex(null)}
-        else setMatchingIndex(null);
-      }}>{pair.de}</button>)}
+      {scramble(unit.pairs.slice(0,4),unitIndex+99).map(pair=><div key={pair.de} style={{display:"flex",alignItems:"center",gap:6,minWidth:0}}>
+        <button type="button" className="tile" style={{flex:"1 1 auto",minWidth:0}} disabled={Object.values(matched).includes(pair.de)} onClick={()=>{
+          if(matchingIndex===null)return;
+          if(unit.pairs[matchingIndex].de===pair.de){setMatched(old=>({...old,[matchingIndex]:pair.de}));setMatchingIndex(null)}
+          else setMatchingIndex(null);
+        }}>{pair.de}</button>
+        <Pronounce text={pair.de}/>
+      </div>)}
     </div>
     <p className="muted">Tačno povezano: {Object.keys(matched).length}/4. Ako par nije tačan, pokušaj ponovo.</p>
     <button className="primary" type="button" disabled={Object.keys(matched).length!==4} onClick={()=>setStage("quiz")}>Nastavi na pitanja</button>
@@ -97,7 +136,10 @@ export default function BeginnerBasics({state,onComplete}:{state:Study;onComplet
     <progress className="bar" value={index} max={quiz.length} aria-label="Napredak testa"/>
     <div className="picture" style={{minHeight:110}}><span style={{fontSize:55}} aria-hidden="true">{question.pair.visual||"📘"}</span></div>
     <h2>{unit.id==="objects"?"Koja nemačka reč odgovara slici?":`Kako se na nemačkom kaže: ${question.pair.sr}?`}</h2>
-    <div className="choices">{choices.map((c,i)=><button key={c.de} type="button" className={`choice ${selected===i?"selected":""}`} disabled={submitted} aria-pressed={selected===i} onClick={()=>setSelected(i)} lang="de">{c.de}</button>)}</div>
+    <div className="choices">{choices.map((c,i)=><div key={c.de} style={{display:"flex",alignItems:"center",gap:8,minWidth:0}}>
+      <button type="button" className={`choice ${selected===i?"selected":""}`} style={{flex:"1 1 auto",minWidth:0}} disabled={submitted} aria-pressed={selected===i} onClick={()=>setSelected(i)} lang="de">{c.de}</button>
+      <Pronounce text={c.de}/>
+    </div>)}</div>
     {submitted&&<p role="status" className={`feedback ${selected!==null&&choices[selected].de===question.pair.de?"ok":"miss"}`}>{selected!==null&&choices[selected].de===question.pair.de?"Sehr gut!":"Fast richtig!"} Tačno: <strong lang="de">{question.pair.de}</strong></p>}
     <button type="button" className="primary" disabled={selected===null} onClick={()=>submitted?next():setSubmitted(true)} style={{marginTop:16}}>{submitted?"Nastavi":"Proveri odgovor"}</button>
   </>}
