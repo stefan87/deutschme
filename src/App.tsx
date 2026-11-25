@@ -1103,6 +1103,23 @@ export default function App() {
           )}
         </main>
       </div>
+      {!active && (
+        <nav className="mobile-bottom-nav" aria-label={t("Mobilna navigacija", "Mobile Navigation")}>
+          {nav.filter(([id]) => ["home", "learn", "vocab", "progress", "profile"].includes(id))
+            .map(([id, sr, deLabel, Icon]) => (
+              <button
+                key={id}
+                type="button"
+                className={`mobile-bottom-item ${page === id ? "selected" : ""}`}
+                aria-current={page === id ? "page" : undefined}
+                onClick={() => go(id)}
+              >
+                <Icon size={21} aria-hidden="true" />
+                <span>{t(sr, deLabel)}</span>
+              </button>
+            ))}
+        </nav>
+      )}
     </div>
   );
 }
