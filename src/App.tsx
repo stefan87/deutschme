@@ -375,9 +375,21 @@ export default function App() {
           </h2>
           <p>Prilagodi svoj profil za prve korake na nemačkom.</p>
           <ProfileForm profile={null} onSave={storeProfile} suggestedLevel={s.placement?.recommended} />
-          {!saved && (
-            <p role="alert">Podaci ne mogu da se sačuvaju u ovom pregledaču.</p>
-          )}
+         {cloudError && (
+  <p className="callout" role="alert">
+    {cloudError}
+  </p>
+)}
+
+{!cloud && !saved && (
+  <p className="callout" role="alert">
+    {t(
+      "Napredak nije sačuvan.",
+      "Fortschritt wurde nicht gespeichert.",
+    )}
+  </p>
+)}
+
         </section>
       </div>
     );
