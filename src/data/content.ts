@@ -335,10 +335,7 @@ export const exam: Session = {
     "final",
   ),
 };
-export const a12Sessions = [
-  ...a12Unit1,
-  ...a12Units2to10,
-];
+
 export const a12Sessions = [
   ...a12Unit1,
   ...a12Units2to10,
