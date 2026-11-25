@@ -12,6 +12,7 @@ import { scenes } from "./scenes";
 import { extraSceneDialogues } from "./germany-extra-dialogues";
 import { lessonDialogues } from "./lesson-dialogues";
 import { roadmap } from "./roadmap";
+import { a12Unit1 } from "./a12-unit1";  
 export const media = (name: string) =>
   `${import.meta.env.BASE_URL}audio/${name}.mp3`;
 const pair = (a: string, b: string): [string, string] => [a, b];
