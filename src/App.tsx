@@ -398,17 +398,17 @@ export default function App() {
       onClick={() => open(item)}
     >
       <span className={`lesson-icon ${s.results[item.id] ? "done" : ""}`}>
-        {s.results[item.id] ? (
-          <Check size={17} />
-        ) : !unlocked(s, item.id) && item.type !== "practice" ? (
-          <LockKeyhole size={16} />
-        ) : item.type === "lesson" ? (
-          <Play size={16} />
-        ) : item.type === "practice" ? (
-          <GermanySceneIcon id={item.id} />
-        ) : (
-          <GraduationCap size={18} />
-        )}
+        {item.type === "practice" ? (
+  <GermanySceneIcon id={item.id} />
+) : s.results[item.id] ? (
+  <Check size={17} />
+) : !unlocked(s, item.id) ? (
+  <LockKeyhole size={16} />
+) : item.type === "lesson" ? (
+  <Play size={16} />
+) : (
+  <GraduationCap size={18} />
+)}
       </span>
       <span>
         {item.title[k]}
