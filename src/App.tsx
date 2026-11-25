@@ -817,6 +817,28 @@ export default function App() {
                   "Neue Lektionen öffnen sich ab 80 % in der vorherigen. Abgeschlossene kannst du wiederholen.",
                 ),
               )}
+              {level === "A1.1" && (
+  <BeginnerBasics
+    state={s}
+    onComplete={(unitId, score) =>
+      change((old) => {
+        const previous = old.basics?.[unitId];
+        const best = Math.max(previous?.score ?? 0, score);
+
+        return {
+          ...old,
+          basics: {
+            ...old.basics,
+            [unitId]: {
+              score: best,
+              date: previous?.date || new Date().toISOString(),
+            },
+          },
+        };
+      })
+    }
+  />
+)
               {levelCards}
               {level === "A1.1" ? (
                 <>
