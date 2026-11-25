@@ -59,6 +59,7 @@ import { colors, levels, roadmap } from "./data/roadmap";
 import Exercise, { Sound } from "./features/Exercise";
 import Vocabulary from "./features/Vocabulary";
 import ProfileForm from "./features/Profile";
+import AccountSettings from "./features/AccountSettings";
 import Speaking from "./features/Speaking";
 const nav = [
   ["home", "Početna", "Start", House],
@@ -1085,6 +1086,7 @@ export default function App() {
               <div className="card profile">
                 <ProfileForm profile={s.profile} onSave={storeProfile} />
               </div>
+              <AccountSettings account={account} />
               <div className="card" style={{ marginTop: 16 }}>
                 <h2>{t("Procena znanja nemačkog", "Deutsch-Einstufungstest")}</h2>
                 <p>{t("Proveri svoj nivo kroz 24 pitanja. Rezultat ne briše XP, završene lekcije ni postojeći nivo.", "Prüfe dein Niveau mit 24 Fragen. Deine XP, Lektionen und dein aktuelles Niveau bleiben erhalten.")}</p>
