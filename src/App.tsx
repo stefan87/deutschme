@@ -63,7 +63,6 @@ import {
 } from "./data/content";
 import { colors, levels, roadmap } from "./data/roadmap";
 import BeginnerBasics from "./features/BeginnerBasics";
-import GermanySceneIcon from "./features/GermanySceneIcon";
 import Exercise, { Sound } from "./features/Exercise";
 import Vocabulary from "./features/Vocabulary";
 import ProfileForm from "./features/Profile";
