@@ -838,7 +838,7 @@ export default function App() {
       })
     }
   />
-)
+)}
               {levelCards}
               {level === "A1.1" ? (
                 <>
