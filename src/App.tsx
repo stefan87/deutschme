@@ -64,6 +64,7 @@ import {
 import { colors, levels, roadmap } from "./data/roadmap";
 import BeginnerBasics from "./features/BeginnerBasics";
 import Exercise, { Sound } from "./features/Exercise";
+import { a12Unit1 } from "./data/a12-unit1";
 import Vocabulary from "./features/Vocabulary";
 import ProfileForm from "./features/Profile";
 import AccountSettings from "./features/AccountSettings";
@@ -899,8 +900,17 @@ export default function App() {
                       </details>
                     ))}
                   </div>
-                  {cardList([exam])}
+               {cardList([exam])}
                 </>
+              ) : level === "A1.2" ? (
+                <div className="unit-list">
+                  <h2>A1.2 · Alltag</h2>
+                  <p className="muted">
+                    Prva celina: pet lekcija i test.
+                    Ostale A1.2 celine su u pripremi.
+                  </p>
+                  {cardList(a12Unit1)}
+                </div>
               ) : (
                 <div className="unit-list">
                   <p className="callout">
