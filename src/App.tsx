@@ -106,7 +106,6 @@ export default function App() {
   const pendingSave=useRef<ReturnType<typeof setTimeout>|null>(null);
   const [page, setPage] = useState<Page>("home");
   const [retakePlacement, setRetakePlacement] = useState(false);
-
   const [level, setLevel] = useState<LevelId>(
     () => repository.load().profile?.start || "A1.1",
   );
@@ -283,32 +282,6 @@ export default function App() {
   function storeProfile(p: Profile) {
     change((old) => ({ ...old, profile: p }));
     setLevel(p.start);
-    if (s.profile && retakePlacement) {
-  return (
-    <Placement
-      onDone={(result) => {
-        change((old) => ({ ...old, placement: result }));
-        setRetakePlacement(false);
-        setPage("profile");
-      }}
-    />
-  );
-}
-
-    if (!s.profile && !s.placement) {
-  return (
-    <Placement
-      onDone={(result) => {
-        change((old) => ({
-          ...old,
-          placement: result,
-        }));
-        setLevel(result.recommended);
-      }}
-    />
-  );
-}
-
     if (!s.profile) go("home");
   }
   const head = (title: string, sub: string) => (
@@ -327,6 +300,19 @@ export default function App() {
   if(cloud&&!authReady)return <div className="welcome-main"><h2>Učitavanje naloga i napretka...</h2></div>;
   if(cloud&&!account)return <Auth/>;
   if(cloud&&cloudError&&!cloudLoaded.current)return <div className="welcome-main"><h2>Greška pri učitavanju</h2><p role="alert">{cloudError}</p><button className="secondary" onClick={()=>void cloud?.auth.signOut()}>Odjavi se</button></div>;
+  if (s.profile && retakePlacement) {
+    return (
+      <Placement
+        onDone={(placementResult) => {
+          change((old) => ({ ...old, placement: placementResult }));
+          setRetakePlacement(false);
+          setPage("profile");
+        }}
+      />
+    );
+  }
+  if (!s.profile && !s.placement)
+    return <Placement onDone={r=>{change(old=>({...old,placement:r}));setLevel(r.recommended)}}/>;
   if (!s.profile)
     return (
       <div className="welcome">
@@ -356,11 +342,7 @@ export default function App() {
             Dobrodošao! <span>Willkommen!</span>
           </h2>
           <p>Prilagodi svoj profil za prve korake na nemačkom.</p>
-          <ProfileForm
-  profile={null}
-  onSave={storeProfile}
-  suggestedLevel={s.placement?.recommended}
-/>
+          <ProfileForm profile={null} onSave={storeProfile} suggestedLevel={s.placement?.recommended} />
           {!saved && (
             <p role="alert">Podaci ne mogu da se sačuvaju u ovom pregledaču.</p>
           )}
@@ -1104,25 +1086,19 @@ export default function App() {
                 <ProfileForm profile={s.profile} onSave={storeProfile} />
               </div>
               <div className="card" style={{ marginTop: 16 }}>
-  <h2>Procena znanja nemackog</h2>
-  <p>
-    Proveri svoje znanje kroz 24 pitanja. Test ne menja
-    zavrsene lekcije, XP niti tvoj izabrani nivo.
-  </p>
-  {s.placement && (
-    <p>
-      Poslednja preporuka: <strong>{s.placement.recommended}</strong>
-    </p>
-  )}
-  <button
-    type="button"
-    className="primary"
-    onClick={() => setRetakePlacement(true)}
-  >
-    Zapocni test procene znanja
-  </button>
-</div>
-
+                <h2>{t("Procena znanja nemačkog", "Deutsch-Einstufungstest")}</h2>
+                <p>{t("Proveri svoj nivo kroz 24 pitanja. Rezultat ne briše XP, završene lekcije ni postojeći nivo.", "Prüfe dein Niveau mit 24 Fragen. Deine XP, Lektionen und dein aktuelles Niveau bleiben erhalten.")}</p>
+                {s.placement && (
+                  <p>{t("Poslednja preporuka", "Letzte Empfehlung")}: <strong>{s.placement.recommended}</strong></p>
+                )}
+                <button
+                  type="button"
+                  className="primary"
+                  onClick={() => setRetakePlacement(true)}
+                >
+                  {t("Započni test procene znanja", "Einstufungstest starten")}
+                </button>
+              </div>
             </>
           )}
         </main>
