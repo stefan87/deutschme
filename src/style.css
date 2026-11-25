@@ -303,3 +303,31 @@ label { min-width: 0; }
   100% { opacity: 0; translate: 0 15px; rotate: 300deg; }
 }
 @media (prefers-reduced-motion: reduce) { .dm-confetti-piece { animation: none; display: none; } }
+/* DeutschMe v6 - visible confetti overlay (replaces previous .dm-confetti rules) */
+.exercise { position: relative; isolation: isolate; }
+.dm-celebration {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  overflow: visible;
+  pointer-events: none;
+}
+.dm-celebration-piece {
+  position: absolute;
+  top: 48%;
+  width: 9px;
+  height: 13px;
+  border-radius: 2px;
+  opacity: 0;
+  box-shadow: 0 0 8px currentColor;
+  animation: dm-celebrate 1100ms ease-out forwards;
+}
+@keyframes dm-celebrate {
+  0% { opacity: 1; transform: translate(0,0) rotate(0deg) scale(.6); }
+  25% { opacity: 1; transform: translate(calc(var(--drift) * .45),-75px) rotate(110deg) scale(1); }
+  70% { opacity: 1; transform: translate(var(--drift),-115px) rotate(260deg) scale(1); }
+  100% { opacity: 0; transform: translate(var(--drift),25px) rotate(410deg) scale(.7); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .dm-celebration { display: none; }
+}
