@@ -43,6 +43,7 @@ import {
 import { repository, fresh } from "./services/repository";
 import {cloud,loadCloud,saveCloud,type Account} from "./services/cloud";
 import Auth from "./features/Auth";
+import Placement from "./features/placement/Placement";
 import {
   allSessions,
   curriculum,
@@ -280,6 +281,20 @@ export default function App() {
   function storeProfile(p: Profile) {
     change((old) => ({ ...old, profile: p }));
     setLevel(p.start);
+    if (!s.profile && !s.placement) {
+  return (
+    <Placement
+      onDone={(result) => {
+        change((old) => ({
+          ...old,
+          placement: result,
+        }));
+        setLevel(result.recommended);
+      }}
+    />
+  );
+}
+
     if (!s.profile) go("home");
   }
   const head = (title: string, sub: string) => (
