@@ -378,9 +378,9 @@ export const nextSession = (s: Study) => {
 };
 export const progress = (s: Study, l: LevelId) => {
   if (l === "A1.1") {
-    const completed = sessions
-      .slice(0, 61)
-      .filter((x) => s.results[x.id]).length;
+    const completed = a12Sessions.filter(
+  (x) => s.results[x.id]
+).length;
 
     return Math.floor((completed * 100) / 61);
   }
@@ -391,8 +391,8 @@ export const progress = (s: Study, l: LevelId) => {
     ).length;
 
     return Math.floor(
-      (completed * 100) / a12Unit1.length
-    );
+  (completed * 100) / a12Sessions.length
+);
   }
 
   return 0;
