@@ -342,7 +342,11 @@ export default function App() {
             Dobrodošao! <span>Willkommen!</span>
           </h2>
           <p>Prilagodi svoj profil za prve korake na nemačkom.</p>
-          <ProfileForm profile={null} onSave={storeProfile} />
+          <ProfileForm
+  profile={null}
+  onSave={storeProfile}
+  suggestedLevel={s.placement?.recommended}
+/>
           {!saved && (
             <p role="alert">Podaci ne mogu da se sačuvaju u ovom pregledaču.</p>
           )}
