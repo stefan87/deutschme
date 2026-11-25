@@ -1228,3 +1228,62 @@ audio {
     max-width: none;
   }
 }
+
+
+/* DeutschMe mobile UX v4: touch targets, compact learning, safe areas. */
+html { -webkit-text-size-adjust: 100%; }
+button, select, input, summary { touch-action: manipulation; }
+button { -webkit-tap-highlight-color: transparent; }
+.sound { min-width: 0; }
+.sound select { width: auto; max-width: 100%; flex: 1 1 145px; }
+.sound details { flex-basis: 100%; }
+.sound details audio { margin-top: 8px; }
+@media (max-width: 740px) {
+  .top { position: sticky; top: 0; z-index: 20; padding-top: env(safe-area-inset-top, 0px); }
+  .sidebar { position: fixed; top: calc(57px + env(safe-area-inset-top, 0px)); z-index: 30; overflow-y: auto; overscroll-behavior: contain; max-height: calc(100dvh - 57px - env(safe-area-inset-top, 0px)); }
+  .main { padding: 14px 12px calc(28px + env(safe-area-inset-bottom, 0px)); }
+  .page-head { margin-bottom: 16px; }
+  .page-head h1 { font-size: clamp(1.8rem, 8vw, 2.5rem); }
+  .hero { border-radius: 19px; }
+  .hero h1 { font-size: clamp(2rem, 9vw, 3rem); }
+  .hero p { font-size: 0.94rem; }
+  .stat-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .home-grid { grid-template-columns: 1fr; }
+  .card { padding: 16px; }
+  .stat { padding: 12px; }
+  .stat-icon { width: 39px; height: 39px; }
+  .lesson-row { min-height: 62px; padding: 10px 4px; }
+  .nav, .primary, .secondary, .choice, .tile, .hero-btn { min-height: 48px; }
+  .exercise { padding: 18px 14px; gap: 14px; }
+  .exercise h2 { font-size: clamp(1.3rem, 5.5vw, 1.8rem); }
+  .exercise .prompt { font-size: 1.06rem; padding: 15px; }
+  .choices { grid-template-columns: 1fr; gap: 10px; }
+  .choice { min-height: 54px; padding: 13px 15px; font-size: 1rem; }
+  .tile { min-height: 48px; padding: 10px 13px; }
+  .tilebox { min-height: 74px; }
+  .exercise-action { width: 100%; min-height: 52px; }
+  .sound { display: flex; align-items: stretch; }
+  .sound > svg { align-self: center; }
+  .sound > button { flex: 1 1 180px; }
+  .sound select { flex: 1 1 120px; min-width: 0; }
+  .sound audio { max-width: 100%; }
+  .session-head { position: sticky; top: calc(57px + env(safe-area-inset-top, 0px)); z-index: 10; background: var(--bg); padding: 8px 0; }
+  .unit summary { min-height: 65px; }
+  .toolbar { grid-template-columns: 1fr; }
+  .welcome-main { padding-bottom: calc(28px + env(safe-area-inset-bottom, 0px)); }
+}
+@media (max-width: 360px) {
+  .top { padding-left: 9px; padding-right: 9px; }
+  .top-right { gap: 3px; }
+  .crumb { font-size: 0.73rem; }
+  .main { padding-left: 9px; padding-right: 9px; }
+  .stat { gap: 7px; }
+  .stat b { font-size: 1.05rem; }
+  .stat small { font-size: 0.68rem; }
+  .level { padding: 12px; }
+  .selectrow { grid-template-columns: 1fr; }
+}
+@media print {
+  .top { position: static; }
+  .session-head { position: static; }
+}
