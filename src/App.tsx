@@ -437,15 +437,19 @@ export default function App() {
         >
           <span className="level-label">
             {l}
-            {i ? <LockKeyhole size={14} /> : <BookOpen size={15} />}
+{l === "A1.1" || l === "A1.2"
+  ? <BookOpen size={15} />
+  : <LockKeyhole size={14} />}
           </span>
           <b>{progress(s, l)}%</b>
           <Bar value={progress(s, l)} label={l} />
           <small>
-            {i
-              ? t("Plan · u pripremi", "Plan · in Vorbereitung")
-              : t("Dostupno", "Verfügbar")}
-          </small>
+  {l === "A1.1"
+    ? t("Dostupno", "Verfügbar")
+    : l === "A1.2"
+      ? t("Dostupno · 1. celina", "Verfügbar · Einheit 1")
+      : t("Plan · u pripremi", "Plan · in Vorbereitung")}
+</small>
         </button>
       ))}
     </div>
