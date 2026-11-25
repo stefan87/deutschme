@@ -6,16 +6,18 @@ import { levels } from "../data/roadmap";
 export default function ProfileForm({
   profile,
   onSave,
+  suggestedLevel,
 }: {
   profile: Profile | null;
   onSave: (p: Profile) => void;
+  suggestedLevel?: Profile["start"];
 }) {
   const [p, set] = useState<Profile>(
     profile || {
       name: "",
       language: "sr",
       native: "sr",
-      start: "A1.1",
+      start: suggestedLevel || "A1.1",
       goal: 10,
       theme: "system",
     },
