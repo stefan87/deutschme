@@ -349,3 +349,192 @@ h1, h2, h3, .brand {
 .primary, .secondary, .hero-btn, .nav, .mobile-bottom-item, .tile, .choice {
   font-weight: 700;
 }
+/* DeutschMe v6: real light/dark themes. Default = neon dark. */
+:root,
+:root[data-theme="dark"] {
+  color-scheme: dark;
+}
+
+/* Explicit light theme, plus system theme when OS prefers light. */
+:root[data-theme="light"] {
+  color-scheme: light;
+  --bg: #f3fbfc;
+  --panel: #ffffff;
+  --ink: #10303b;
+  --muted: #526a73;
+  --border: #9bcdd1;
+  --primary: #008e9b;
+  --primaryText: #006f7b;
+  --pale: #e0f5f5;
+  --soft: #edf9fa;
+  --good: #17634c;
+  --goodbg: #dff8e9;
+  --warn: #9c2949;
+  --warnbg: #ffedf1;
+  --shadow: 0 10px 26px #12495616;
+}
+@media (prefers-color-scheme: light) {
+  :root[data-theme="system"] {
+    color-scheme: light;
+    --bg: #f3fbfc;
+    --panel: #ffffff;
+    --ink: #10303b;
+    --muted: #526a73;
+    --border: #9bcdd1;
+    --primary: #008e9b;
+    --primaryText: #006f7b;
+    --pale: #e0f5f5;
+    --soft: #edf9fa;
+    --good: #17634c;
+    --goodbg: #dff8e9;
+    --warn: #9c2949;
+    --warnbg: #ffedf1;
+    --shadow: 0 10px 26px #12495616;
+  }
+}
+
+/* These rules replace hardcoded dark surfaces only in light mode. */
+:root[data-theme="light"] body {
+  background: radial-gradient(circle at 85% 0%, #d6f9f7, transparent 42%), var(--bg);
+}
+:root[data-theme="light"] .card {
+  background: linear-gradient(145deg, #ffffff, #f3fcfd);
+  border-color: var(--border);
+  box-shadow: var(--shadow);
+}
+:root[data-theme="light"] .sidebar,
+:root[data-theme="light"] .top,
+:root[data-theme="light"] .mobile-bottom-nav {
+  background: #ffffffed;
+  border-color: var(--border);
+}
+:root[data-theme="light"] .nav,
+:root[data-theme="light"] .lesson-row,
+:root[data-theme="light"] .mobile-bottom-item {
+  color: var(--ink);
+}
+:root[data-theme="light"] .nav:hover,
+:root[data-theme="light"] .nav.active,
+:root[data-theme="light"] .mobile-bottom-item.selected,
+:root[data-theme="light"] .mobile-bottom-item[aria-current="page"] {
+  background: var(--pale);
+  border-color: var(--border);
+  color: var(--primaryText);
+  box-shadow: none;
+}
+:root[data-theme="light"] .hero {
+  background: radial-gradient(circle at 80% 20%, #a7efed, #d9f8f8 45%, #ecfcfd 90%);
+  color: var(--ink);
+  border-color: var(--border);
+  box-shadow: var(--shadow);
+}
+:root[data-theme="light"] .hero p { color: var(--muted); }
+:root[data-theme="light"] .hero-art { background: radial-gradient(ellipse at 55% 55%, #83dbd7, transparent 70%); }
+:root[data-theme="light"] .orbit { border-color: #008f9b70; }
+:root[data-theme="light"] .tag { background: #ddf7f7; color: #006f7b; border-color: #78c9cc; }
+:root[data-theme="light"] .float.a { background: #fff; color: #006f7b; }
+:root[data-theme="light"] .float.b,
+:root[data-theme="light"] .float.c { background: #d8f6f5; color: #075b63; border-color: #78c9cc; }
+:root[data-theme="light"] .primary,
+:root[data-theme="light"] .hero-btn {
+  color: #ffffff;
+  background: linear-gradient(135deg, #008e9b, #00aeb6);
+  border-color: #008e9b;
+  box-shadow: 0 4px 13px #008e9b38;
+}
+:root[data-theme="light"] .primary:hover:not(:disabled),
+:root[data-theme="light"] .hero-btn:hover:not(:disabled) {
+  background: #007681;
+  box-shadow: 0 5px 16px #008e9b50;
+}
+:root[data-theme="light"] .secondary,
+:root[data-theme="light"] .tile,
+:root[data-theme="light"] .choice,
+:root[data-theme="light"] .icon-btn,
+:root[data-theme="light"] .avatar,
+:root[data-theme="light"] input:not([type="radio"]):not([type="checkbox"]),
+:root[data-theme="light"] select {
+  background: #ffffff;
+  color: var(--ink);
+  border-color: var(--border);
+  box-shadow: none;
+}
+:root[data-theme="light"] .choice:hover:not(:disabled),
+:root[data-theme="light"] .choice.selected,
+:root[data-theme="light"] .selected,
+:root[data-theme="light"] .secondary:hover:not(:disabled),
+:root[data-theme="light"] .tile:hover:not(:disabled),
+:root[data-theme="light"] .level.current,
+:root[data-theme="light"] .level:hover,
+:root[data-theme="light"] .unit summary:hover,
+:root[data-theme="light"] .lesson-row:not(:disabled):hover {
+  background: var(--pale);
+  color: var(--primaryText);
+  border-color: var(--border);
+}
+:root[data-theme="light"] .prompt,
+:root[data-theme="light"] blockquote,
+:root[data-theme="light"] .tilebox,
+:root[data-theme="light"] .rule-grid section,
+:root[data-theme="light"] .reveal {
+  background: var(--soft);
+  color: var(--ink);
+  border-color: var(--border);
+}
+:root[data-theme="light"] .picture {
+  background: radial-gradient(ellipse, #ffffff, #ddf7f7);
+  border-color: var(--border);
+  box-shadow: none;
+}
+:root[data-theme="light"] .unit-icon,
+:root[data-theme="light"] .lesson-icon,
+:root[data-theme="light"] .chip,
+:root[data-theme="light"] .callout {
+  background: var(--pale);
+  color: var(--primaryText);
+  border-color: var(--border);
+}
+:root[data-theme="light"] .crumb { color: var(--muted); }
+:root[data-theme="light"] .session-head { background: var(--bg); }
+:root[data-theme="light"] .welcome-art {
+  background: radial-gradient(circle at 75% 20%, #72d6d4, #159da7 55%, #076775);
+  color: #ffffff;
+}
+:root[data-theme="light"] .welcome-art p,
+:root[data-theme="light"] .welcome-art h1 span,
+:root[data-theme="light"] .welcome-art .eyebrow { color: #f0ffff; }
+:root[data-theme="light"] .feedback.ok { background: var(--goodbg); color: var(--good); }
+:root[data-theme="light"] .feedback.miss { background: var(--warnbg); color: var(--warn); }
+
+/* OS-light selection when user chose System. */
+@media (prefers-color-scheme: light) {
+  :root[data-theme="system"] body { background: #f3fbfc; }
+  :root[data-theme="system"] .card { background: #ffffff; border-color: var(--border); box-shadow: var(--shadow); }
+  :root[data-theme="system"] .sidebar,
+  :root[data-theme="system"] .top,
+  :root[data-theme="system"] .mobile-bottom-nav { background: #ffffffed; border-color: var(--border); }
+  :root[data-theme="system"] .nav,
+  :root[data-theme="system"] .lesson-row,
+  :root[data-theme="system"] .mobile-bottom-item { color: var(--ink); }
+  :root[data-theme="system"] .nav.active,
+  :root[data-theme="system"] .mobile-bottom-item.selected { background: var(--pale); color: var(--primaryText); }
+  :root[data-theme="system"] .hero { background: linear-gradient(125deg, #e6fbfc, #b6eeed); color: var(--ink); }
+  :root[data-theme="system"] .hero p { color: var(--muted); }
+  :root[data-theme="system"] .primary,
+  :root[data-theme="system"] .hero-btn { background: #008e9b; color: white; box-shadow: none; }
+  :root[data-theme="system"] .secondary,
+  :root[data-theme="system"] .tile,
+  :root[data-theme="system"] .choice,
+  :root[data-theme="system"] .icon-btn,
+  :root[data-theme="system"] .avatar,
+  :root[data-theme="system"] input:not([type="radio"]):not([type="checkbox"]),
+  :root[data-theme="system"] select { background: white; color: var(--ink); border-color: var(--border); }
+  :root[data-theme="system"] .prompt,
+  :root[data-theme="system"] blockquote,
+  :root[data-theme="system"] .tilebox { background: var(--soft); color: var(--ink); border-color: var(--border); }
+  :root[data-theme="system"] .picture { background: radial-gradient(ellipse, white, #ddf7f7); }
+  :root[data-theme="system"] .unit-icon,
+  :root[data-theme="system"] .lesson-icon,
+  :root[data-theme="system"] .chip { background: var(--pale); color: var(--primaryText); }
+  :root[data-theme="system"] .session-head { background: var(--bg); }
+}
