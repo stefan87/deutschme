@@ -582,14 +582,21 @@ export default function App() {
             if (sidebar) setSidebar(false);
           }}
         >
-          {!saved && (
-            <p className="callout" role="alert">
-              {t(
-                "Pregledač nije sačuvao promene. Napredak može nestati pri zatvaranju.",
-                "Änderungen wurden nicht gespeichert. Der Fortschritt kann verloren gehen.",
-              )}
-            </p>
-          )}
+          {cloudError && (
+  <p className="callout" role="alert">
+    {cloudError}
+  </p>
+)}
+
+{!cloud && !saved && (
+  <p className="callout" role="alert">
+    {t(
+      "Napredak nije sačuvan.",
+      "Fortschritt wurde nicht gespeichert.",
+    )}
+  </p>
+)}
+
           {active && current && s.cursor ? (
             <div className="session">
               {sessionHeader}
