@@ -475,7 +475,7 @@ export default function App() {
             </span>
           </div>
           <div className="top-right">
-            {cloud&&account&&<button className="secondary" type="button" onClick={()=>void cloud.auth.signOut()}>Odjavi se</button>}
+            {cloud&&account&&<button className="secondary" type="button" onClick={()=>void cloud?.auth.signOut()}>Odjavi se</button>}
 
             <button
               className="icon-btn"
