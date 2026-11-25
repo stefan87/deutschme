@@ -90,11 +90,20 @@ const nav = [
 type Page = (typeof nav)[number][0];
 const brand = (
   <div className="brand">
-    <span className="brandmark">
-      <Languages size={23} />
-    </span>
+  <span className="brandmark">
+  <img
+    src={`${import.meta.env.BASE_URL}deutschly-logo.png`}
+    alt="Deutschly logo"
+    style={{
+      width: "42px",
+      height: "42px",
+      objectFit: "contain",
+      borderRadius: "10px",
+    }}
+  />
+</span>
     <span>
-      Deutsch<span>Me</span>
+Deutsch<span>ly</span>
       <small>LERNSTUDIO</small>
     </span>
   </div>
