@@ -367,9 +367,9 @@ const a12Index = a12Sessions.findIndex((x) => x.id === id);
 }
 export const nextSession = (s: Study) => {
   if (s.profile?.start === "A1.2") {
-    return a12Unit1.find(
-      (x) => !s.results[x.id] && unlocked(s, x.id)
-    );
+    return a12Sessions.find(
+  (x) => !s.results[x.id] && unlocked(s, x.id)
+);
   }
 
   return sessions
