@@ -360,8 +360,17 @@ export function unlocked(s: Study, id: string) {
 
   return i === 0 || (i > 0 && !!s.results[path[i - 1].id]);
 }
-export const nextSession = (s: Study) =>
-  sessions.slice(0, 61).find((x) => !s.results[x.id] && unlocked(s, x.id));
+export const nextSession = (s: Study) => {
+  if (s.profile?.start === "A1.2") {
+    return a12Unit1.find(
+      (x) => !s.results[x.id] && unlocked(s, x.id)
+    );
+  }
+
+  return sessions
+    .slice(0, 61)
+    .find((x) => !s.results[x.id] && unlocked(s, x.id));
+};
 export const progress = (s: Study, l: LevelId) =>
   l === "A1.1"
     ? Math.floor(
