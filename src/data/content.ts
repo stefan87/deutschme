@@ -12,7 +12,8 @@ import { scenes } from "./scenes";
 import { extraSceneDialogues } from "./germany-extra-dialogues";
 import { lessonDialogues } from "./lesson-dialogues";
 import { roadmap } from "./roadmap";
-import { a12Unit1 } from "./a12-unit1";  
+import { a12Unit1 } from "./a12-unit1"; 
+import { a12Units2to10 } from "./a12-units2-10";
 export const media = (name: string) =>
   `${import.meta.env.BASE_URL}audio/${name}.mp3`;
 const pair = (a: string, b: string): [string, string] => [a, b];
@@ -334,6 +335,10 @@ export const exam: Session = {
     "final",
   ),
 };
+export const a12Sessions = [
+  ...a12Unit1,
+  ...a12Units2to10,
+];
 export const sessions = [
   ...curriculum.flatMap((x) => [...x.lessons, x.test]),
   exam,
