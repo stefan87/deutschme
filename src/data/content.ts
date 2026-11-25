@@ -371,13 +371,27 @@ export const nextSession = (s: Study) => {
     .slice(0, 61)
     .find((x) => !s.results[x.id] && unlocked(s, x.id));
 };
-export const progress = (s: Study, l: LevelId) =>
-  l === "A1.1"
-    ? Math.floor(
-        (sessions.slice(0, 61).filter((x) => s.results[x.id]).length * 100) /
-          61,
-      )
-    : 0;
+export const progress = (s: Study, l: LevelId) => {
+  if (l === "A1.1") {
+    const completed = sessions
+      .slice(0, 61)
+      .filter((x) => s.results[x.id]).length;
+
+    return Math.floor((completed * 100) / 61);
+  }
+
+  if (l === "A1.2") {
+    const completed = a12Unit1.filter(
+      (x) => s.results[x.id]
+    ).length;
+
+    return Math.floor(
+      (completed * 100) / a12Unit1.length
+    );
+  }
+
+  return 0;
+};
 export const planCount =
   roadmap.reduce((n, level) => n + level.length, 0) + curriculum.length;
 export const drills: Session[] = curriculum.flatMap((u, i) =>
