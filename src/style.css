@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -330,4 +331,21 @@ label { min-width: 0; }
 }
 @media (prefers-reduced-motion: reduce) {
   .dm-celebration { display: none; }
+}
+/* DeutschMe Nunito typography */
+:root,
+:root[data-theme="dark"],
+:root[data-theme="light"],
+:root[data-theme="system"] {
+  font-family: "Nunito", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+body, button, input, select, textarea, summary {
+  font-family: inherit;
+}
+h1, h2, h3, .brand {
+  font-weight: 800;
+  letter-spacing: -0.035em;
+}
+.primary, .secondary, .hero-btn, .nav, .mobile-bottom-item, .tile, .choice {
+  font-weight: 700;
 }
