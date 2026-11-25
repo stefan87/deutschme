@@ -17,7 +17,7 @@ export default function ProfileForm({
       name: "",
       language: "sr",
       native: "sr",
-      suggestedLevel || "A1.1",
+      start: suggestedLevel || "A1.1",
       goal: 10,
       theme: "system",
     },
