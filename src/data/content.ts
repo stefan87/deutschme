@@ -341,9 +341,23 @@ export const sessions = [
   ...practiceScenes,
 ];
 export function unlocked(s: Study, id: string) {
-  if (practiceScenes.some((x) => x.id === id) || s.results[id]) return true;
+  const a12Index = a12Unit1.findIndex((x) => x.id === id);
+
+  if (a12Index >= 0) {
+    if (s.results[id]) return true;
+
+    if (a12Index === 0) return true;
+
+    return !!s.results[a12Unit1[a12Index - 1].id];
+  }
+
+  if (practiceScenes.some((x) => x.id === id) || s.results[id]) {
+    return true;
+  }
+
   const path = sessions.slice(0, 61);
   const i = path.findIndex((x) => x.id === id);
+
   return i === 0 || (i > 0 && !!s.results[path[i - 1].id]);
 }
 export const nextSession = (s: Study) =>
