@@ -297,7 +297,7 @@ export default function App() {
         : t("Početnik", "Einsteiger");
   if(cloud&&!authReady)return <div className="welcome-main"><h2>Učitavanje naloga i napretka...</h2></div>;
   if(cloud&&!account)return <Auth/>;
-  if(cloud&&cloudError&&!cloudLoaded.current)return <div className="welcome-main"><h2>Greška pri učitavanju</h2><p role="alert">{cloudError}</p><button className="secondary" onClick={()=>void cloud.auth.signOut()}>Odjavi se</button></div>;
+  if(cloud&&cloudError&&!cloudLoaded.current)return <div className="welcome-main"><h2>Greška pri učitavanju</h2><p role="alert">{cloudError}</p><button className="secondary" onClick={()=>void cloud?.auth.signOut()}>Odjavi se</button></div>;
   if (!s.profile)
     return (
       <div className="welcome">
