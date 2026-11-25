@@ -122,9 +122,9 @@ const germanyIcons = [
 ];
 
 function GermanySceneIcon({ id }: { id: string }) {
-  const index = /^s(\\d+)$/.exec(id);
-  const Icon = index ? germanyIcons[Number(index[1])] : undefined;
-  return Icon ? <Icon size={19} aria-hidden="true" /> : <GraduationCap size={18} />;
+const index = /^s([0-9]+)$/.exec(id);
+const Icon = index ? germanyIcons[Number(index[1])] : undefined;
+return Icon ? <Icon size={19} aria-hidden="true" /> : <GraduationCap size={18} />;
 }
 export default function App() {
   const [s, setState] = useState<Study>(() => cloud?fresh():repository.load());
