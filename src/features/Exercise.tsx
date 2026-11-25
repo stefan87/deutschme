@@ -10,6 +10,8 @@ import { media, shuffle } from "../data/content";
 import { choose, taskNames } from "../core/i18n";
 import type { Cursor, Lang, Question } from "../core/types";
 import Sound from './Sound';
+import PronounceText from './PronounceText';
+
 export {default as Sound} from './Sound';
 export function Visual({ value }: { value: string }) {
   return (
@@ -42,6 +44,8 @@ export default function Exercise({
   const [typeMode, setTypeMode] = useState(false);
   const [drag, setDrag] = useState<number | null>(null);
   const disabled = !!cursor.graded;
+  const isA12 = q.id.startsWith("A1.2-");
+const germanPrompt = isA12 && ["conversation", "dialog"].includes(q.kind);
   const tokens = shuffle(q.tokens || [], q.id);
   const isWrite = q.kind === "translate" || q.kind === "correct" || typeMode;
   const target = q.pairs?.length || q.questions?.length || tokens.length;
@@ -89,6 +93,7 @@ export default function Exercise({
         {t("ZADATAK", "AUFGABE")} {cursor.index + 1}
       </span>
       <h2>{taskNames[q.kind][de ? 1 : 0]}</h2>
+            {germanPrompt && <PronounceText text={q.prompt} />}
       {de && q.kind === "translate" && (
         <p>Formuliere diesen Satz auf Deutsch. Die Vorlage ist auf Serbisch.</p>
       )}
@@ -280,6 +285,9 @@ export default function Exercise({
             {cursor.graded?.ok ? "Sehr gut!" : "Keine Sorge, weiter üben!"}
           </strong>
           <p>{cursor.graded?.answer}</p>
+          {isA12 && cursor.graded?.answer && (
+            <PronounceText text={cursor.graded.answer} />
+          )}
           <small>
             {q.explain[de ? 1 : 0]}
             {cursor.graded?.points
