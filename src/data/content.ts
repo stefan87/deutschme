@@ -337,6 +337,7 @@ export const exam: Session = {
 export const sessions = [
   ...curriculum.flatMap((x) => [...x.lessons, x.test]),
   exam,
+  ...a12Unit1,
   ...practiceScenes,
 ];
 export function unlocked(s: Study, id: string) {
