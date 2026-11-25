@@ -42,6 +42,12 @@ import {
 } from "./core/engine";
 import { repository, fresh } from "./services/repository";
 import {cloud,loadCloud,saveCloud,type Account} from "./services/cloud";
+import {
+  LuLandmark, LuStethoscope, LuBriefcaseBusiness,
+  LuUsers, LuShoppingCart, LuHouse, LuSchool,
+  LuBuilding2, LuPhone, LuWallet,
+  LuHandshake, LuCoffee, LuMapPin, LuBus,
+} from "react-icons/lu";
 import Auth from "./features/Auth";
 import Placement from "./features/placement/Placement";
 import {
@@ -98,6 +104,28 @@ export function Bar({ value, label }: { value: number; label: string }) {
 }
 const dateTxt = (val: string, de: boolean) =>
   new Date(val).toLocaleDateString(de ? "de-DE" : "sr-Latn-RS");
+const germanyIcons = [
+  LuLandmark,         // s0 Auslaenderbehoerde
+  LuStethoscope,      // s1 Lekar
+  LuBriefcaseBusiness,// s2 Poslodavac
+  LuUsers,            // s3 Kolege
+  LuShoppingCart,     // s4 Supermarket
+  LuHouse,            // s5 Stan
+  LuSchool,           // s6 Skola
+  LuBuilding2,        // s7 Institucija
+  LuPhone,            // s8 Telefon
+  LuWallet,           // s9 Banka
+  LuHandshake,        // s10 Upoznavanje
+  LuCoffee,           // s11 Kafa
+  LuMapPin,           // s12 Adresa
+  LuBus,              // s13 Prevoz
+];
+
+function GermanySceneIcon({ id }: { id: string }) {
+  const index = /^s(\\d+)$/.exec(id);
+  const Icon = index ? germanyIcons[Number(index[1])] : undefined;
+  return Icon ? <Icon size={19} aria-hidden="true" /> : <GraduationCap size={18} />;
+}
 export default function App() {
   const [s, setState] = useState<Study>(() => cloud?fresh():repository.load());
   const [account,setAccount]=useState<Account|null>(null);
@@ -376,6 +404,8 @@ export default function App() {
           <LockKeyhole size={16} />
         ) : item.type === "lesson" ? (
           <Play size={16} />
+        ) : item.type === "practice" ? (
+          <GermanySceneIcon id={item.id} />
         ) : (
           <GraduationCap size={18} />
         )}
