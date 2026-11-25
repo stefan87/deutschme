@@ -46,8 +46,25 @@ export default function Exercise({
   const disabled = !!cursor.graded;
   const isA12 = q.id.startsWith("A1.2-");
 const germanPrompt = isA12 && ["conversation", "dialog"].includes(q.kind);
-  const tokens = shuffle(q.tokens || [], q.id);
-  const isWrite = q.kind === "translate" || q.kind === "correct" || typeMode;
+  const isA12Translation =
+  isA12 && q.kind === "translate";
+
+const wordTiles = isA12Translation
+  ? (q.accept?.[0] || "")
+      .replace(/[.!?]+$/u, "")
+      .split(/\s+/)
+      .filter(Boolean)
+  : [];
+
+const tokens = shuffle(
+  q.tokens || (typeMode ? [] : wordTiles),
+  q.id
+);
+
+const isWrite =
+  (q.kind === "translate" && (!isA12Translation || typeMode)) ||
+  q.kind === "correct" ||
+  (typeMode && ["conversation", "dialog"].includes(q.kind));
   const target = q.pairs?.length || q.questions?.length || tokens.length;
   const valid = isWrite
     ? !!text.trim()
@@ -102,6 +119,21 @@ const germanPrompt = isA12 && ["conversation", "dialog"].includes(q.kind);
           className={`prompt ${q.kind === "conversation" || q.kind === "dialog" ? "bubble" : ""}`}
           lang={["translate", "order"].includes(q.kind) ? "sr" : "de"}
         >
+          {isA12Translation && !disabled && (
+          <button
+            type="button"
+            className="quiet"
+            onClick={() => {
+              setTypeMode((old) => !old);
+              setText("");
+              setPlaced([]);
+            }}
+          >
+            {typeMode
+              ? t("Pomoć: složi reči", "Hilfe: Wörter ordnen")
+              : t("Želim da napišem samostalno", "Ich möchte selbst schreiben")}
+          </button>
+        )}
           {["conversation", "dialog"].includes(q.kind) && (
             <MessageCircle size={19} />
           )}{" "}
