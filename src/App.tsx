@@ -105,6 +105,8 @@ export default function App() {
   const activeUserId=useRef<string|null>(null);
   const pendingSave=useRef<ReturnType<typeof setTimeout>|null>(null);
   const [page, setPage] = useState<Page>("home");
+  const [retakePlacement, setRetakePlacement] = useState(false);
+
   const [level, setLevel] = useState<LevelId>(
     () => repository.load().profile?.start || "A1.1",
   );
@@ -281,6 +283,18 @@ export default function App() {
   function storeProfile(p: Profile) {
     change((old) => ({ ...old, profile: p }));
     setLevel(p.start);
+    if (s.profile && retakePlacement) {
+  return (
+    <Placement
+      onDone={(result) => {
+        change((old) => ({ ...old, placement: result }));
+        setRetakePlacement(false);
+        setPage("profile");
+      }}
+    />
+  );
+}
+
     if (!s.profile && !s.placement) {
   return (
     <Placement
@@ -1089,6 +1103,26 @@ export default function App() {
               <div className="card profile">
                 <ProfileForm profile={s.profile} onSave={storeProfile} />
               </div>
+              <div className="card" style={{ marginTop: 16 }}>
+  <h2>Procena znanja nemackog</h2>
+  <p>
+    Proveri svoje znanje kroz 24 pitanja. Test ne menja
+    zavrsene lekcije, XP niti tvoj izabrani nivo.
+  </p>
+  {s.placement && (
+    <p>
+      Poslednja preporuka: <strong>{s.placement.recommended}</strong>
+    </p>
+  )}
+  <button
+    type="button"
+    className="primary"
+    onClick={() => setRetakePlacement(true)}
+  >
+    Zapocni test procene znanja
+  </button>
+</div>
+
             </>
           )}
         </main>
