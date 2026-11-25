@@ -911,10 +911,28 @@ export default function App() {
                 <div className="unit-list">
                   <h2>A1.2 · Alltag</h2>
                   <p className="muted">
-                    Prva celina: pet lekcija i test.
-                    Ostale A1.2 celine su u pripremi.
+                       A1.2: 10 celina, 50 lekcija, 10 testova i završni ispit.
+
                   </p>
-                  {cardList(a12Unit1)}
+{Array.from({ length: 10 }, (_, i) => (
+  <details className="card unit" key={`a12-u${i + 1}`} open={i === 0}>
+    <summary>
+      <span className="unit-icon">
+        {String(i + 1).padStart(2, "0")}
+      </span>
+      <strong>{roadmap[0][i].title[k]}</strong>
+      <span className="chip">
+        {a12Sessions
+          .slice(i * 6, i * 6 + 5)
+          .filter((x) => s.results[x.id]).length}/5
+      </span>
+    </summary>
+    <div className="rows">
+      {a12Sessions.slice(i * 6, i * 6 + 6).map(renderObj)}
+    </div>
+  </details>
+))}
+{cardList([a12Sessions[a12Sessions.length - 1]])}
                 </div>
               ) : (
                 <div className="unit-list">
