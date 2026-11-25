@@ -52,6 +52,7 @@ import Auth from "./features/Auth";
 import Placement from "./features/placement/Placement";
 import {
   allSessions,
+  a12Sessions,
   curriculum,
   drills,
   exam,
