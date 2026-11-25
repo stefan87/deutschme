@@ -56,6 +56,7 @@ import {
   unlocked,
 } from "./data/content";
 import { colors, levels, roadmap } from "./data/roadmap";
+import BeginnerBasics from "./features/BeginnerBasics";
 import Exercise, { Sound } from "./features/Exercise";
 import Vocabulary from "./features/Vocabulary";
 import ProfileForm from "./features/Profile";
