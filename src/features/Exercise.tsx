@@ -119,21 +119,7 @@ const isWrite =
           className={`prompt ${q.kind === "conversation" || q.kind === "dialog" ? "bubble" : ""}`}
           lang={["translate", "order"].includes(q.kind) ? "sr" : "de"}
         >
-          {isA12Translation && !disabled && (
-          <button
-            type="button"
-            className="quiet"
-            onClick={() => {
-              setTypeMode((old) => !old);
-              setText("");
-              setPlaced([]);
-            }}
-          >
-            {typeMode
-              ? t("Pomoć: složi reči", "Hilfe: Wörter ordnen")
-              : t("Želim da napišem samostalno", "Ich möchte selbst schreiben")}
-          </button>
-        )}
+         
           {["conversation", "dialog"].includes(q.kind) && (
             <MessageCircle size={19} />
           )}{" "}
@@ -247,6 +233,22 @@ const isWrite =
             </div>
           </>
         )}
+        {isA12Translation && !disabled && (
+  <button
+    type="button"
+    className="quiet"
+    onClick={() => {
+      setTypeMode((old) => !old);
+      setText("");
+      setPlaced([]);
+    }}
+  >
+    {typeMode
+      ? t("Pomoć: složi reči", "Hilfe: Wörter ordnen")
+      : t("Želim da napišem samostalno", "Ich möchte selbst schreiben")}
+  </button>
+)}
+
         {["conversation", "dialog"].includes(q.kind) && (
           <button
             type="button"
