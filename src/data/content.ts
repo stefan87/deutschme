@@ -9,6 +9,7 @@ import type {
 } from "../core/types";
 import { readings } from "./reading";
 import { scenes } from "./scenes";
+import { extraSceneDialogues } from "./germany-extra-dialogues";
 import { lessonDialogues } from "./lesson-dialogues";
 import { roadmap } from "./roadmap";
 export const media = (name: string) =>
@@ -118,21 +119,24 @@ export const practiceScenes: Session[] = scenes.map(
     title: pair(sr, de),
     type: "practice",
     level: "A1.1",
-    items: [
+    items: ([
       [a, b],
       [c, d],
-    ].map(([prompt, answer], j) => ({
+      ...extraSceneDialogues[i],
+    ] as [string, string][]).map(([prompt, response], j) => ({
       id: `scene:${i}:${j}`,
-      kind: j ? "dialog" : "conversation",
+      kind: j % 2 ? "dialog" : "conversation",
       prompt,
       explain: explanations.scene,
-      accept: [answer],
+      accept: [response],
       options: shuffle(
         [
-          answer,
-          scenes[(i + 3) % scenes.length][j ? 5 : 3],
-          scenes[(i + 7) % scenes.length][j ? 5 : 3],
-        ],
+          response,
+          ...[3, 7, 11].map(offset => {
+            const other = (i + offset) % scenes.length;
+            return extraSceneDialogues[other][j % 13][1];
+          }),
+        ].filter((value, index, array) => array.indexOf(value) === index),
         `scene:${i}:${j}`,
       ),
     })),
