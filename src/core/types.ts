@@ -62,19 +62,27 @@ export type Cursor = {
   earned: number;
   graded?: { ok: boolean; points: number; answer: string };
 };
-export type Study = {  placement?: {
+export type Study = {
+  basics?: Record<string, { score: number; date: string }>;
+
+  placement?: {
     self: LevelId;
     recommended: LevelId;
     scores: Record<LevelId, number>;
     date: string;
     version: number;
   };
+
   profile: Profile | null;
   xp: number;
   results: Record<string, { score: number; date: string }>;
   awards: Record<string, number>;
   days: Record<string, number>;
   activity: string;
-  cards: Record<string, { status: CardStatus; due: number; step: number }>;
+  cards: Record<string, {
+    status: CardStatus;
+    due: number;
+    step: number;
+  }>;
   cursor: Cursor | null;
-};
+};  
