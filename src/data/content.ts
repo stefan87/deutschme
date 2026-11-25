@@ -339,6 +339,10 @@ export const a12Sessions = [
   ...a12Unit1,
   ...a12Units2to10,
 ];
+export const a12Sessions = [
+  ...a12Unit1,
+  ...a12Units2to10,
+];
 export const sessions = [
   ...curriculum.flatMap((x) => [...x.lessons, x.test]),
   exam,
