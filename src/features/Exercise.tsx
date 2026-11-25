@@ -1,3 +1,5 @@
+import { grade } from "../core/engine";
+import MiniConfetti from "./MiniConfetti";
 import { useState } from "react";
 import { ArrowRight, AudioLines, Check, X, MessageCircle } from "./icons";
 import { shuffle } from "../data/content";
@@ -75,14 +77,43 @@ export default function Exercise({
       )
     : t("Pročitaj pitanje još jednom. Obrati pažnju na glagol i ključne reči.", "Lies die Frage noch einmal. Achte auf das Verb und die Schlüsselwörter.");
 
+  function playSuccessTone() {
+    try {
+      const AudioContextClass = window.AudioContext;
+      if (!AudioContextClass) return;
+      const ctx = new AudioContextClass();
+      const now = ctx.currentTime;
+      [660, 880].forEach((frequency, index) => {
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        const start = now + index * 0.11;
+        osc.type = "sine";
+        osc.frequency.setValueAtTime(frequency, start);
+        gain.gain.setValueAtTime(0.0001, start);
+        gain.gain.exponentialRampToValueAtTime(0.055, start + 0.018);
+        gain.gain.exponentialRampToValueAtTime(0.0001, start + 0.17);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(start);
+        osc.stop(start + 0.18);
+      });
+      window.setTimeout(() => { void ctx.close().catch(() => {}); }, 550);
+    } catch { /* No sound support: visual feedback still works. */ }
+  }
+
   return (
     <form
       className="exercise card"
       data-kind={q.kind}
-      onSubmit={event => {
-        event.preventDefault();
-        if (disabled) onNext();
-        else if (valid) onAnswer(answers());
+        onSubmit={(e) => {
+        e.preventDefault();
+        if (disabled) {
+          onNext();
+        } else if (valid) {
+          const response = answers();
+          if (grade(q, response).ok) playSuccessTone();
+          onAnswer(response);
+        }
       }}
     >
       <span className="eyebrow">
@@ -211,7 +242,7 @@ export default function Exercise({
           </div>
         )}
       </fieldset>
-
+      <MiniConfetti active={!!cursor.graded?.ok} />
       {disabled && (
         <div className={`feedback ${cursor.graded?.ok ? "ok" : "miss"}`} role="status">
           <strong>
