@@ -452,13 +452,32 @@ export default function App() {
       <ChevronRight size={18} />
     </button>
   );
-  const levelCards = (
-    <div className="level-grid">
+const levelCards = (
+    <div
+      className="level-grid"
+      style={page === "learn" ? {
+        maxWidth: 1040,
+        margin: "0 auto 18px",
+        gap: 10,
+      } : undefined}
+    >
       {levels.map((l, i) => (
         <button
           key={l}
+          type="button"
           className={`card level ${level === l ? "current" : ""}`}
-          style={{ "--level": colors[i] } as React.CSSProperties}
+          style={{
+            "--level": colors[i],
+            ...(page === "learn" ? {
+              padding: "12px 16px",
+              minHeight: 58,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: 10,
+              textAlign: "center" as const,
+            } : {}),
+          } as React.CSSProperties}
           aria-pressed={level === l}
           onClick={() => {
             setLevel(l);
@@ -467,23 +486,29 @@ export default function App() {
         >
           <span className="level-label">
             {l}
-{l === "A1.1" || l === "A1.2"
-  ? <BookOpen size={15} />
-  : <LockKeyhole size={14} />}
+            {l === "A1.1" || l === "A1.2"
+              ? <BookOpen size={15} />
+              : <LockKeyhole size={14} />}
           </span>
-          <b>{progress(s, l)}%</b>
-          <Bar value={progress(s, l)} label={l} />
-          <small>
-  {l === "A1.1"
-    ? t("Dostupno", "Verfügbar")
-    : l === "A1.2"
-      ? t("Dostupno · 1. celina", "Verfügbar · Einheit 1")
-      : t("Plan · u pripremi", "Plan · in Vorbereitung")}
-</small>
+          {page !== "learn" && (
+            <>
+              <b>{progress(s, l)}%</b>
+              <Bar value={progress(s, l)} label={l} />
+              <small>
+                {l === "A1.1"
+                  ? t("Dostupno", "Verfügbar")
+                  : l === "A1.2"
+                    ? t("Dostupno · 1. celina", "Verfügbar · Einheit 1")
+                    : t("Plan · u pripremi", "Plan · in Vorbereitung")}
+              </small>
+            </>
+          )}
         </button>
       ))}
     </div>
   );
+
+
   const cardList = (items: Session[]) => (
     <div className="card rows">{items.map(renderObj)}</div>
   );
