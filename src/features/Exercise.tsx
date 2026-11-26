@@ -257,9 +257,11 @@ const tokens = typeMode && isAssistedTranslation
             {cursor.graded?.ok ? "Sehr gut!" : "Keine Sorge, weiter üben!"}
           </strong>
           <p>{cursor.graded?.answer}</p>
-{cursor.graded?.answer && (
-  <PronounceText text={cursor.graded.answer} />
-)}          <small>
+{cursor.graded?.answer &&
+  ["translate", "order", "correct", "conversation", "dialog"].includes(q.kind) && (
+    <PronounceText text={cursor.graded.answer} />
+  )}
+          <small>
             {q.explain[de ? 1 : 0]}
             {cursor.graded?.points
               ? ` · +${cursor.graded.points} XP`
