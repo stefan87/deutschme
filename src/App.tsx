@@ -1040,7 +1040,7 @@ const levelCards = (
 
                   </p>
 {Array.from({ length: 10 }, (_, i) => (
-  <details className="card unit" key={`a12-u${i + 1}`} open={i === 0}>
+  <details className="card unit" key={`a12-u${i + 1}`}>
     <summary>
       <span className="unit-icon">
         {String(i + 1).padStart(2, "0")}
