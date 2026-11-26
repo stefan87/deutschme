@@ -343,7 +343,7 @@ export const a12Sessions = [
 export const sessions = [
   ...curriculum.flatMap((x) => [...x.lessons, x.test]),
   exam,
-  ...a12Unit1,
+  ...a12Sessions,
   ...practiceScenes,
 ];
 export function unlocked(s: Study, id: string) {
@@ -378,25 +378,19 @@ export const nextSession = (s: Study) => {
 };
 export const progress = (s: Study, l: LevelId) => {
   if (l === "A1.1") {
-    const completed = a12Sessions.filter(
-  (x) => s.results[x.id]
-).length;
-
-    return Math.floor((completed * 100) / 61);
+    const a11Sessions = sessions.slice(0, 61);
+    const completed = a11Sessions.filter((x) => !!s.results[x.id]).length;
+    return Math.floor((completed * 100) / a11Sessions.length);
   }
 
   if (l === "A1.2") {
-    const completed = a12Unit1.filter(
-      (x) => s.results[x.id]
-    ).length;
-
-    return Math.floor(
-  (completed * 100) / a12Sessions.length
-);
+    const completed = a12Sessions.filter((x) => !!s.results[x.id]).length;
+    return Math.floor((completed * 100) / a12Sessions.length);
   }
 
   return 0;
 };
+
 export const planCount =
   roadmap.reduce((n, level) => n + level.length, 0) + curriculum.length;
 export const drills: Session[] = curriculum.flatMap((u, i) =>
