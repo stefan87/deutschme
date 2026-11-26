@@ -45,7 +45,7 @@ export const normalize = (v: string) =>
     .normalize("NFC")
     .toLocaleLowerCase("de")
     .trim()
-    .replace(/[.!?]+$/u, "")
+    .replace(/[\s.!?]+$/u, "")
     .replace(/\s+/g, " ");
 export function grade(q: Question, answers: string[]) {
   const expected =
