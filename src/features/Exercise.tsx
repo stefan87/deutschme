@@ -36,14 +36,14 @@ export default function Exercise({
   const disabled = !!cursor.graded;
   const isA12 = q.id.startsWith("A1.2-");
   const germanPrompt = isA12 && ["conversation", "dialog"].includes(q.kind);
-  const isA12Translation = isA12 && q.kind === "translate";
+  const isAssistedTranslation = q.kind === "translate";
   const expected = q.accept?.[0] || "";
-  const wordTiles = isA12Translation
+  const wordTiles = isAssistedTranslation
     ? expected.replace(/[.!?]+$/u, "").split(/\s+/).filter(Boolean)
     : [];
   const tokens = shuffle(q.tokens || (typeMode ? [] : wordTiles), q.id);
   const isWrite =
-    (q.kind === "translate" && (!isA12Translation || typeMode)) ||
+    (q.kind === "translate" && (!isAssistedTranslation || typeMode)) ||
     q.kind === "correct" ||
     (typeMode && ["conversation", "dialog"].includes(q.kind));
   const target = q.pairs?.length || q.questions?.length || tokens.length;
@@ -70,7 +70,7 @@ export default function Exercise({
         ? [placed.map(i => tokens[i]).join(" ")]
         : [single];
   const prompt = de && ["translate", "order"].includes(q.kind) ? "" : q.prompt;
-  const hintText = isA12Translation
+  const hintText = isAssistedTranslation
     ? t(
         `Prva reč: ${expected.split(/\s+/)[0] || "?"}. Obrati pažnju na položaj glagola.`,
         `Erstes Wort: ${expected.split(/\s+/)[0] || "?"}. Achte auf die Verbposition.`,
@@ -197,7 +197,7 @@ export default function Exercise({
           </>
         )}
 
-        {isA12Translation && !disabled && (
+        {isAssistedTranslation && !disabled && (
           <button type="button" className="quiet"
             onClick={() => { setTypeMode(old => !old); setText(""); setPlaced([]); }}>
             {typeMode
