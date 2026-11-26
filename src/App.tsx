@@ -233,6 +233,15 @@ export default function App() {
   }
   function open(item: Session) {
     if (!unlocked(live.current, item.id) && item.type !== "practice") return;
+    if (live.current.cursor?.id !== item.id && live.current.results[item.id]) {
+      const confirmed = window.confirm(
+        t(
+          "Uradi ponovo ovu lekciju? Novi pokusaj pocinje od prvog zadatka. Vec osvojeni XP i najbolji rezultat ostaju sacuvani. Za iste tacne odgovore XP se ne dodeljuje ponovo.",
+          "Diese Lektion wiederholen? Der neue Versuch beginnt bei Aufgabe 1. Bereits verdiente XP und das beste Ergebnis bleiben erhalten. Fuer dieselben richtigen Antworten gibt es keine weiteren XP.",
+        ),
+      );
+      if (!confirmed) return;
+    }
     if (live.current.cursor?.id !== item.id) {
       if (
         live.current.cursor &&
@@ -436,7 +445,7 @@ export default function App() {
         {item.title[k]}
         <small>
           {s.results[item.id]
-            ? `${s.results[item.id].score}% · ${t("Ponovi", "Wiederholen")}`
+            ? `${s.results[item.id].score}% · ${t("Uradi ponovo", "Erneut machen")}``
             : `${item.items.length} ${t("zadataka", "Aufgaben")}`}
         </small>
       </span>
@@ -715,6 +724,15 @@ export default function App() {
                     )}
               </p>
               <div className="tiles">
+                {result.passed && (
+                  <button
+                    type="button"
+                    className="primary"
+                    onClick={() => open(result.session)}
+                  >
+                    {t("Uradi ponovo", "Erneut machen")}
+                  </button>
+                )}
                 {!result.passed && (
                   <button
                     className="primary"
