@@ -93,6 +93,19 @@ const tokens = typeMode && isAssistedTranslation
   );
 
   const prompt = de && ["translate", "order"].includes(q.kind) ? "" : q.prompt;
+  const pronunciationText = (() => {
+    const answer = cursor.graded?.answer?.trim();
+    if (!answer) return "";
+    if (q.questions || q.pairs) return "";
+    if (q.kind === "flash" || q.kind === "read") return "";
+    if (["fill", "grammar"].includes(q.kind)) {
+      return q.prompt.replace(/_{3,}/g, answer);
+    }
+    if (["translate", "order", "correct", "conversation", "dialog", "listen", "image"].includes(q.kind)) {
+      return answer;
+    }
+    return "";
+  })();
   const hintText = isAssistedTranslation
     ? t(
         `Prva reč: ${expected.split(/\s+/)[0] || "?"}. Obrati pažnju na položaj glagola.`,
@@ -304,12 +317,8 @@ const tokens = typeMode && isAssistedTranslation
               )}
               {cursor.graded?.answer}
             </p>
-            {cursor.graded?.answer && (
-              q.kind === "fill" && q.prompt.includes("_____") ? (
-                <PronounceText text={q.prompt.replace("_____", cursor.graded.answer)} />
-              ) : ["translate", "order", "correct", "conversation", "dialog"].includes(q.kind) ? (
-                <PronounceText text={cursor.graded.answer} />
-              ) : null
+            {pronunciationText && (
+              <PronounceText text={pronunciationText} />
             )}
           </div>
           <small>
