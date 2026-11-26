@@ -136,12 +136,42 @@ export default function BeginnerBasics({state,onComplete}:{state:Study;onComplet
     <progress className="bar" value={index} max={quiz.length} aria-label="Napredak testa"/>
     <div className="picture" style={{minHeight:110}}><span style={{fontSize:55}} aria-hidden="true">{question.pair.visual||"📘"}</span></div>
     <h2>{unit.id==="objects"?"Koja nemačka reč odgovara slici?":`Kako se na nemačkom kaže: ${question.pair.sr}?`}</h2>
+        {submitted && selected !== null && (
+      <div role="status" style={{margin:"10px 0",textAlign:"center"}}>
+        <span
+          lang="de"
+          style={{
+            display:"inline-block",
+            backgroundColor:"#ffffff",
+            color:choices[selected].de === question.pair.de ? "#167a43" : "#c62828",
+            borderRadius:8,
+            padding:"7px 14px",
+            fontWeight:800,
+            overflowWrap:"anywhere",
+            maxWidth:"100%"
+          }}
+        >
+          {choices[selected].de}
+        </span>
+      </div>
+    )}
     <div className="choices">{choices.map((c,i)=><div key={c.de} style={{display:"flex",alignItems:"center",gap:8,minWidth:0}}>
       <button type="button" className={`choice ${selected===i?"selected":""}`} style={{flex:"1 1 auto",minWidth:0}} disabled={submitted} aria-pressed={selected===i} onClick={()=>setSelected(i)} lang="de">{c.de}</button>
       <Pronounce text={c.de}/>
     </div>)}</div>
-    {submitted&&<p role="status" className={`feedback ${selected!==null&&choices[selected].de===question.pair.de?"ok":"miss"}`}>{selected!==null&&choices[selected].de===question.pair.de?"Sehr gut!":"Fast richtig!"} Tačno: <strong lang="de">{question.pair.de}</strong></p>}
-    <button type="button" className="primary" disabled={selected===null} onClick={()=>submitted?next():setSubmitted(true)} style={{marginTop:16}}>{submitted?"Nastavi":"Proveri odgovor"}</button>
+{submitted && selected !== null && (
+      <div className={`feedback ${choices[selected].de === question.pair.de ? "ok" : "miss"}`}>
+        <strong>
+          {choices[selected].de === question.pair.de
+            ? "Sehr gut!"
+            : "Nije tačno. Pogledaj ispravan odgovor:"}
+        </strong>
+        <p>
+          {choices[selected].de === question.pair.de ? "Tačan odgovor: " : "Ispravan odgovor: "}
+          <strong lang="de">{question.pair.de}</strong>
+        </p>
+      </div>
+    )}    <button type="button" className="primary" disabled={selected===null} onClick={()=>submitted?next():setSubmitted(true)} style={{marginTop:16}}>{submitted?"Nastavi":"Proveri odgovor"}</button>
   </>}
   {stage==="done"&&<><h2>Sehr gut! 🎉</h2><p>Rezultat: {Math.round(correct*100/quiz.length)}%</p><p>Rezultat je sačuvan u tvom profilu. Ponovljeni test ne donosi dupli XP.</p><button className="primary" type="button" onClick={()=>chooseUnit((unitIndex+1)%units.length)}>Sledeća celina →</button></>}
   {done&&stage!=="done"&&<p className="muted">Najbolji prethodni rezultat: {done.score}%</p>}
