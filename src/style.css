@@ -567,3 +567,71 @@ h1, h2, h3, .brand {
   .unit summary { padding: 10px 9px; gap: 7px; }
   .unit-icon, .lesson-icon { width: 34px; height: 34px; }
 }
+/* Deutschly learning map: midnight navy and neon turquoise */
+.dm-map-hero{position:relative;display:grid;grid-template-columns:minmax(110px,35%) 1fr;align-items:center;gap:12px;min-height:205px;padding:12px 20px;overflow:hidden;background:radial-gradient(ellipse at 17% 80%,#075b6a,#062c3a 48%,#041b2b 100%);border:1px solid #147f8c;border-radius:22px;box-shadow:0 0 25px #00dede18}
+.dm-map-rabbit{width:100%;max-width:235px;max-height:225px;object-fit:contain;justify-self:center;filter:drop-shadow(0 0 16px #00e5e55c)}
+.dm-map-hero-copy{min-width:0;position:relative;z-index:1}
+.dm-map-hero h1{font-size:clamp(1.6rem,5vw,2.7rem);line-height:1.1;margin:0 0 9px}
+.dm-map-hero p{font-size:clamp(.84rem,2.5vw,1rem);color:#c7e2e9;line-height:1.45;margin:0}
+.dm-map-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;margin:12px 0 16px;padding:12px 8px;background:linear-gradient(135deg,#073d4b,#062b39);border:1px solid #1d8995;border-radius:16px}
+.dm-map-stats>div{display:grid;grid-template-columns:auto minmax(0,1fr);column-gap:8px;align-items:center;padding:0 12px;border-left:1px solid #286b78}
+.dm-map-stats>div:first-child{border-left:0}
+.dm-map-stats span{grid-row:span 2;font-size:1.6rem}
+.dm-map-stats strong{font-size:.98rem;line-height:1.15;overflow-wrap:anywhere}
+.dm-map-stats small{font-size:.72rem;color:#bddbe1}
+.dm-map-levels{display:flex;justify-content:center;flex-wrap:wrap;gap:8px;margin:0 0 18px}
+.dm-map-levels button{border:1px solid #247d88;background:#082f3d;color:#d1e7eb;border-radius:999px;min-height:40px;min-width:66px;padding:7px 14px;font-weight:800}
+.dm-map-levels button.dm-map-level-active{background:#00d9da;color:#03212b;border-color:#b9ffff;box-shadow:0 0 16px #00dede77}
+.dm-map-basics{max-width:480px;margin:0 auto 18px;border:1px solid #238f9a;border-radius:15px;background:#082b3a}
+.dm-map-basics>summary{display:flex;justify-content:space-between;gap:10px;align-items:center;padding:12px 18px;font-weight:800;list-style:none}
+.dm-map-basics>summary::-webkit-details-marker{display:none}
+.dm-map-basics>section{max-width:100%!important;border:0;box-shadow:none}
+.dm-map-path{position:relative;display:grid;gap:14px;margin:0 auto;max-width:800px;padding-left:54px}
+.dm-map-path:before{content:"";position:absolute;left:21px;top:22px;bottom:30px;width:3px;background:linear-gradient(#00ece6,#155665 60%,#155665);box-shadow:0 0 12px #00ece68a}
+.dm-map-stop{position:relative;min-width:0}
+.dm-map-node{position:absolute;left:-54px;top:26px;width:44px;height:44px;border-radius:50%;display:grid;place-items:center;border:2px solid #3e8492;background:#062937;color:#b2d2db;z-index:1;font-weight:900}
+.dm-map-node.done,.dm-map-node.active{border-color:#27f8ef;color:#c4fffb;box-shadow:0 0 13px #00e5e599}
+.dm-map-unit{background:linear-gradient(145deg,#082e3d,#041e2b);border:1px solid #1a7f8c;border-radius:17px;overflow:hidden;min-width:0}
+.dm-map-unit-active{border:2px solid #2af8f0;box-shadow:0 0 15px #00e5e568,inset 0 0 12px #00dede1d}
+.dm-map-unit>summary{list-style:none;display:grid;grid-template-columns:54px minmax(0,1fr) auto;align-items:center;gap:13px;padding:14px;cursor:pointer}
+.dm-map-unit>summary::-webkit-details-marker{display:none}
+.dm-map-book{display:grid;place-items:center;width:50px;height:50px;border-radius:13px;background:linear-gradient(135deg,#0e8b9a,#05485d);font-size:1.8rem;box-shadow:0 0 10px #00dede30}
+.dm-map-unit-info{display:grid;gap:4px;min-width:0}
+.dm-map-unit-info small{font-size:.72rem;color:#b2d2db}
+.dm-map-unit-info strong{font-size:1.06rem;line-height:1.25;overflow-wrap:anywhere}
+.dm-map-progress{display:block;height:7px;background:#1b5262;border-radius:999px;overflow:hidden;margin-top:4px}
+.dm-map-progress>span{display:block;height:100%;background:linear-gradient(90deg,#00d0d3,#54fff0);border-radius:inherit}
+.dm-map-status{font-size:.75rem;color:#9fffe9;white-space:nowrap}
+.dm-map-unit-body{padding:0 12px 12px;border-top:1px solid #1b6875}
+.dm-map-unit-body .lesson-row{padding:10px 4px}
+.dm-map-continue{display:flex;align-items:center;justify-content:center;gap:9px;width:calc(100% - 26px);min-height:44px;margin:0 13px 12px;border:1px solid #86ffff;border-radius:999px;background:linear-gradient(135deg,#7efffa,#00cfd3);color:#052a32;font-weight:900;box-shadow:0 0 13px #00dede66}
+.dm-map-achievement{width:100%;max-width:800px;margin:18px auto 0;display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:13px;text-align:left;border:1px solid #278e9b;border-radius:16px;padding:13px 17px;background:linear-gradient(120deg,#0b6574,#073543);color:#efffff}
+.dm-map-achievement>span:first-child{font-size:2rem}
+.dm-map-achievement strong,.dm-map-achievement small{display:block}
+.dm-map-achievement small{color:#c3e6e8}
+@media(max-width:740px){
+ .dm-map-hero{grid-template-columns:35% 1fr;min-height:165px;padding:9px 12px;gap:8px}
+ .dm-map-rabbit{max-height:168px}
+ .dm-map-stats>div{padding:0 7px;column-gap:5px}
+ .dm-map-stats span{font-size:1.2rem}
+ .dm-map-stats strong{font-size:.8rem}
+ .dm-map-stats small{font-size:.62rem}
+ .dm-map-path{padding-left:40px;gap:12px}
+ .dm-map-path:before{left:15px}
+ .dm-map-node{left:-40px;width:32px;height:32px;top:30px;font-size:.75rem}
+ .dm-map-unit>summary{grid-template-columns:40px minmax(0,1fr) auto;gap:9px;padding:11px 9px}
+ .dm-map-book{width:40px;height:40px;font-size:1.4rem}
+ .dm-map-unit-info strong{font-size:.95rem}
+ .dm-map-status{font-size:.67rem}
+ .dm-map-continue{width:calc(100% - 18px);margin:0 9px 9px}
+}
+@media(max-width:360px){
+ .dm-map-hero h1{font-size:1.45rem}
+ .dm-map-hero p{font-size:.76rem}
+ .dm-map-stats>div{grid-template-columns:1fr;text-align:center;justify-items:center}
+ .dm-map-stats span{grid-row:auto}
+ .dm-map-status{max-width:50px;overflow-wrap:anywhere;white-space:normal}
+}
+:root[data-theme="light"] .dm-map-unit,:root[data-theme="light"] .dm-map-basics{background:#fff;color:#10303b}
+:root[data-theme="light"] .dm-map-unit-info small{color:#526a73}
+:root[data-theme="light"] .dm-map-hero-copy{color:#fff}
