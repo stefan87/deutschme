@@ -250,8 +250,9 @@ export default function Exercise({
             {cursor.graded?.ok ? "Sehr gut!" : "Keine Sorge, weiter üben!"}
           </strong>
           <p>{cursor.graded?.answer}</p>
-          {isA12 && cursor.graded?.answer && <PronounceText text={cursor.graded.answer} />}
-          <small>
+{cursor.graded?.answer && (
+  <PronounceText text={cursor.graded.answer} />
+)}          <small>
             {q.explain[de ? 1 : 0]}
             {cursor.graded?.points
               ? ` · +${cursor.graded.points} XP`
