@@ -63,6 +63,7 @@ export type Cursor = {
   graded?: { ok: boolean; points: number; answer: string };
 };
 export type Study = {
+  favorites?: string[];
   basics?: Record<string, { score: number; date: string }>;
 
   placement?: {
