@@ -24,13 +24,17 @@ export default function Vocabulary({
   state,
   lang,
   onMark,
+  onToggleFavorite,
 }: {
   state: Study;
   lang: Lang;
   onMark: (id: string, status: CardStatus) => void;
+  onToggleFavorite: (id: string) => void;
 }) {
   const t = (a: string, b: string) => choose(lang, a, b);
   const [filter, setFilter] = useState("due");
+  const favorites = state.favorites || [];
+  const favoriteCount = allVocabulary.filter(w => favorites.includes(w.id)).length;
   const [category, setCategory] = useState("all");
   const [query, setQuery] = useState("");
   const [i, setIndex] = useState(0);
@@ -41,7 +45,7 @@ export default function Vocabulary({
     known: t("Naučena", "Gelernt"),
     hard: t("Teška", "Schwierig"),
   };
-  
+
   const categories = useMemo(
     () => Array.from(new Set(extraVocabulary.map((w) => w.category))),
     [],
@@ -55,6 +59,7 @@ export default function Vocabulary({
           (category === "original" ? !w.category : w.category === category)) &&
         (filter === "all" ||
           (filter === "due" && (state.cards[w.id]?.due || 0) <= now) ||
+          (filter === "favorites" && favorites.includes(w.id)) ||
           filter === (state.cards[w.id]?.status || "new")),
       )
       .sort((a, b) => {
@@ -64,7 +69,7 @@ export default function Vocabulary({
         return Number(B?.status === "hard") - Number(A?.status === "hard") ||
           (A?.due || 0) - (B?.due || 0);
       });
-  }, [state.cards, query, filter, category]);
+  }, [state.cards, state.favorites, query, filter, category]);
 
   const pos = Math.max(0, Math.min(i, eligible.length - 1));
   const w = eligible[pos];
@@ -86,6 +91,7 @@ export default function Vocabulary({
           <select value={filter} onChange={(e) => { setFilter(e.target.value); reset(); }}>
             <option value="due">{t("Za ponavljanje", "Zur Wiederholung")}</option>
             <option value="all">{t("Sve reči", "Alle Wörter")}</option>
+            <option value="favorites">{t("Omiljene reči", "Lieblingswörter")}</option>
             {Object.entries(statuses).map(([k, v]) => <option key={k} value={k}>{v}</option>)}
           </select>
         </label>
@@ -97,14 +103,38 @@ export default function Vocabulary({
             {categories.map((c) => <option key={c} value={c}>{c}</option>)}
           </select>
         </label>
+        <div style={{ display: "grid", gap: 8, alignContent: "center" }}>
+          <strong>{t("Sačuvane reči", "Gespeicherte Wörter")}</strong>
+          <button
+            type="button"
+            className="secondary"
+            aria-pressed={filter === "favorites"}
+            onClick={() => { setFilter("favorites"); reset(); }}
+            style={{ justifyContent: "space-between", width: "100%", borderColor: "var(--primary)" }}
+          >
+            <span>★ {t("Omiljene reči", "Lieblingswörter")}</span>
+            <span className="chip">{favoriteCount}</span>
+          </button>
+        </div>
       </div>
       {w ? (
         <article className="card flashcard" key={w.id}>
           <span className="eyebrow">
-  {pos + 1} / {eligible.length}
-</span>
+            {pos + 1} / {eligible.length} · {statuses[state.cards[w.id]?.status || "new"]}
+            {w.category ? ` · ${w.category}` : ""}
+          </span>
           <div className="picture"><Visual value={w.visual} /></div>
           <h2 lang="de">{w.de}</h2>
+          <button
+            type="button"
+            className={favorites.includes(w.id) ? "primary" : "secondary"}
+            aria-pressed={favorites.includes(w.id)}
+            onClick={() => onToggleFavorite(w.id)}
+          >
+            {favorites.includes(w.id)
+              ? t("★ Ukloni iz omiljenih", "★ Aus Favoriten entfernen")
+              : t("☆ Sačuvaj reč", "☆ Wort speichern")}
+          </button>
           {w.audio ? <Sound key={w.audio} clip={w.audio} lang={lang} /> : <PronounceText text={w.de} />}
           <button type="button" className="secondary" onClick={() => flip(!face)}>
             <RotateCcw size={17} />
@@ -139,7 +169,9 @@ export default function Vocabulary({
         </article>
       ) : (
         <p className="card">
-          {t("Ovde trenutno nema kartica. Promeni prikaz ili pretragu.", "Hier sind gerade keine Karten. Ändere den Filter oder die Suche.")}
+          {filter === "favorites"
+            ? t("Još nema sačuvanih reči. Izaberi 'Sve reči' i sačuvaj neku pomoću zvezdice.", "Noch keine gespeicherten Wörter. Wähle 'Alle Wörter' und speichere Wörter mit dem Stern.")
+            : t("Ovde trenutno nema kartica. Promeni prikaz ili pretragu.", "Hier sind gerade keine Karten. Ändere den Filter oder die Suche.")}
         </p>
       )}
     </>
