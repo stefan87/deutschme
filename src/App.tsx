@@ -898,6 +898,39 @@ export default function App() {
                   "Neue Lektionen öffnen sich ab 80 % in der vorherigen. Abgeschlossene kannst du wiederholen.",
                 ),
               )}
+              {(current || next) && (
+                <section
+                  className="card"
+                  style={{
+                    maxWidth: 720,
+                    margin: "0 auto 20px",
+                    padding: "18px 22px",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    flexWrap: "wrap",
+                    gap: 16,
+                  }}
+                >
+                  <div>
+                    <small className="muted">
+                      {(current || next)!.level} · {t("NASTAVI GDE SI STAO", "WEITERLERNEN")}
+                    </small>
+                    <h2 style={{ margin: "6px 0 0" }}>
+                      {(current || next)!.title[k]}
+                    </h2>
+                  </div>
+                  <button
+                    type="button"
+                    className="primary"
+                    onClick={() => open((current || next)!)}
+                  >
+                    {t("Nastavi učenje", "Weiterlernen")}
+                    <ArrowRight size={18} />
+                  </button>
+                </section>
+              )}
+
              {level === "A1.1" && (
                 <details
                   className="card"
