@@ -104,7 +104,6 @@ const brand = (
 </span>
     <span>
 Deutsch<span>ly</span>
-      <small>LERNSTUDIO</small>
     </span>
   </div>
 );
