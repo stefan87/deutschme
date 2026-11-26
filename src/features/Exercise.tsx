@@ -153,19 +153,24 @@ const tokens = typeMode && isAssistedTranslation
           lang={["translate", "order"].includes(q.kind) ? "sr" : "de"}
         >
           {["conversation", "dialog"].includes(q.kind) && <MessageCircle size={19} />}{" "}
-{q.kind === "fill" && prompt.includes("_____")
-            ? prompt.split("_____").map((part, i, parts) => (
-                <span key={i}>
-                  {part}
-                  {i < parts.length - 1 && (
-                    disabled ? feedbackBox(feedbackValue || "?") : "_____"
-                  )}
-                </span>
-              ))
-            : prompt} 
-        {disabled && q.kind !== "fill" && feedbackValue && (
+{ /_{3,}/.test(prompt)
+            ? prompt.split(/(_{3,})/g).map((part, i) =>
+                /^_{3,}$/.test(part) ? (
+                  <span key={i}>
+                    {disabled && feedbackValue
+                      ? feedbackBox(feedbackValue)
+                      : part}
+                  </span>
+                ) : (
+                  <span key={i}>{part}</span>
+                )
+              )
+            : prompt } 
+        {disabled && !/_{3,}/.test(prompt) && feedbackValue && (
         <div className="prompt" role="status">
           {feedbackBox(feedbackValue)}
+        </div>
+      )}
         </div>
       )}
         </div>
