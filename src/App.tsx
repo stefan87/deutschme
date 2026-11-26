@@ -916,187 +916,163 @@ const levelCards = (
             </>
           ) : page === "learn" ? (
             <>
-              {head(
-                t("Mapa učenja", "Dein Lernweg"),
-                t(
-                  "Nove lekcije se otključavaju nakon najmanje 80% na prethodnoj. Završene možeš ponoviti.",
-                  "Neue Lektionen öffnen sich ab 80 % in der vorherigen. Abgeschlossene kannst du wiederholen.",
-                ),
-              )}
-              {(current || next) && (
-                <section
-                  className="card"
-                  style={{
-                    maxWidth: 720,
-                    margin: "0 auto 20px",
-                    padding: "18px 22px",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "space-between",
-                    flexWrap: "wrap",
-                    gap: 16,
-                  }}
-                >
-                  <div>
-                    <small className="muted">
-                      {(current || next)!.level} · {t("NASTAVI GDE SI STAO", "WEITERLERNEN")}
-                    </small>
-                    <h2 style={{ margin: "6px 0 0" }}>
-                      {(current || next)!.title[k]}
-                    </h2>
-                  </div>
-                  <button
-                    type="button"
-                    className="primary"
-                    onClick={() => open((current || next)!)}
-                  >
-                    {t("Nastavi učenje", "Weiterlernen")}
-                    <ArrowRight size={18} />
-                  </button>
-                </section>
-              )}
+              <section className="dm-map-hero">
+                <img
+                  className="dm-map-rabbit"
+                  src={`${import.meta.env.BASE_URL}deutschly-rabbit.png`}
+                  alt="Deutschly zec sa diplomskom kapom i nemačkom zastavom"
+                />
+                <div className="dm-map-hero-copy">
+                  <h1>{t("Mapa učenja", "Lernkarte")}</h1>
+                  <p>{t(
+                    "Nove lekcije se otključavaju nakon najmanje 80% na prethodnoj.",
+                    "Neue Lektionen werden nach mindestens 80 % in der vorherigen freigeschaltet."
+                  )}</p>
+                </div>
+              </section>
 
-             {level === "A1.1" && (
-                <details
-                  className="card"
-                  style={{
-                    maxWidth: 620,
-                    width: "100%",
-                    margin: "0 auto 24px",
-                    padding: "16px 20px",
-                  }}
-                >
-                  <summary
-                    style={{
-                      cursor: "pointer",
-                      fontWeight: 800,
-                      fontSize: "1.1rem",
-                      textAlign: "center",
-                      listStylePosition: "inside",
-                    }}
-                  >
-                    {t("📘 Prvi koraci", "📘 Erste Schritte")}
-                  </summary>
-                  <div style={{ marginTop: 20 }}>
-                    <BeginnerBasics
-                      state={s}
-                      onComplete={(unitId, score) =>
-                        change((old) => {
-                          const previous = old.basics?.[unitId];
-                          const best = Math.max(previous?.score ?? 0, score);
-                          return {
-                            ...old,
-                            basics: {
-                              ...old.basics,
-                              [unitId]: {
-                                score: best,
-                                date: previous?.date || new Date().toISOString(),
-                              },
+              <section className="dm-map-stats" aria-label={t("Statistika", "Statistik")}>
+                <div><span aria-hidden="true">🔥</span><strong>{run} {t("dana", "Tage")}</strong><small>{t("Dnevni niz", "Lernserie")}</small></div>
+                <div><span aria-hidden="true">⭐</span><strong>{s.xp} XP</strong><small>{t("Poeni", "Punkte")}</small></div>
+                <div><span aria-hidden="true">🎯</span><strong>{Math.min(100, Math.floor(daily * 100 / (goal * 60)))}%</strong><small>{t("Dnevni cilj", "Tagesziel")}</small></div>
+              </section>
+
+              <div className="dm-map-levels" role="group" aria-label={t("Izaberi nivo", "Niveau wählen")}>
+                {levels.map(l => (
+                  <button key={l} type="button"
+                    className={level === l ? "dm-map-level-active" : ""}
+                    aria-pressed={level === l}
+                    onClick={() => setLevel(l)}>{l}</button>
+                ))}
+              </div>
+
+              {level === "A1.1" && (
+                <details className="dm-map-basics">
+                  <summary>📘 {t("Prvi koraci", "Erste Schritte")} <span>⌄</span></summary>
+                  <BeginnerBasics
+                    state={s}
+                    onComplete={(unitId, score) =>
+                      change(old => {
+                        const previous = old.basics?.[unitId];
+                        return {
+                          ...old,
+                          basics: {
+                            ...old.basics,
+                            [unitId]: {
+                              score: Math.max(previous?.score ?? 0, score),
+                              date: previous?.date || new Date().toISOString(),
                             },
-                          };
-                        })
-                      }
-                    />
-                  </div>
+                          },
+                        };
+                      })
+                    }
+                  />
                 </details>
               )}
 
-              {levelCards}
-              {level === "A1.1" ? (
-                <>
-                  <div className="unit-list">
-                    {curriculum.map((u, i) => (
-                      <details
-                        className="card unit"
-                        key={u.id}
-                      >
+              <div className="dm-map-path">
+                {level === "A1.1" && curriculum.map((u, i) => {
+                  const completed = u.lessons.filter(x => !!s.results[x.id]).length;
+                  const firstAvailable = u.lessons.find(x => unlocked(s, x.id) && !s.results[x.id]);
+                  const isActive = !!firstAvailable || u.lessons.some(x => x.id === current?.id);
+                  const target = firstAvailable || u.lessons[0];
+                  return (
+                    <div className="dm-map-stop" key={u.id}>
+                      <div className={`dm-map-node ${completed === u.lessons.length ? "done" : isActive ? "active" : "locked"}`} aria-hidden="true">
+                        {completed === u.lessons.length ? "✓" : isActive ? "▶" : "🔒"}
+                      </div>
+                      <details className={`dm-map-unit ${isActive ? "dm-map-unit-active" : ""}`}>
                         <summary>
-                          <span className="unit-icon">{u.icon}</span>
-                          <span>
-                            <small>
-                              {t("CELINA", "EINHEIT")}{" "}
-                              {String(i + 1).padStart(2, "0")}
-                            </small>
+                          <span className="dm-map-book" aria-hidden="true">📖</span>
+                          <span className="dm-map-unit-info">
+                            <small>{level} · {t("Celina", "Einheit")} {String(i+1).padStart(2,"0")}</small>
                             <strong>{u.title[k]}</strong>
+                            <span className="dm-map-progress"><span style={{width:`${completed * 100 / u.lessons.length}%`}} /></span>
+                            <small>{Math.floor(completed * 100 / u.lessons.length)}% {t("završeno", "abgeschlossen")}</small>
                           </span>
-                          <span className="chip">
-                            {u.lessons.filter((l) => s.results[l.id]).length}/5
-                          </span>
+                          <span className="dm-map-status">{completed === u.lessons.length ? "✓" : isActive ? t("U toku", "Aktiv") : "🔒"}</span>
                         </summary>
-                        <div className="rows">
+                        <div className="dm-map-unit-body">
                           {u.lessons.map(renderObj)}
                           {renderObj(u.test)}
                         </div>
                       </details>
-                    ))}
-                  </div>
-               {cardList([exam])}
-                </>
-              ) : level === "A1.2" ? (
-                <div className="unit-list">
-                  <h2>A1.2 · Alltag</h2>
-                  <p className="muted">
-                       A1.2: 10 celina, 50 lekcija, 10 testova i završni ispit.
+                      {isActive && (
+                        <button type="button" className="dm-map-continue"
+                          onClick={() => open(target)}>
+                          {t("Nastavi učenje", "Weiterlernen")} <ArrowRight size={18}/>
+                        </button>
+                      )}
+                    </div>
+                  );
+                })}
 
-                  </p>
-{Array.from({ length: 10 }, (_, i) => (
-  <details className="card unit" key={`a12-u${i + 1}`}>
-    <summary>
-      <span className="unit-icon">
-        {String(i + 1).padStart(2, "0")}
-      </span>
-      <strong>{roadmap[0][i].title[k]}</strong>
-      <span className="chip">
-        {a12Sessions
-          .slice(i * 6, i * 6 + 5)
-          .filter((x) => s.results[x.id]).length}/5
-      </span>
-    </summary>
-    <div className="rows">
-      {a12Sessions.slice(i * 6, i * 6 + 6).map(renderObj)}
-    </div>
-  </details>
-))}
-{cardList([a12Sessions[a12Sessions.length - 1]])}
-                </div>
-              ) : (
-                <div className="unit-list">
-                  <p className="callout">
-                    {t(
-                      "Ovo je nastavni plan. Lekcije, testovi i ispit još nisu dostupni.",
-                      "Dies ist der Lernplan. Lektionen, Tests und Prüfung sind noch nicht verfügbar.",
-                    )}
-                  </p>
-                  {roadmap[levels.indexOf(level) - 1]?.map((u, i) => (
-                    <details className="card unit" key={u.title[0]}>
-                      <summary>
-                        <span className="unit-icon">
-                          {String(i + 1).padStart(2, "0")}
-                        </span>
-                        <strong>{u.title[k]}</strong>
-                        <LockKeyhole size={17} />
-                      </summary>
-                      <ol>
-                        {u.topics.map((topic) => (
-                          <li key={topic} lang="sr">
-                            {topic}
-                          </li>
-                        ))}
-                      </ol>
-                      <p className="muted">
-                        {t("Test celine · planiran", "Einheitstest · geplant")}
-                      </p>
-                    </details>
+                {level === "A1.2" && Array.from({length:10}, (_, i) => {
+                  const group = a12Sessions.slice(i*6, i*6+6);
+                  const completed = group.slice(0,5).filter(x => !!s.results[x.id]).length;
+                  const firstAvailable = group.find(x => unlocked(s,x.id) && !s.results[x.id]);
+                  const isActive = !!firstAvailable;
+                  return (
+                    <div className="dm-map-stop" key={`a12-${i}`}>
+                      <div className={`dm-map-node ${completed === 5 ? "done" : isActive ? "active" : "locked"}`} aria-hidden="true">
+                        {completed === 5 ? "✓" : isActive ? "▶" : "🔒"}
+                      </div>
+                      <details className={`dm-map-unit ${isActive ? "dm-map-unit-active" : ""}`}>
+                        <summary>
+                          <span className="dm-map-book" aria-hidden="true">📖</span>
+                          <span className="dm-map-unit-info">
+                            <small>A1.2 · {t("Celina", "Einheit")} {String(i+1).padStart(2,"0")}</small>
+                            <strong>{roadmap[0][i].title[k]}</strong>
+                            <span className="dm-map-progress"><span style={{width:`${completed*20}%`}} /></span>
+                            <small>{completed}/5 {t("lekcija", "Lektionen")}</small>
+                          </span>
+                          <span className="dm-map-status">{completed === 5 ? "✓" : isActive ? t("U toku", "Aktiv") : "🔒"}</span>
+                        </summary>
+                        <div className="dm-map-unit-body">{group.map(renderObj)}</div>
+                      </details>
+                      {firstAvailable && <button type="button" className="dm-map-continue" onClick={() => open(firstAvailable)}>
+                        {t("Nastavi učenje", "Weiterlernen")} <ArrowRight size={18}/>
+                      </button>}
+                    </div>
+                  );
+                })}
+
+                {level !== "A1.1" && level !== "A1.2" &&
+                  roadmap[levels.indexOf(level)-1]?.map((u,i) => (
+                    <div className="dm-map-stop" key={`${level}-${i}`}>
+                      <div className="dm-map-node locked" aria-hidden="true">🔒</div>
+                      <details className="dm-map-unit">
+                        <summary>
+                          <span className="dm-map-book" aria-hidden="true">📖</span>
+                          <span className="dm-map-unit-info">
+                            <small>{level} · {t("Celina", "Einheit")} {String(i+1).padStart(2,"0")}</small>
+                            <strong>{u.title[k]}</strong>
+                          </span>
+                          <span className="dm-map-status">🔒</span>
+                        </summary>
+                        <div className="dm-map-unit-body">
+                          <p className="muted">{t("Lekcije su u pripremi.", "Lektionen in Vorbereitung.")}</p>
+                        </div>
+                      </details>
+                    </div>
                   ))}
-                  <p className="callout">
-                    {t(
-                      "Završni ispit · planiran",
-                      "Abschlussprüfung · geplant",
-                    )}
-                  </p>
-                </div>
-              )}
+                {level === "A1.1" && <div className="dm-map-stop">
+                  <div className="dm-map-node locked" aria-hidden="true">🏅</div>
+                  <div className="dm-map-unit dm-map-unit-body">{renderObj(exam)}</div>
+                </div>}
+                {level === "A1.2" && <div className="dm-map-stop">
+                  <div className="dm-map-node locked" aria-hidden="true">🏅</div>
+                  <div className="dm-map-unit dm-map-unit-body">{renderObj(a12Sessions[a12Sessions.length - 1])}</div>
+                </div>}
+              </div>
+
+              <button type="button" className="dm-map-achievement" onClick={() => go("progress")}>
+                <span aria-hidden="true">🏆</span>
+                <span><strong>{t("Tvoj napredak", "Dein Fortschritt")}</strong><small>{t("Ti si na dobrom putu!", "Du bist auf dem richtigen Weg!")}</small></span>
+                <ChevronRight size={22}/>
+              </button>
             </>
+
           ) : page === "vocab" ? (
             <>
               {head(
