@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import { ArrowLeft, ArrowRight, RotateCcw } from "./icons";
 import { choose } from "../core/i18n";
 import { words } from "../data/content";
@@ -32,9 +32,11 @@ export default function Vocabulary({
   onToggleFavorite: (id: string) => void;
 }) {
   const t = (a: string, b: string) => choose(lang, a, b);
+  const favoritesDialog = useRef<HTMLDialogElement>(null);
   const [filter, setFilter] = useState("due");
   const favorites = state.favorites || [];
-  const favoriteCount = allVocabulary.filter(w => favorites.includes(w.id)).length;
+  const savedWords = allVocabulary.filter(w => favorites.includes(w.id));
+  const favoriteCount = savedWords.length;
   const [category, setCategory] = useState("all");
   const [query, setQuery] = useState("");
   const [i, setIndex] = useState(0);
@@ -108,8 +110,8 @@ export default function Vocabulary({
           <button
             type="button"
             className="secondary"
-            aria-pressed={filter === "favorites"}
-            onClick={() => { setFilter("favorites"); reset(); }}
+            aria-haspopup="dialog"
+            onClick={() => favoritesDialog.current?.showModal()}
             style={{ justifyContent: "space-between", width: "100%", borderColor: "var(--primary)" }}
           >
             <span>★ {t("Omiljene reči", "Lieblingswörter")}</span>
@@ -117,11 +119,72 @@ export default function Vocabulary({
           </button>
         </div>
       </div>
+      <dialog
+        ref={favoritesDialog}
+        aria-labelledby="saved-words-heading"
+        onClick={(event) => {
+          if (event.target === favoritesDialog.current) favoritesDialog.current?.close();
+        }}
+        style={{
+          width: "min(94vw, 760px)",
+          maxHeight: "min(82dvh, 760px)",
+          padding: 0,
+          border: "1px solid var(--primary)",
+          borderRadius: 20,
+          background: "var(--panel)",
+          color: "var(--ink)",
+          boxShadow: "0 18px 70px #0009",
+        }}
+      >
+        <div style={{ padding: 20, display: "grid", gap: 16 }}>
+          <div className="line">
+            <div>
+              <h2 id="saved-words-heading">★ {t("Omiljene reči", "Lieblingswörter")}</h2>
+              <p className="muted">{favoriteCount} {t("sačuvanih reči", "gespeicherte Wörter")}</p>
+            </div>
+            <button type="button" className="secondary" onClick={() => favoritesDialog.current?.close()}>
+              {t("Zatvori ✕", "Schließen ✕")}
+            </button>
+          </div>
+          {favoriteCount === 0 ? (
+            <p className="callout">
+              {t("Još nema omiljenih reči. Sačuvaj neku reč klikom na zvezdicu.",
+                 "Noch keine Lieblingswörter. Speichere ein Wort mit dem Stern.")}
+            </p>
+          ) : (
+            <div style={{ display: "grid", gap: 10, maxHeight: "60dvh", overflowY: "auto" }}>
+              {savedWords.map((word) => (
+                <div
+                  key={word.id}
+                  style={{
+                    display: "grid",
+                    gridTemplateColumns: "minmax(0, 1fr) auto",
+                    gap: 12,
+                    alignItems: "center",
+                    padding: 12,
+                    border: "1px solid var(--border)",
+                    borderRadius: 14,
+                    background: "var(--soft)",
+                  }}
+                >
+                  <div style={{ minWidth: 0 }}>
+                    <strong lang="de" style={{ display: "block", overflowWrap: "anywhere" }}>{word.de}</strong>
+                    <span lang="sr" className="muted">{word.sr}</span>
+                    {word.plural && word.plural !== "—" && (
+                      <small style={{ display: "block" }}>{t("Množina", "Plural")}: {word.plural}</small>
+                    )}
+                  </div>
+                  <PronounceText text={word.de} />
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      </dialog>
       {w ? (
         <article className="card flashcard" key={w.id}>
           <span className="eyebrow">
-            {pos + 1} / {eligible.length} · {statuses[state.cards[w.id]?.status || "new"]}
-            {w.category ? ` · ${w.category}` : ""}
+            {pos + 1} / {eligible.length}
           </span>
           <div className="picture"><Visual value={w.visual} /></div>
           <h2 lang="de">{w.de}</h2>
