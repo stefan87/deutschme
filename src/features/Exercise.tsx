@@ -297,21 +297,21 @@ const tokens = typeMode && isAssistedTranslation
             {cursor.graded?.ok ? <Check size={20} /> : <X size={19} />}{" "}
             {cursor.graded?.ok ? "Sehr gut!" : "Keine Sorge, weiter üben!"}
           </strong>
- <p>
-            {!cursor.graded?.ok && (
-              <strong>{t("Tačan odgovor: ", "Richtige Antwort: ")}</strong>
+<div style={{display:"flex",alignItems:"center",gap:12,flexWrap:"wrap"}}>
+            <p style={{margin:0,flex:"0 1 auto"}}>
+              {!cursor.graded?.ok && (
+                <strong>{t("Tačan odgovor: ", "Richtige Antwort: ")}</strong>
+              )}
+              {cursor.graded?.answer}
+            </p>
+            {cursor.graded?.answer && (
+              q.kind === "fill" && q.prompt.includes("_____") ? (
+                <PronounceText text={q.prompt.replace("_____", cursor.graded.answer)} />
+              ) : ["translate", "order", "correct", "conversation", "dialog"].includes(q.kind) ? (
+                <PronounceText text={cursor.graded.answer} />
+              ) : null
             )}
-            {cursor.graded?.answer}
-          </p>
-          {cursor.graded?.answer && (
-            q.kind === "fill" && q.prompt.includes("_____") ? (
-              <PronounceText
-                text={q.prompt.replace("_____", cursor.graded.answer)}
-              />
-            ) : ["translate", "order", "correct", "conversation", "dialog"].includes(q.kind) ? (
-              <PronounceText text={cursor.graded.answer} />
-            ) : null
-          )}
+          </div>
           <small>
             {q.explain[de ? 1 : 0]}
             {cursor.graded?.points
