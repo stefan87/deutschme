@@ -41,7 +41,7 @@ export default function Vocabulary({
     known: t("Naučena", "Gelernt"),
     hard: t("Teška", "Schwierig"),
   };
-
+  
   const categories = useMemo(
     () => Array.from(new Set(extraVocabulary.map((w) => w.category))),
     [],
@@ -101,9 +101,8 @@ export default function Vocabulary({
       {w ? (
         <article className="card flashcard" key={w.id}>
           <span className="eyebrow">
-            {pos + 1} / {eligible.length} · {statuses[state.cards[w.id]?.status || "new"]}
-            {w.category ? ` · ${w.category}` : ""}
-          </span>
+  {pos + 1} / {eligible.length}
+</span>
           <div className="picture"><Visual value={w.visual} /></div>
           <h2 lang="de">{w.de}</h2>
           {w.audio ? <Sound key={w.audio} clip={w.audio} lang={lang} /> : <PronounceText text={w.de} />}
