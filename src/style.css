@@ -538,3 +538,32 @@ h1, h2, h3, .brand {
   :root[data-theme="system"] .chip { background: var(--pale); color: var(--primaryText); }
   :root[data-theme="system"] .session-head { background: var(--bg); }
 }
+/* Deutschly - mobile learning layout refinement */
+@media (max-width: 740px) {
+  .main { min-width: 0; }
+  .main > *, .unit-list, .level-grid { min-width: 0; max-width: 100%; }
+  .level-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+  .level-grid .level {
+    min-width: 0;
+    padding: 11px 10px !important;
+    min-height: 52px !important;
+    border-radius: 13px;
+  }
+  .level-grid .level-label { gap: 8px; min-width: 0; }
+  .unit-list { gap: 8px; }
+  .unit summary { gap: 9px; padding: 11px 12px; min-height: 58px; }
+  .unit summary strong { overflow-wrap: anywhere; }
+  .unit .rows { padding: 2px 9px; }
+  .unit .lesson-row { min-width: 0; gap: 8px; }
+  .unit .lesson-row > span:nth-child(2) { min-width: 0; overflow-wrap: anywhere; }
+  .unit .chip { max-width: 100%; }
+  .page-head { margin-bottom: 14px; }
+  .page-head p { line-height: 1.4; }
+}
+
+@media (max-width: 380px) {
+  .level-grid { gap: 6px; }
+  .level-grid .level { padding: 9px 7px !important; }
+  .unit summary { padding: 10px 9px; gap: 7px; }
+  .unit-icon, .lesson-icon { width: 34px; height: 34px; }
+}
