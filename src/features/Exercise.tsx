@@ -41,7 +41,9 @@ export default function Exercise({
   const wordTiles = isAssistedTranslation
     ? expected.replace(/[.!?]+$/u, "").split(/\s+/).filter(Boolean)
     : [];
-  const tokens = shuffle(q.tokens || (typeMode ? [] : wordTiles), q.id);
+const tokens = typeMode && isAssistedTranslation
+  ? []
+  : shuffle(q.tokens || wordTiles, q.id);
   const isWrite =
     (q.kind === "translate" && (!isAssistedTranslation || typeMode)) ||
     q.kind === "correct" ||
@@ -213,14 +215,19 @@ export default function Exercise({
         {hintShown && !disabled && (
           <p className="callout" role="status">{hintText}</p>
         )}
-        {["conversation", "dialog"].includes(q.kind) && (
-          <button type="button" className="quiet"
-            onClick={() => { setTypeMode(!typeMode); setText(""); }}>
-            {typeMode
-              ? t("Prikaži ponuđene odgovore", "Antwortoptionen anzeigen")
-              : t("Upiši svoj odgovor", "Antwort selbst schreiben")}
-          </button>
-        )}
+      {["conversation", "dialog"].includes(q.kind) && !disabled && (
+  <button type="button" className="quiet"
+    onClick={() => {
+      setTypeMode(old => !old);
+      setText("");
+      setSingle("");
+      setPlaced([]);
+    }}>
+    {typeMode
+      ? t("Prikaži ponuđene odgovore", "Antwortoptionen anzeigen")
+      : t("Upiši svoj odgovor", "Antwort selbst schreiben")}
+  </button>
+)}
         {isWrite ? (
           <>
             <label className="inputlabel" htmlFor="reply">{t("Tvoj odgovor", "Deine Antwort")}</label>
