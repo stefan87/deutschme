@@ -303,10 +303,15 @@ const tokens = typeMode && isAssistedTranslation
             )}
             {cursor.graded?.answer}
           </p>
-          {cursor.graded?.answer &&
-  ["translate", "order", "correct", "conversation", "dialog"].includes(q.kind) && (
-    <PronounceText text={cursor.graded.answer} />
-  )}
+          {cursor.graded?.answer && (
+            q.kind === "fill" && q.prompt.includes("_____") ? (
+              <PronounceText
+                text={q.prompt.replace("_____", cursor.graded.answer)}
+              />
+            ) : ["translate", "order", "correct", "conversation", "dialog"].includes(q.kind) ? (
+              <PronounceText text={cursor.graded.answer} />
+            ) : null
+          )}
           <small>
             {q.explain[de ? 1 : 0]}
             {cursor.graded?.points
