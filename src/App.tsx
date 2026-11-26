@@ -898,28 +898,51 @@ export default function App() {
                   "Neue Lektionen öffnen sich ab 80 % in der vorherigen. Abgeschlossene kannst du wiederholen.",
                 ),
               )}
-              {level === "A1.1" && (
-  <BeginnerBasics
-    state={s}
-    onComplete={(unitId, score) =>
-      change((old) => {
-        const previous = old.basics?.[unitId];
-        const best = Math.max(previous?.score ?? 0, score);
+             {level === "A1.1" && (
+                <details
+                  className="card"
+                  style={{
+                    maxWidth: 620,
+                    width: "100%",
+                    margin: "0 auto 24px",
+                    padding: "16px 20px",
+                  }}
+                >
+                  <summary
+                    style={{
+                      cursor: "pointer",
+                      fontWeight: 800,
+                      fontSize: "1.1rem",
+                      textAlign: "center",
+                      listStylePosition: "inside",
+                    }}
+                  >
+                    {t("📘 Prvi koraci", "📘 Erste Schritte")}
+                  </summary>
+                  <div style={{ marginTop: 20 }}>
+                    <BeginnerBasics
+                      state={s}
+                      onComplete={(unitId, score) =>
+                        change((old) => {
+                          const previous = old.basics?.[unitId];
+                          const best = Math.max(previous?.score ?? 0, score);
+                          return {
+                            ...old,
+                            basics: {
+                              ...old.basics,
+                              [unitId]: {
+                                score: best,
+                                date: previous?.date || new Date().toISOString(),
+                              },
+                            },
+                          };
+                        })
+                      }
+                    />
+                  </div>
+                </details>
+              )}
 
-        return {
-          ...old,
-          basics: {
-            ...old.basics,
-            [unitId]: {
-              score: best,
-              date: previous?.date || new Date().toISOString(),
-            },
-          },
-        };
-      })
-    }
-  />
-)}
               {levelCards}
               {level === "A1.1" ? (
                 <>
