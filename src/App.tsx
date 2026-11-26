@@ -445,7 +445,7 @@ export default function App() {
         {item.title[k]}
         <small>
           {s.results[item.id]
-            ? `${s.results[item.id].score}% · ${t("Uradi ponovo", "Erneut machen")}``
+            ? `${s.results[item.id].score}% · ${t("Uradi ponovo", "Erneut machen")}`
             : `${item.items.length} ${t("zadataka", "Aufgaben")}`}
         </small>
       </span>
