@@ -71,6 +71,27 @@ const tokens = typeMode && isAssistedTranslation
       : tokens.length
         ? [placed.map(i => tokens[i]).join(" ")]
         : [single];
+  const feedbackValue = answers().filter(Boolean).join(" · ");
+
+  const feedbackBox = (value: string) => (
+    <span
+      lang="de"
+      style={{
+        display: "inline-block",
+        background: "#ffffff",
+        color: cursor.graded?.ok ? "#167a43" : "#c62828",
+        borderRadius: 8,
+        padding: "4px 10px",
+        margin: "0 4px",
+        fontWeight: 800,
+        overflowWrap: "anywhere",
+        maxWidth: "100%",
+      }}
+    >
+      {value}
+    </span>
+  );
+
   const prompt = de && ["translate", "order"].includes(q.kind) ? "" : q.prompt;
   const hintText = isAssistedTranslation
     ? t(
@@ -132,7 +153,21 @@ const tokens = typeMode && isAssistedTranslation
           lang={["translate", "order"].includes(q.kind) ? "sr" : "de"}
         >
           {["conversation", "dialog"].includes(q.kind) && <MessageCircle size={19} />}{" "}
-          {prompt}
+{q.kind === "fill" && prompt.includes("_____")
+            ? prompt.split("_____").map((part, i, parts) => (
+                <span key={i}>
+                  {part}
+                  {i < parts.length - 1 && (
+                    disabled ? feedbackBox(feedbackValue || "?") : "_____"
+                  )}
+                </span>
+              ))
+            : prompt} 
+        {disabled && q.kind !== "fill" && feedbackValue && (
+        <div className="prompt" role="status">
+          {feedbackBox(feedbackValue)}
+        </div>
+      )}
         </div>
       )}
       {de && q.kind === "translate" && <div className="prompt" lang="sr">{q.prompt}</div>}
@@ -256,8 +291,13 @@ const tokens = typeMode && isAssistedTranslation
             {cursor.graded?.ok ? <Check size={20} /> : <X size={19} />}{" "}
             {cursor.graded?.ok ? "Sehr gut!" : "Keine Sorge, weiter üben!"}
           </strong>
-          <p>{cursor.graded?.answer}</p>
-{cursor.graded?.answer &&
+ <p>
+            {!cursor.graded?.ok && (
+              <strong>{t("Tačan odgovor: ", "Richtige Antwort: ")}</strong>
+            )}
+            {cursor.graded?.answer}
+          </p>
+          {cursor.graded?.answer &&
   ["translate", "order", "correct", "conversation", "dialog"].includes(q.kind) && (
     <PronounceText text={cursor.graded.answer} />
   )}
