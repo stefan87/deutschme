@@ -1009,7 +1009,6 @@ const levelCards = (
                       <details
                         className="card unit"
                         key={u.id}
-                        open={i === 0 || next?.id.startsWith(`${u.id}-`)}
                       >
                         <summary>
                           <span className="unit-icon">{u.icon}</span>
