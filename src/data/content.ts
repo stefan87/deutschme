@@ -166,8 +166,7 @@ export const curriculum = units.map((unit, u) => {
     for (const word of words)
       if (pairs.length < 4 && !pairs.some((x) => x.visual === word.visual))
         pairs.push(word);
-    const correction =
-      (i === 0 ? "A · " : "") + cloze.replace(/\[[^\]]+\]/, wrong[0]);
+    const correction = cloze.replace(/\[[^\]]+\]/, wrong[0]);
     const dialogueIndex = u * 4 + Math.max(0, j - 1);
     const [scenePrompt, sceneReply] = lessonDialogues[dialogueIndex];
     const sceneOptions = [
