@@ -147,13 +147,15 @@ const tokens = typeMode && isAssistedTranslation
       {de && q.kind === "translate" && (
         <p>Formuliere diesen Satz auf Deutsch. Die Vorlage ist auf Serbisch.</p>
       )}
-      {prompt && (
+       {prompt && (
         <div
           className={`prompt ${["conversation", "dialog"].includes(q.kind) ? "bubble" : ""}`}
           lang={["translate", "order"].includes(q.kind) ? "sr" : "de"}
         >
-          {["conversation", "dialog"].includes(q.kind) && <MessageCircle size={19} />}{" "}
-{ /_{3,}/.test(prompt)
+          {["conversation", "dialog"].includes(q.kind) && (
+            <MessageCircle size={19} />
+          )}{" "}
+          { /_{3,}/.test(prompt)
             ? prompt.split(/(_{3,})/g).map((part, i) =>
                 /^_{3,}$/.test(part) ? (
                   <span key={i}>
@@ -165,14 +167,13 @@ const tokens = typeMode && isAssistedTranslation
                   <span key={i}>{part}</span>
                 )
               )
-            : prompt } 
-        {disabled && !/_{3,}/.test(prompt) && feedbackValue && (
+            : prompt}
+        </div>
+      )}
+
+      {disabled && !/_{3,}/.test(prompt) && feedbackValue && (
         <div className="prompt" role="status">
           {feedbackBox(feedbackValue)}
-        </div>
-      )}
-        </div>
-      )}
         </div>
       )}
       {de && q.kind === "translate" && <div className="prompt" lang="sr">{q.prompt}</div>}
