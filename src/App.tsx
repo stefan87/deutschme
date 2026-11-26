@@ -1021,7 +1021,18 @@ export default function App() {
                       : n;
                   })
                 }
-              />
+             onToggleFavorite={(id) =>
+  change((old) => {
+    const current = old.favorites || [];
+
+    return {
+      ...old,
+      favorites: current.includes(id)
+        ? current.filter((wordId) => wordId !== id)
+        : [...current, id],
+    };
+  })
+} />
             </>
           ) : page === "listen" ? (
             <>
