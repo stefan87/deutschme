@@ -266,6 +266,51 @@ export const curriculum = units.map((unit, u) => {
         options: choices(sceneReply, sceneOptions, "dialog"),
       }),
     };
+    const extraA: Question[] = id === "u1-l1" ? [
+      {
+        id: `${id}:extra:read-anna`,
+        kind: "read",
+        prompt: "",
+        text: "Das ist Anna. Anna hat ein Auto. Das Auto ist rot.",
+        questions: [
+          { prompt: "Wie heißt sie?", answer: "Anna", options: ["Anna", "Lea", "Mia"] },
+          { prompt: "Was hat Anna?", answer: "Ein Auto", options: ["Ein Auto", "Ein Fahrrad", "Einen Bus"] },
+          { prompt: "Welche Farbe hat das Auto?", answer: "Rot", options: ["Rot", "Blau", "Grün"] },
+        ],
+        explain: pair("Pronađi odgovore direktno u tekstu.", "Finde die Antworten direkt im Text."),
+        hard: true,
+      },
+      {
+        id: `${id}:extra:a-short`,
+        kind: "grammar",
+        prompt: "In welchem Wort ist das a kurz?",
+        options: ["Mann", "Name", "Tag", "haben"],
+        accept: ["Mann"],
+        explain: pair("U Mann glas a je kratak. U Name, Tag i haben je dug.", "In Mann ist das a kurz. In Name, Tag und haben ist es lang."),
+      },
+      {
+        id: `${id}:extra:write-name`,
+        kind: "translate",
+        prompt: "Moje ime je Ana.",
+        accept: ["Mein Name ist Ana.", "Mein Name ist Anna."],
+        explain: pair("Za predstavljanje možeš reći: Mein Name ist ...", "Zur Vorstellung kannst du sagen: Mein Name ist ..."),
+        hard: true,
+      },
+      {
+        id: `${id}:extra:read-letter`,
+        kind: "read",
+        prompt: "",
+        text: "Hallo! Ich bin Max. Mein Name beginnt mit M. Anna ist meine Freundin. Ihr Name beginnt mit A.",
+        questions: [
+          { prompt: "Wie heißt er?", answer: "Max", options: ["Max", "Alex", "Paul"] },
+          { prompt: "Mit welchem Buchstaben beginnt Annas Name?", answer: "A", options: ["A", "M", "E"] },
+          { prompt: "Wer ist Anna?", answer: "Seine Freundin", options: ["Seine Freundin", "Seine Mutter", "Seine Lehrerin"] },
+        ],
+        explain: pair("Prepoznaj imena i početna slova u tekstu.", "Erkenne Namen und Anfangsbuchstaben im Text."),
+      },
+    ] : [];
+
+  
     const types: Kind[] = [
       "fill",
       "image",
