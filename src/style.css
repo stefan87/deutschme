@@ -1219,3 +1219,103 @@ h1, h2, h3, .brand {
   min-height: 45px;
   border-radius: 999px;
 }
+/* Deutschly profile - compact layout, same style as Listening */
+.dm-profile-page {
+  display: grid;
+  gap: 15px;
+  width: 100%;
+  max-width: 780px;
+  min-width: 0;
+  margin: 0 auto;
+}
+.dm-profile-page .dm-profile-hero {
+  display: grid;
+  grid-template-columns: 110px minmax(0, 1fr);
+  align-items: center;
+  gap: 15px;
+  padding: 20px;
+  border: 1px solid #168a93;
+  border-radius: 20px;
+  background: linear-gradient(135deg, #0b6070, #063442 65%, #041f2e);
+  box-shadow: 0 0 18px #00dede22;
+}
+.dm-profile-page .dm-profile-hero-image {
+  display: block;
+  width: 105px;
+  height: 105px;
+  max-width: 100%;
+  object-fit: cover;
+  border: 1px solid #168a93;
+  border-radius: 24px;
+}
+.dm-profile-page .dm-profile-hero h2 {
+  font-size: clamp(1.3rem, 3.5vw, 1.85rem);
+  margin: 6px 0;
+  overflow-wrap: anywhere;
+}
+.dm-profile-page .dm-profile-hero p {
+  color: #d2edf1;
+  font-size: .94rem;
+  line-height: 1.4;
+}
+.dm-profile-page .dm-profile-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+.dm-profile-page .dm-profile-stats > div {
+  min-width: 0;
+  min-height: 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  padding: 12px 6px;
+  border: 1px solid #168a93;
+  border-radius: 17px;
+  background: linear-gradient(145deg, #0b5060, #052b3a);
+  text-align: center;
+}
+.dm-profile-page .dm-profile-stats span { font-size: 2rem; }
+.dm-profile-page .dm-profile-stats strong { font-size: 1.35rem; overflow-wrap: anywhere; }
+.dm-profile-page .dm-profile-stats small { font-size: .75rem; color: #c4e1e5; }
+.dm-profile-page .dm-profile-section {
+  display: grid;
+  gap: 14px;
+  min-width: 0;
+  padding: 19px;
+  border: 1px solid #168a93;
+  border-radius: 19px;
+  background: linear-gradient(145deg, #083845, #041f2e);
+}
+.dm-profile-page .dm-profile-section > h2 { font-size: 1.18rem; margin: 0; }
+.dm-profile-page .dm-profile-section > p { margin: 0; color: #d1e7eb; }
+.dm-profile-page .dm-profile-section > .primary,
+.dm-profile-page .dm-profile-section .profile-form > .primary { justify-self: start; }
+.dm-profile-page .dm-profile-section > .card { max-width: 100%; margin: 0; box-shadow: none; }
+@media (max-width: 740px) {
+  .dm-profile-page .dm-profile-hero { grid-template-columns: 88px minmax(0, 1fr); gap: 10px; padding: 13px; }
+  .dm-profile-page .dm-profile-hero-image { width: 85px; height: 85px; border-radius: 20px; }
+  .dm-profile-page .dm-profile-stats { gap: 7px; }
+  .dm-profile-page .dm-profile-stats > div { min-height: 106px; padding: 9px 4px; }
+  .dm-profile-page .dm-profile-stats span { font-size: 1.6rem; }
+  .dm-profile-page .dm-profile-stats strong { font-size: 1.1rem; }
+  .dm-profile-page .dm-profile-stats small { font-size: .65rem; }
+  .dm-profile-page .dm-profile-section { padding: 14px; }
+}
+@media (max-width: 390px) {
+  .dm-profile-page .dm-profile-hero h2 { font-size: 1.2rem; }
+  .dm-profile-page .dm-profile-hero p { font-size: .82rem; }
+  .dm-profile-page .dm-profile-section { padding: 11px; }
+}
+:root[data-theme="light"] .dm-profile-page .dm-profile-hero,
+:root[data-theme="light"] .dm-profile-page .dm-profile-stats > div,
+:root[data-theme="light"] .dm-profile-page .dm-profile-section {
+  background: #f4fcfd;
+  color: #10303b;
+  border-color: #9bcdd1;
+}
+:root[data-theme="light"] .dm-profile-page .dm-profile-hero p,
+:root[data-theme="light"] .dm-profile-page .dm-profile-stats small,
+:root[data-theme="light"] .dm-profile-page .dm-profile-section > p { color: #526a73; }
