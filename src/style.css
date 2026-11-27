@@ -960,3 +960,34 @@ h1, h2, h3, .brand {
 }
 :root[data-theme="light"] .dm-progress-congrats-copy h2 { color: #10303b; }
 :root[data-theme="light"] .dm-progress-congrats-copy p { color: #526a73; }
+/* Deutschly speaking page */
+.dm-speak{max-width:780px;margin:0 auto;display:grid;gap:16px;min-width:0}
+.dm-speak-hero{display:grid;grid-template-columns:110px minmax(0,1fr);align-items:center;gap:15px;padding:20px;border:1px solid #168a93;border-radius:20px;background:linear-gradient(135deg,#0b6070,#063442 65%,#041f2e);box-shadow:0 0 18px #00dede22}
+.dm-speak-hero-icon{width:105px;height:105px;display:grid;place-items:center;border-radius:24px;background:radial-gradient(circle,#0d7c8b,#06404d);font-size:3.6rem;box-shadow:inset 0 0 20px #00e5e530}
+.dm-speak-hero h2{font-size:clamp(1.3rem,3.5vw,1.85rem);margin:6px 0}
+.dm-speak-hero p{color:#d2edf1;font-size:.94rem;line-height:1.4}
+.dm-speak-section-head h2{font-size:1.25rem}
+.dm-speak-topics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:11px}
+.dm-speak-topic{min-height:139px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;padding:12px 7px;border:1px solid #177b88;border-radius:18px;background:linear-gradient(145deg,#0b5060,#052b3a);color:#f1fcff;text-align:center;overflow-wrap:anywhere}
+.dm-speak-topic:hover,.dm-speak-topic:focus-visible{border-color:#40fff5;box-shadow:0 0 16px #00e5e555}
+.dm-speak-topic>span{font-size:2.8rem;line-height:1.15}
+.dm-speak-topic strong{font-size:1rem;line-height:1.2}
+.dm-speak-topic small{font-size:.74rem;color:#c4e1e5}
+.dm-speak-note{padding:13px 16px;border:1px solid #176f7d;border-radius:14px;background:#073442;color:#d4edf1;font-size:.9rem}
+.dm-speak-back{justify-self:start;display:inline-flex;align-items:center;gap:7px;padding:7px 2px;background:transparent;border:0;color:var(--primaryText);font-weight:800}
+.dm-speak-practice{display:grid;gap:15px;padding:22px;border:1px solid #168a93;border-radius:20px;background:linear-gradient(145deg,#083845,#041f2e)}
+.dm-speak-practice-top{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.dm-speak-sentence{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;padding:17px;background:#082f3d;border:1px solid #1d8995;border-radius:15px}
+.dm-speak-sentence strong{font-size:clamp(1.12rem,3.5vw,1.5rem);line-height:1.45;overflow-wrap:anywhere;flex:1 1 190px}
+.dm-speak-microphone{width:104px;height:104px;display:grid;place-items:center;justify-self:center;border-radius:50%;background:radial-gradient(circle,#0c7b87,#063743);color:#a5fffa;border:2px solid #26cbd0;box-shadow:0 0 25px #00dede35}
+.dm-speak-record{width:100%;max-width:330px;justify-self:center}
+.dm-speak-recording{text-align:center;color:#ffbdc9;font-weight:800}
+.dm-speak-playback{display:grid;gap:8px;justify-items:center;padding:14px;background:#083543;border-radius:14px}
+.dm-speak-playback audio{width:min(100%,360px)}
+.dm-speak-pager{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.dm-speak-pager button{flex:1 1 140px}
+@media(max-width:740px){.dm-speak{gap:13px}.dm-speak-hero{grid-template-columns:88px minmax(0,1fr);gap:10px;padding:13px}.dm-speak-hero-icon{width:85px;height:85px;font-size:2.9rem}.dm-speak-topics{gap:8px}.dm-speak-topic{min-height:122px;padding:10px 5px}.dm-speak-topic>span{font-size:2.3rem}.dm-speak-topic strong{font-size:.86rem}.dm-speak-topic small{font-size:.68rem}.dm-speak-practice{padding:15px}}
+@media(max-width:390px){.dm-speak-topics{gap:6px}.dm-speak-topic{min-height:113px;padding:8px 4px}.dm-speak-topic>span{font-size:2rem}.dm-speak-topic strong{font-size:.78rem}.dm-speak-topic small{font-size:.62rem}.dm-speak-hero h2{font-size:1.2rem}.dm-speak-hero p{font-size:.82rem}}
+:root[data-theme="light"] .dm-speak-hero,:root[data-theme="light"] .dm-speak-topic,:root[data-theme="light"] .dm-speak-practice,:root[data-theme="light"] .dm-speak-note{background:#f4fcfd;color:#10303b;border-color:#9bcdd1}
+:root[data-theme="light"] .dm-speak-hero p,:root[data-theme="light"] .dm-speak-topic small{color:#526a73}
+:root[data-theme="light"] .dm-speak-sentence,:root[data-theme="light"] .dm-speak-playback{background:#edf9fa;color:#10303b}
