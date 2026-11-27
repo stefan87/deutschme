@@ -21,19 +21,31 @@ const allVocabulary: CategorizedWord[] = (() => {
 
 function categoryIcon(name: string) {
   const c = name.toLocaleLowerCase("de").trim();
-  if (/osnovne fraze|fraze|phrase|ausdruck/.test(c)) return "💬";
-  if (/putov|reise|travel|verkehr/.test(c)) return "🧳";
-  if (/^dom$|kuća|kuca|haus|wohn/.test(c)) return "🏠";
-  if (/hrana|essen|food|obrok/.test(c)) return "🍴";
-  if (/posao|arbeit|beruf|job/.test(c)) return "💼";
-  if (/zdrav|gesund|arzt|körper/.test(c)) return "❤️";
   if (/reči iz lekcija|reci iz lekcija|wörter aus lektionen|lekcij/.test(c)) return "📚";
+  if (/osnovne fraze|fraze|phrase|ausdruck/.test(c)) return "🗨️";
   if (/porodic|famil/.test(c)) return "👨‍👩‍👧";
+  if (/^dom$|kuća|kuca|haus|wohn/.test(c)) return "🏠";
   if (/nameštaj|namestaj|möbel|moebel/.test(c)) return "🛋️";
   if (/piće|pice|getränk|getraenk|trink/.test(c)) return "🥤";
+  if (/hrana|essen|food|obrok/.test(c)) return "🍴";
+  if (/odeća|odeca|odeć|odec|kleid|bekleid/.test(c)) return "👕";
+  if (/^telo$|körper|koerper|body|anatom/.test(c)) return "🧍";
+  if (/zdrav|gesund|arzt|medizin/.test(c)) return "❤️";
+  if (/^grad$|stadt|city/.test(c)) return "🏙️";
+  if (/prevoz|transport|verkehr|fahrzeug/.test(c)) return "🚌";
+  if (/posao|arbeit|beruf|job/.test(c)) return "💼";
+  if (/škola|skola|schule|unterricht/.test(c)) return "🎓";
+  if (/priroda|natur|landschaft/.test(c)) return "🌳";
+  if (/vreme napolju|vremenske prilike|wetter|weather/.test(c)) return "🌤️";
+  if (/^vreme$|^zeit$|uhrzeit|sat/.test(c)) return "⏰";
+  if (/kupovina|shopping|einkauf|prodavn/.test(c)) return "🛍️";
+  if (/tehnolog|technik|computer|digital/.test(c)) return "💻";
+  if (/putov|reise|travel|urlaub/.test(c)) return "🧳";
+  if (/životinje|zivotinje|tier|animal/.test(c)) return "🐾";
+  if (/svakodnevni predmeti|predmeti|gegenstände|gegenstaende|alltag/.test(c)) return "🎒";
   if (/broj|zahl/.test(c)) return "🔢";
   if (/boj|farb/.test(c)) return "🎨";
-  return "📖";
+  return "✨";
 }
 
 export default function Vocabulary({ state, lang, onMark, onToggleFavorite }: {
