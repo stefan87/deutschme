@@ -1052,7 +1052,7 @@ h1, h2, h3, .brand {
 .dm-home-welcome-copy{position:relative;z-index:1;width:56%;padding:20px}
 .dm-home-welcome h1{font-size:clamp(1.65rem,4vw,2.7rem);margin-bottom:10px}
 .dm-home-welcome p{color:#d5eaf0;font-size:clamp(.9rem,2.5vw,1.15rem);line-height:1.4}
-.dm-home-welcome img{position:absolute;right:0;top:0;width:63%;height:100%;object-fit:cover;object-position:75% center;mask-image:linear-gradient(90deg,transparent 0%,black 32%)}
+.dm-home-welcome img{position:absolute;right:0;top:0;width:63%;height:100%;object-fit:;object-position:75% center;mask-image:linear-gradient(90deg,transparent 0%,black 32%)}
 .dm-home-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border:1px solid #188b98;border-radius:18px;background:linear-gradient(135deg,#073947,#041e2b);padding:12px 6px;margin-bottom:17px}
 .dm-home-stats>div{display:grid;grid-template-columns:auto minmax(0,1fr);align-items:center;gap:0 9px;padding:3px 13px;border-left:1px solid #27717d;min-width:0}
 .dm-home-stats>div:first-child{border-left:0}
@@ -1123,7 +1123,7 @@ h1, h2, h3, .brand {
   padding: 0;
   border: 1px solid #168a93;
   border-radius: 18px;
-  object-fit: cover;
+  object-fit: contain;
   object-position: center;
   box-shadow: 0 0 15px #00dede33;
   background: #052a3a;
