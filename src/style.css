@@ -1741,4 +1741,12 @@ h1, h2, h3, .brand {
   .dm-germany .dm-germany-banner-copy h2 { font-size: 1.2rem; }
   .dm-germany .dm-germany-banner-copy p { font-size: .82rem; }
 }
+/* Deutschly reading - feedback for each question */
+.dm-reading-question { display: grid; gap: 7px; min-width: 0; padding: 9px 0; }
+.dm-reading-question + .dm-reading-question { border-top: 1px solid var(--border); }
+.dm-reading-answer { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; font-size: .9rem; }
+.dm-reading-answer-box { display: inline-block; background: #fff; border-radius: 8px; padding: 5px 10px; font-weight: 800; overflow-wrap: anywhere; }
+.dm-reading-answer.miss > span:last-child { flex-basis: 100%; }
+.dm-reading-answer strong { font-weight: 850; }
+@media (max-width: 445px) { .dm-reading-question .selectrow { grid-template-columns: 1fr; } }
 
