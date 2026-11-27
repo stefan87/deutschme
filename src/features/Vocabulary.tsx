@@ -175,14 +175,18 @@ normalizeSearch(`${w.de} ${w.sr}`).includes(normalizeSearch(query)) &&
 
     </div>}
 {mode === "home" && <>
-      <div className="dm-listening-hero">
-        <img
-          className="dm-listening-hero-icon dm-vocab-rabbit-image"
-          src={`${import.meta.env.BASE_URL}deutschly-vocabulary-rabbit.png`}
-          alt=""
-          aria-hidden="true"
-        />
-        <div>
+      <div
+  className="dm-listening-hero dm-vocab-banner-hero"
+  style={{
+    backgroundImage: `linear-gradient(90deg, #031d2c 0%, #031d2cf2 27%, #031d2c8c 52%, transparent 76%), url("${import.meta.env.BASE_URL}deutschly-vocabulary-banner.png")`,
+  }}
+>
+  <div className="dm-vocab-banner-copy">
+    <span className="eyebrow">{t("VOKABULAR", "WORTSCHATZ")}</span>
+    <h2>{t("Uči nove reči", "Neue Wörter lernen")}</h2>
+    <p>{t("Proširi svoj rečnik korak po korak.", "Erweitere deinen Wortschatz Schritt für Schritt.")}</p>
+  </div>
+</div>
           <span className="eyebrow">{t("VOKABULAR", "WORTSCHATZ")}</span>
           <h2>{t("Uči nove reči", "Neue Wörter lernen")}</h2>
           <p>{t(
