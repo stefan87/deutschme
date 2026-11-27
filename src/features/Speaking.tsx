@@ -126,13 +126,20 @@ export default function Speaking({ lang }: { lang: Lang }) {
 
   return <section className="dm-speak">
     {topic === null ? <>
-      <div className="dm-speak-hero">
-<img className="dm-speak-hero-icon dm-rabbit-hero-image" src={`${import.meta.env.BASE_URL}deutschly-speaking-rabbit.png`} alt="" aria-hidden="true" />
-        <div><span className="eyebrow">{t("VEŽBA IZGOVORA", "AUSSPRACHE ÜBEN")}</span>
-          <h2>{t("Vežbaj nemački govor", "Deutsch sprechen üben")}</h2>
-          <p>{t("Slušaj, ponovi i snimi svoj glas. Vežbaj svojim tempom.", "Höre zu, sprich nach und nimm deine Stimme auf.")}</p>
-        </div>
-      </div>
+     <div className="dm-speak-hero dm-speak-banner">
+  <img
+    className="dm-speak-banner-image"
+    src={`${import.meta.env.BASE_URL}deutschly-speaking-banner.png`}
+    alt=""
+    aria-hidden="true"
+  />
+  <div className="dm-speak-banner-fade" aria-hidden="true" />
+  <div className="dm-speak-banner-copy">
+    <span className="eyebrow">{t("VEŽBA IZGOVORA", "AUSSPRACHE ÜBEN")}</span>
+    <h2>{t("Vežbaj nemački govor", "Deutsch sprechen üben")}</h2>
+    <p>{t("Slušaj, ponovi i snimi svoj glas. Vežbaj svojim tempom.", "Höre zu, sprich nach und nimm deine Stimme auf.")}</p>
+  </div>
+</div>
       <div className="dm-speak-section-head"><h2>{t("Izaberi situaciju", "Situation auswählen")}</h2></div>
       <div className="dm-speak-topics">
         {topics.map((item, index) => <button type="button" key={item.sr} className="dm-speak-topic" onClick={() => openTopic(index)}>
