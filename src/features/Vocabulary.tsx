@@ -117,7 +117,8 @@ export default function Vocabulary({ state, lang, onMark, onToggleFavorite }: {
 
     {mode === "home" && <>
       <div className="dm-vocab-hero">
-        <div className="dm-vocab-hero-main"><span className="dm-vocab-illustration" aria-hidden="true">📚🍎</span>
+        <div className="dm-vocab-hero-main">
+<img className="dm-vocab-illustration" src={`${import.meta.env.BASE_URL}deutschly-vocab-cards.png`} alt="" aria-hidden="true" />
           <div><h2>{t("Uči nove reči", "Neue Wörter lernen")}</h2><p>{t("Proširi svoj rečnik korak po korak.", "Erweitere deinen Wortschatz Schritt für Schritt.")}</p></div>
         </div>
         <button type="button" className="primary" onClick={() => start("quiz", "all")}>{t("Započni vežbu", "Übung starten")} <ArrowRight size={19}/></button>
