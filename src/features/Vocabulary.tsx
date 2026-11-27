@@ -147,7 +147,32 @@ normalizeSearch(`${w.de} ${w.sr}`).includes(normalizeSearch(query)) &&
         <option value="all">{t("Sve teme", "Alle Themen")}</option>
         {categoryItems.map(c => <option key={c.id} value={c.id}>{c.label}</option>)}
       </select></label>
-      <button type="button" className="secondary" onClick={() => { setFilter("all"); setCategory("all"); setQuery(""); reset(); }}>{t("Očisti filtere", "Filter löschen")}</button>
+     <button
+        type="button"
+        className="secondary"
+        style={{
+          width: "50%",
+          minWidth: 125,
+          maxWidth: "100%",
+          height: 45,
+          minHeight: 45,
+          padding: "8px 10px",
+          fontSize: "0.85rem",
+          borderRadius: 11,
+          justifySelf: "start",
+          alignSelf: "end",
+          whiteSpace: "nowrap",
+        }}
+        onClick={() => {
+          setFilter("all");
+          setCategory("all");
+          setQuery("");
+          reset();
+        }}
+      >
+        {t("Očisti filtere", "Filter löschen")}
+      </button>
+
     </div>}
 
     {mode === "home" && <>
