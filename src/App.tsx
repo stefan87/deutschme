@@ -1129,7 +1129,7 @@ const levelCards = (
   <div className="dm-germany-banner-fade" aria-hidden="true" />
   <div className="dm-germany-banner-copy">
     <span className="eyebrow">GERMAN IN GERMANY</span>
-    <h2>{t("Snalađi se u Nemačkoj", "Im deutschen Alltag zurechtkommen")}</h2>
+    <h2>{t("Snađi se u Nemačkoj", "Im deutschen Alltag zurechtkommen")}</h2>
     <p>{t("Vežbaj razgovore iz svakodnevnog života u Nemačkoj.", "Übe Gespräche aus dem Alltag in Deutschland.")}</p>
   </div>
 
