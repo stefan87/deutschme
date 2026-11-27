@@ -1363,4 +1363,44 @@ h1, h2, h3, .brand {
 }
 @media (max-width: 390px) {
   .dm-vocab .dm-listening-hero { grid-template-columns: minmax(0, 1fr) 38%; }
+  /* Deutschly Vocabulary Hero FIX */
+
+.dm-vocab .dm-vocab-banner-hero {
+  display: flex;
+  align-items: center;
+  min-height: 205px;
+  padding: 20px;
+  border-radius: 22px;
+  overflow: hidden;
+
+  background-color: #031d2c;
+  background-size: cover;
+  background-position: center right;
+  background-repeat: no-repeat;
+
+  border: 1px solid #147f8c;
+}
+
+.dm-vocab-banner-copy {
+  position: relative;
+  z-index: 2;
+  width: 56%;
+  min-width: 0;
+}
+
+.dm-vocab-banner-copy h2 {
+  font-size: clamp(1.3rem, 3.5vw, 1.85rem);
+  margin: 6px 0;
+}
+
+@media (max-width: 740px) {
+  .dm-vocab .dm-vocab-banner-hero {
+    min-height: 170px;
+    padding: 14px;
+  }
+
+  .dm-vocab-banner-copy {
+    width: 60%;
+  }
+}
 }
