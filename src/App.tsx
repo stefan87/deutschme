@@ -1062,7 +1062,7 @@ const levelCards = (
               )}
               <section className="dm-grammar">
                 <div className="dm-grammar-hero">
-<img className="dm-grammar-hero-icon dm-rabbit-hero-image" src={`${import.meta.env.BASE_URL}deutschly-grammar-rabbit.png`} alt="" aria-hidden="true" />                  <div>
+<img className="dm-grammar-hero-icon dm-rabbit-hero-image" src={`${import.meta.env.BASE_URL}deutschly-grammar-banner.png`} alt="" aria-hidden="true" />                  <div>
                     <span className="eyebrow">{t("NEMAČKA GRAMATIKA", "DEUTSCHE GRAMMATIK")}</span>
                     <h2>{t("Savladaj nemačku gramatiku", "Deutsche Grammatik meistern")}</h2>
                     <p>{t("Kratka pravila, jasni primeri i vežbe za svaku celinu.", "Kurze Regeln, klare Beispiele und Übungen für jede Einheit.")}</p>
