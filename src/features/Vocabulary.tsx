@@ -174,9 +174,8 @@ normalizeSearch(`${w.de} ${w.sr}`).includes(normalizeSearch(query)) &&
       </button>
 
     </div>}
-
-    {mode === "home" && <>
-    <div className="dm-listening-hero">
+{mode === "home" && <>
+      <div className="dm-listening-hero">
         <img
           className="dm-listening-hero-icon dm-vocab-rabbit-image"
           src={`${import.meta.env.BASE_URL}deutschly-vocabulary-rabbit.png`}
@@ -200,17 +199,6 @@ normalizeSearch(`${w.de} ${w.sr}`).includes(normalizeSearch(query)) &&
         {t("Započni vežbu", "Übung starten")}
         <ArrowRight size={19} />
       </button>
-          <div className="dm-vocab-hero-copy">
-            <span className="eyebrow">{t("VOKABULAR", "WORTSCHATZ")}</span>
-            <h2>{t("Uči nove reči", "Neue Wörter lernen")}</h2>
-            <p>{t("Proširi svoj rečnik korak po korak.", "Erweitere deinen Wortschatz Schritt für Schritt.")}</p>
-          </div>
-        </div>
-        <button type="button" className="primary" onClick={() => start("quiz", "all")}>
-          {t("Započni vežbu", "Übung starten")} <ArrowRight size={19}/>
-        </button>
-      </div>
-
       <div className="dm-vocab-section-title"><h2>{t("Kategorije", "Kategorien")}</h2><button type="button" onClick={() => setShowAllCategories(v => !v)}>{showAllCategories ? t("Manje", "Weniger") : t("Sve kategorije", "Alle Kategorien")} →</button></div>
       <div className="dm-vocab-categories">
         {(showAllCategories ? categoryItems : categoryItems.slice(0, 6)).map(c => {
