@@ -188,7 +188,7 @@ normalizeSearch(`${w.de} ${w.sr}`).includes(normalizeSearch(query)) &&
     }}
   >
     <img
-      src={`${import.meta.env.BASE_URL}deutschly-vocabulary-banner.png`}
+      src={`${import.meta.env.BASE_URL}deutschly-vocabulary-banner.webp`}
       alt=""
       aria-hidden="true"
       style={{
