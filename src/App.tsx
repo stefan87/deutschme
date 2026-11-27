@@ -1319,33 +1319,58 @@ const levelCards = (
             </>
 
           ) : (
-            <>
+           <>
               {head(
                 t("Profil i podešavanja", "Profil und Einstellungen"),
-                t(
-                  "Podešavanja i napredak ostaju u ovom pregledaču.",
-                  "Einstellungen und Fortschritt bleiben in diesem Browser.",
-                ),
+                t("Uredi svoj profil i prilagodi Deutschly sebi.", "Passe dein Profil und Deutschly an deine Wünsche an."),
               )}
-              <div className="card profile">
-                <ProfileForm profile={s.profile} onSave={storeProfile} />
-              </div>
-              <AccountSettings account={account} />
-              <div className="card" style={{ marginTop: 16 }}>
-                <h2>{t("Procena znanja nemačkog", "Deutsch-Einstufungstest")}</h2>
-                <p>{t("Proveri svoj nivo kroz 24 pitanja. Rezultat ne briše šargarepice, završene lekcije ni postojeći nivo.", "Prüfe dein Niveau mit 24 Fragen. Deine karroten, Lektionen und dein aktuelles Niveau bleiben erhalten.")}</p>
-                {s.placement && (
-                  <p>{t("Poslednja preporuka", "Letzte Empfehlung")}: <strong>{s.placement.recommended}</strong></p>
-                )}
-                <button
-                  type="button"
-                  className="primary"
-                  onClick={() => setRetakePlacement(true)}
-                >
-                  {t("Započni test procene znanja", "Einstufungstest starten")}
-                </button>
-              </div>
+              <section className="dm-profile-page">
+                <div className="dm-profile-hero">
+                  <img
+                    className="dm-profile-hero-image"
+                    src={`${import.meta.env.BASE_URL}deutschly-profile-rabbit.png`}
+                    alt=""
+                    aria-hidden="true"
+                  />
+                  <div>
+                    <span className="eyebrow">{t("TVOJ PROFIL", "DEIN PROFIL")}</span>
+                    <h2>{s.profile.name}</h2>
+                    <p>{t("Tvoj prostor za učenje nemačkog.", "Dein persönlicher Ort zum Deutschlernen.")}</p>
+                  </div>
+                </div>
+
+                <div className="dm-profile-stats">
+                  <div><span aria-hidden="true">🥕</span><strong>{s.xp}</strong><small>{t("Šargarepice", "Karotten")}</small></div>
+                  <div><span aria-hidden="true">📚</span><strong>{s.profile.start}</strong><small>{t("Početni nivo", "Startniveau")}</small></div>
+                  <div><span aria-hidden="true">🎯</span><strong>{s.profile.goal} min</strong><small>{t("Dnevni cilj", "Tagesziel")}</small></div>
+                </div>
+
+                <section className="dm-profile-section">
+                  <h2>👤 {t("Lični podaci i učenje", "Persönliche Daten und Lernen")}</h2>
+                  <ProfileForm profile={s.profile} onSave={storeProfile} />
+                </section>
+
+                <section className="dm-profile-section">
+                  <h2>⚙️ {t("Podešavanja naloga", "Kontoeinstellungen")}</h2>
+                  <AccountSettings account={account} />
+                </section>
+
+                <section className="dm-profile-section">
+                  <h2>🎓 {t("Procena znanja nemačkog", "Deutsch-Einstufungstest")}</h2>
+                  <p>{t(
+                    "Proveri svoj nivo kroz 24 pitanja. Rezultat ne briše šargarepice, završene lekcije ni postojeći nivo.",
+                    "Prüfe dein Niveau mit 24 Fragen. Deine Karotten, abgeschlossenen Lektionen und dein aktuelles Niveau bleiben erhalten.",
+                  )}</p>
+                  {s.placement && (
+                    <p>{t("Poslednja preporuka", "Letzte Empfehlung")}: <strong>{s.placement.recommended}</strong></p>
+                  )}
+                  <button type="button" className="primary" onClick={() => setRetakePlacement(true)}>
+                    {t("Započni test procene znanja", "Einstufungstest starten")}
+                  </button>
+                </section>
+              </section>
             </>
+
           )}
         </main>
       </div>
