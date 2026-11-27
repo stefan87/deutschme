@@ -1404,3 +1404,60 @@ h1, h2, h3, .brand {
   }
 }
 }
+/* FIX 57: Vocabulary banner readable text and full rabbit */
+.dm-vocab .dm-listening-hero.dm-vocab-banner-hero {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  align-items: center;
+  min-height: 205px;
+  padding: 20px;
+  overflow: hidden;
+  background: #031d2c;
+}
+.dm-vocab .dm-vocab-banner-hero > img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: contain !important;
+  object-position: right center !important;
+  z-index: 0;
+  background: #031d2c;
+}
+.dm-vocab .dm-vocab-banner-hero > div[aria-hidden="true"] {
+  position: absolute !important;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(90deg, #031d2c 0%, #031d2cf5 30%, #031d2c99 53%, transparent 76%) !important;
+  pointer-events: none;
+}
+.dm-vocab .dm-vocab-banner-hero > .dm-vocab-banner-copy {
+  position: relative !important;
+  z-index: 3 !important;
+  width: 56%;
+  min-width: 0;
+  grid-column: auto;
+  grid-row: auto;
+  color: #f1fcff !important;
+  opacity: 1 !important;
+  filter: none !important;
+}
+.dm-vocab .dm-vocab-banner-copy .eyebrow {
+  color: #65f7f1 !important;
+  opacity: 1 !important;
+}
+.dm-vocab .dm-vocab-banner-copy h2 {
+  color: #fff !important;
+  opacity: 1 !important;
+  font-size: clamp(1.3rem, 3.5vw, 1.85rem);
+}
+.dm-vocab .dm-vocab-banner-copy p {
+  color: #d2edf1 !important;
+  opacity: 1 !important;
+}
+@media (max-width: 740px) {
+  .dm-vocab .dm-listening-hero.dm-vocab-banner-hero { min-height: 170px; padding: 14px; }
+  .dm-vocab .dm-vocab-banner-hero > .dm-vocab-banner-copy { width: 58%; }
+}
