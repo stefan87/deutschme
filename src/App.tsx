@@ -1206,6 +1206,45 @@ const levelCards = (
                   <small>{t("Dnevni cilj", "Tagesziel")}</small>
                 </article>
               </div>
+              <section className="dm-progress-skills" aria-label={t("Napredak po veštinama", "Fortschritt nach Fähigkeiten")}>
+                <h2>{t("Tvoj napredak po veštinama", "Dein Fortschritt nach Fähigkeiten")}</h2>
+                {([
+                  { icon: "📚", sr: "Vokabular", de: "Wortschatz", kind: "vocabulary" },
+                  { icon: "🎧", sr: "Slušanje", de: "Hören", kind: "listen" },
+                  { icon: "🏛️", sr: "Gramatika", de: "Grammatik", kind: "grammar" },
+                  { icon: "💬", sr: "Konverzacija", de: "Konversation", kind: "conversation" },
+                ] as const).map(skill => {
+                  const questions = new Map<string, string>();
+                  if (skill.kind !== "vocabulary") {
+                    allSessions.forEach(session => session.items.forEach(q => {
+                      const matches = skill.kind === "conversation"
+                        ? q.kind === "conversation" || q.kind === "dialog"
+                        : skill.kind === "grammar"
+                          ? q.kind === "grammar" || q.kind === "fill" || q.kind === "correct"
+                          : q.kind === "listen";
+                      if (matches) questions.set(q.id, q.id);
+                    }));
+                  }
+                  const total = skill.kind === "vocabulary"
+                    ? Object.keys(s.cards).length
+                    : questions.size;
+                  const achieved = skill.kind === "vocabulary"
+                    ? Object.values(s.cards).filter(card => card.status === "known").length
+                    : Array.from(questions.keys()).filter(id => Object.hasOwn(s.awards, `question:${id}`)).length;
+                  const value = total > 0 ? Math.min(100, Math.round(achieved * 100 / total)) : 0;
+                  return <div className="dm-progress-skill" key={skill.kind}>
+                    <span aria-hidden="true" className="dm-progress-skill-icon">{skill.icon}</span>
+                    <span className="dm-progress-skill-label">{t(skill.sr, skill.de)}</span>
+                    <progress className="bar" value={value} max={100} aria-label={t(skill.sr, skill.de)} />
+                    <strong>{value}%</strong>
+                  </div>;
+                })}
+                <small className="muted">{t(
+                  "Prikaz: naučene među pregledanim rečima i jedinstveni tačni zadaci. Ovo nije procena ukupnog znanja jezika.",
+                  "Anzeige: gelernte unter den bearbeiteten Wörtern und einmalig richtig gelöste Aufgaben. Keine Einstufung des gesamten Sprachniveaus."
+                )}</small>
+              </section>
+
               <div className="home-grid">
                 <article className="card">
                   <h2>{t("Nedeljni cilj", "Wochenziel")}</h2>
