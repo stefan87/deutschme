@@ -569,7 +569,7 @@ h1, h2, h3, .brand {
 }
 /* Deutschly learning map: midnight navy and neon turquoise */
 .dm-map-hero{position:relative;display:grid;grid-template-columns:minmax(110px,35%) 1fr;align-items:center;gap:12px;min-height:205px;padding:12px 20px;overflow:hidden;background:radial-gradient(ellipse at 17% 80%,#075b6a,#062c3a 48%,#041b2b 100%);border:1px solid #147f8c;border-radius:22px;box-shadow:0 0 25px #00dede18}
-.dm-map-rabbit{width:100%;max-width:235px;max-height:225px;object-fit:contain;justify-self:center;filter:drop-shadow(0 0 16px #00e5e55c)}
+.dm-map-rabbit{width:100%;max-width:235px;max-height:225px;object-fit:cover;justify-self:center;filter:drop-shadow(0 0 16px #00e5e55c)}
 .dm-map-hero-copy{min-width:0;position:relative;z-index:1}
 .dm-map-hero h1{font-size:clamp(1.6rem,5vw,2.7rem);line-height:1.1;margin:0 0 9px}
 .dm-map-hero p{font-size:clamp(.84rem,2.5vw,1rem);color:#c7e2e9;line-height:1.45;margin:0}
