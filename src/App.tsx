@@ -1121,37 +1121,50 @@ const levelCards = (
                 onOpen={open}
               />
             </>
-          ) : page === "grammar" ? (
+         ) : page === "grammar" ? (
             <>
               {head(
                 t("Gramatika", "Grammatik"),
-                t(
-                  "Pravila iz A1.1 lekcija i brza vežba članova.",
-                  "Regeln aus den A1.1-Lektionen und kurze Artikelübungen.",
-                ),
+                t("Nauči pravila, pogledaj primere i vežbaj korak po korak.", "Lerne Regeln, sieh dir Beispiele an und übe Schritt für Schritt."),
               )}
-              {curriculum.map((u, i) => (
-                <details className="card unit" key={u.id}>
-                  <summary>
-                    <span className="unit-icon">{u.icon}</span>
-                    <strong>{u.title[k]}</strong>
-                    <BookOpen size={18} />
-                  </summary>
-                  <div className="rule-grid">
-                    {u.lessons.map((x) => (
-                      <section key={x.id}>
-                        <strong>{x.title[k]}</strong>
-                        <p>{x.intro?.[k]}</p>
-                        <p lang="de">{x.example}</p>
-                      </section>
-                    ))}
+              <section className="dm-grammar">
+                <div className="dm-grammar-hero">
+                  <span className="dm-grammar-hero-icon" aria-hidden="true">📚</span>
+                  <div>
+                    <span className="eyebrow">{t("NEMAČKA GRAMATIKA", "DEUTSCHE GRAMMATIK")}</span>
+                    <h2>{t("Savladaj nemačku gramatiku", "Deutsche Grammatik meistern")}</h2>
+                    <p>{t("Kratka pravila, jasni primeri i vežbe za svaku celinu.", "Kurze Regeln, klare Beispiele und Übungen für jede Einheit.")}</p>
                   </div>
-                  {renderObj(
-                    drills.find((x) => x.id === `drill-${i}-grammar`)!,
-                  )}
-                </details>
-              ))}
+                </div>
+                <h2 className="dm-grammar-section-title">{t("Izaberi temu", "Thema auswählen")}</h2>
+                <div className="dm-grammar-topics">
+                  {curriculum.map((u, i) => (
+                    <details className="dm-grammar-topic" key={u.id}>
+                      <summary>
+                        <span className="dm-grammar-topic-icon" aria-hidden="true">{u.icon}</span>
+                        <strong>{u.title[k]}</strong>
+                        <small>{u.lessons.length} {t("lekcija", "Lektionen")}</small>
+                        <span className="dm-grammar-chevron" aria-hidden="true">⌄</span>
+                      </summary>
+                      <div className="dm-grammar-topic-content">
+                        {u.lessons.map(x => (
+                          <section className="dm-grammar-rule" key={x.id}>
+                            <strong>{x.title[k]}</strong>
+                            <p>{x.intro?.[k]}</p>
+                            <p lang="de" className="dm-grammar-example">{x.example}</p>
+                          </section>
+                        ))}
+                        <div className="dm-grammar-drill">
+                          {renderObj(drills.find(x => x.id === `drill-${i}-grammar`)!)}
+                        </div>
+                      </div>
+                    </details>
+                  ))}
+                </div>
+                <p className="dm-grammar-note">💡 {t("Klikni na temu da otvoriš pravila i vežbu.", "Klicke auf ein Thema, um Regeln und Übungen zu öffnen.")}</p>
+              </section>
             </>
+
           ) : page === "speak" ? (
             <>
               {head(
