@@ -19,16 +19,23 @@ export default function Listening({
 
   return (
     <section className="dm-listening">
-      <div className="dm-listening-hero">
-<img className="dm-listening-hero-icon dm-rabbit-hero-image" src={`${import.meta.env.BASE_URL}deutschly-listening-rabbit.png`} alt="" aria-hidden="true" />        <div>
-          <span className="eyebrow">{t("VEŽBA SLUŠANJA", "HÖRVERSTEHEN")}</span>
-          <h2>{t("Vežbaj nemačko slušanje", "Deutsch hören üben")}</h2>
-          <p>{t(
-            "Izaberi temu, poslušaj rečenicu i proveri razumevanje.",
-            "Wähle ein Thema, höre einen Satz und überprüfe dein Verständnis.",
-          )}</p>
-        </div>
-      </div>
+      <div className="dm-listening-hero dm-listening-banner">
+  <img
+    className="dm-listening-banner-image"
+    src={`${import.meta.env.BASE_URL}deutschly-listening-rabbit.png`}
+    alt=""
+    aria-hidden="true"
+  />
+  <div className="dm-listening-banner-fade" aria-hidden="true" />
+  <div className="dm-listening-banner-copy">
+    <span className="eyebrow">{t("VEŽBA SLUŠANJA", "HÖRVERSTEHEN")}</span>
+    <h2>{t("Vežbaj nemačko slušanje", "Deutsch hören üben")}</h2>
+    <p>{t(
+      "Izaberi temu, poslušaj rečenicu i proveri razumevanje.",
+      "Wähle ein Thema, höre einen Satz und überprüfe dein Verständnis.",
+    )}</p>
+  </div>
+</div>
 
       <div className="dm-listening-heading">
         <h2>{t("Izaberi temu", "Thema auswählen")}</h2>
