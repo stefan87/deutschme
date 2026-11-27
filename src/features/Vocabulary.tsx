@@ -122,12 +122,22 @@ normalizeSearch(`${w.de} ${w.sr}`).includes(normalizeSearch(query)) &&
     <div className="dm-vocab-head">
       <button type="button" className="dm-vocab-icon" onClick={() => setMode("home")} aria-label={t("Nazad na vokabular", "Zurück zum Wortschatz")}><ArrowLeft size={21}/></button>
       <h2>{mode === "home" ? t("Vokabular", "Wortschatz") : mode === "quiz" ? t("Vežba reči", "Wortübung") : t("Kartice reči", "Wortkarten")}</h2>
-      <button type="button" className="dm-vocab-icon" onClick={() => setSearchOpen(v => !v)} aria-label={t("Pretraga i filteri", "Suche und Filter")} aria-expanded={searchOpen}>⌕</button>
-    </div>
+ <button type="button" className="dm-vocab-icon" onClick={() => setSearchOpen(v => !v)} aria-label={t("Pretraga i filteri", "Suche und Filter")} aria-expanded={searchOpen}>🔍</button>    </div>
 
     {searchOpen && <div className="dm-vocab-filters">
-      <label>{t("Pretraga", "Suche")}<input value={query} onChange={e => { setQuery(e.target.value); reset(); }} placeholder="Apfel..."/></label>
-      <label>{t("Prikaz", "Ansicht")}<select value={filter} onChange={e => { setFilter(e.target.value); reset(); }}>
+<label>{t("Pretraga", "Suche")}
+        <input
+          value={query}
+          onChange={e => {
+            setQuery(e.target.value);
+            setCategory("all");
+            setFilter("all");
+            reset();
+            if (e.target.value.trim()) setMode("cards");
+          }}
+          placeholder={t("npr. casa, carape, Apfel", "z. B. Glas, Apfel")}
+        />
+      </label>      <label>{t("Prikaz", "Ansicht")}<select value={filter} onChange={e => { setFilter(e.target.value); reset(); }}>
         <option value="all">{t("Sve reči", "Alle Wörter")}</option>
         <option value="due">{t("Za ponavljanje", "Zur Wiederholung")}</option>
         <option value="favorites">{t("Omiljene reči", "Lieblingswörter")}</option>
