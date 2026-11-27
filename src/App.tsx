@@ -1115,12 +1115,46 @@ const levelCards = (
               {head(
                 "German in Germany",
                 t(
-                  "Deset kratkih razgovora iz svakodnevnog života u Nemačkoj. Neke situacije koriste izraze iznad A1.1.",
-                  "Zehn kurze Gespräche aus dem Alltag in Deutschland. Einige verwenden Ausdrücke über A1.1.",
+                  "Praktični nemački za svakodnevne situacije u Nemačkoj.",
+                  "Praktisches Deutsch für Alltagssituationen in Deutschland.",
                 ),
               )}
-              {cardList(practiceScenes.slice(0, 10))}
+              <section className="dm-germany">
+                <div className="dm-germany-hero">
+                  <span className="dm-germany-hero-icon" aria-hidden="true">🇩🇪</span>
+                  <div>
+                    <span className="eyebrow">{t("NEMAČKI U NEMAČKOJ", "DEUTSCH IN DEUTSCHLAND")}</span>
+                    <h2>{t("Snalađi se u Nemačkoj", "Im deutschen Alltag zurechtkommen")}</h2>
+                    <p>{t(
+                      "Vežbaj razgovore u institucijama, na poslu, kod lekara i u drugim stvarnim situacijama.",
+                      "Übe Gespräche bei Behörden, am Arbeitsplatz, beim Arzt und in weiteren Alltagssituationen.",
+                    )}</p>
+                  </div>
+                </div>
+                <h2 className="dm-germany-section-title">{t("Izaberi situaciju", "Situation auswählen")}</h2>
+                <div className="dm-germany-topics">
+                  {practiceScenes.slice(0, 10).map((session, i) => (
+                    <button
+                      type="button"
+                      className="dm-germany-topic"
+                      key={session.id}
+                      onClick={() => open(session)}
+                    >
+                      <span className="dm-germany-topic-icon" aria-hidden="true">
+                        {(["🏛️", "🩺", "💼", "👥", "🛒", "🏠", "🎓", "📋", "☎️", "🏦"])[i]}
+                      </span>
+                      <strong>{session.title[k]}</strong>
+                      <small>{session.items.length} {t("zadataka", "Aufgaben")}</small>
+                    </button>
+                  ))}
+                </div>
+                <p className="dm-germany-note">💡 {t(
+                  "Izaberi situaciju da započneš razgovor. Neke rečenice su zahtevnije od nivoa A1.1.",
+                  "Wähle eine Situation, um ein Gespräch zu üben. Einige Sätze liegen über A1.1.",
+                )}</p>
+              </section>
             </>
+
           ) : page === "progress" ? (
             <>
               {head(
