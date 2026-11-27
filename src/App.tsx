@@ -236,8 +236,8 @@ export default function App() {
     if (live.current.cursor?.id !== item.id && live.current.results[item.id]) {
       const confirmed = window.confirm(
         t(
-          "Uradi ponovo ovu lekciju? Novi pokusaj pocinje od prvog zadatka. Vec osvojeni XP i najbolji rezultat ostaju sacuvani. Za iste tacne odgovore XP se ne dodeljuje ponovo.",
-          "Diese Lektion wiederholen? Der neue Versuch beginnt bei Aufgabe 1. Bereits verdiente XP und das beste Ergebnis bleiben erhalten. Fuer dieselben richtigen Antworten gibt es keine weiteren XP.",
+          "Uradi ponovo ovu lekciju? Novi pokusaj pocinje od prvog zadatka. Već osvojene šargarepice i najbolji rezultat ostaju sacuvani. Za iste tacne odgovore XP se ne dodeljuje ponovo.",
+          "Diese Lektion wiederholen? Der neue Versuch beginnt bei Aufgabe 1. Bereits verdiente karotten und das beste Ergebnis bleiben erhalten. Fuer dieselben richtigen Antworten gibt es keine weiteren XP.",
         ),
       );
       if (!confirmed) return;
@@ -248,7 +248,7 @@ export default function App() {
         live.current.cursor.index > 0 &&
         !window.confirm(
           t(
-            "Otvori novu sesiju? Poeni ostaju sačuvani, ali mesto u trenutnoj sesiji neće biti sačuvano.",
+            "Otvori novu sesiju? šargarepice ostaju sačuvane, ali mesto u trenutnoj sesiji neće biti sačuvano.",
             "Neue Sitzung starten? Deine Punkte bleiben erhalten, aber die aktuelle Position geht verloren.",
           ),
         )
@@ -933,7 +933,7 @@ const levelCards = (
 
               <section className="dm-map-stats" aria-label={t("Statistika", "Statistik")}>
                 <div><span aria-hidden="true">🔥</span><strong>{run} {t("dana", "Tage")}</strong><small>{t("Dnevni niz", "Lernserie")}</small></div>
-                <div><span aria-hidden="true">🥕</span><strong>{s.xp}šargarepica </strong><small>{t("Poeni", "Punkte")}</small></div>
+                <div><span aria-hidden="true">🥕</span><strong>{s.xp}šargarepica </strong><small>{t("šargarepica", "Punkte")}</small></div>
                 <div><span aria-hidden="true">🎯</span><strong>{Math.min(100, Math.floor(daily * 100 / (goal * 60)))}%</strong><small>{t("Dnevni cilj", "Tagesziel")}</small></div>
               </section>
 
@@ -1322,7 +1322,7 @@ const levelCards = (
               <AccountSettings account={account} />
               <div className="card" style={{ marginTop: 16 }}>
                 <h2>{t("Procena znanja nemačkog", "Deutsch-Einstufungstest")}</h2>
-                <p>{t("Proveri svoj nivo kroz 24 pitanja. Rezultat ne briše XP, završene lekcije ni postojeći nivo.", "Prüfe dein Niveau mit 24 Fragen. Deine XP, Lektionen und dein aktuelles Niveau bleiben erhalten.")}</p>
+                <p>{t("Proveri svoj nivo kroz 24 pitanja. Rezultat ne briše šargarepice, završene lekcije ni postojeći nivo.", "Prüfe dein Niveau mit 24 Fragen. Deine karroten, Lektionen und dein aktuelles Niveau bleiben erhalten.")}</p>
                 {s.placement && (
                   <p>{t("Poslednja preporuka", "Letzte Empfehlung")}: <strong>{s.placement.recommended}</strong></p>
                 )}
