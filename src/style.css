@@ -1113,3 +1113,24 @@ h1, h2, h3, .brand {
 @media(max-width:390px){.dm-germany-topics{gap:6px}.dm-germany-topic{min-height:113px;padding:8px 4px}.dm-germany-topic-icon{font-size:2rem}.dm-germany-topic strong{font-size:.78rem}.dm-germany-topic small{font-size:.62rem}.dm-germany-hero h2{font-size:1.2rem}.dm-germany-hero p{font-size:.82rem}}
 :root[data-theme="light"] .dm-germany-hero,:root[data-theme="light"] .dm-germany-topic,:root[data-theme="light"] .dm-germany-note{background:#f4fcfd;color:#10303b;border-color:#9bcdd1}
 :root[data-theme="light"] .dm-germany-hero p,:root[data-theme="light"] .dm-germany-topic small{color:#526a73}
+/* Deutschly - consistent rabbit hero illustrations */
+.dm-rabbit-hero-image {
+  display: block;
+  width: 112px;
+  height: 112px;
+  max-width: 100%;
+  min-width: 0;
+  padding: 0;
+  border: 1px solid #168a93;
+  border-radius: 18px;
+  object-fit: cover;
+  object-position: center;
+  box-shadow: 0 0 15px #00dede33;
+  background: #052a3a;
+}
+@media (max-width: 740px) {
+  .dm-rabbit-hero-image { width: 86px; height: 86px; border-radius: 14px; }
+}
+@media (max-width: 390px) {
+  .dm-rabbit-hero-image { width: 80px; height: 80px; }
+}
