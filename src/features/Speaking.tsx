@@ -3,7 +3,8 @@ import { Mic, Square, ArrowLeft, ArrowRight } from "./icons";
 import { choose } from "../core/i18n";
 import type { Lang } from "../core/types";
 import PronounceText from "./PronounceText";
-
+import { scenes } from "../data/scenes";
+import { extraSceneDialogues } from "../data/germany-extra-dialogues";
 type SpeakingTopic = {
   icon: string;
   sr: string;
@@ -11,38 +12,32 @@ type SpeakingTopic = {
   prompts: string[];
 };
 
-const topics: SpeakingTopic[] = [
-  { icon: "👋", sr: "Predstavljanje", de: "Vorstellung", prompts: [
-    "Guten Tag! Ich heiße Alex und ich wohne in München.",
-    "Hallo! Wie heißt du?",
-    "Ich komme aus Serbien und lerne Deutsch.",
-  ] },
-  { icon: "☕", sr: "U kafiću", de: "Im Café", prompts: [
-    "Ich hätte gern einen Kaffee, bitte.",
-    "Wie viel kostet das?",
-    "Die Rechnung, bitte. Vielen Dank!",
-  ] },
-  { icon: "🛍️", sr: "Kupovina", de: "Einkaufen", prompts: [
-    "Ich suche eine Jacke.",
-    "Haben Sie das in Größe M?",
-    "Kann ich mit Karte bezahlen?",
-  ] },
-  { icon: "🧭", sr: "Snalaženje", de: "Orientierung", prompts: [
-    "Entschuldigung, wo ist der Bahnhof?",
-    "Gehen Sie geradeaus und dann nach links.",
-    "Ist die Haltestelle weit von hier?",
-  ] },
-  { icon: "💼", sr: "Na poslu", de: "Bei der Arbeit", prompts: [
-    "Ich arbeite heute im Büro.",
-    "Wann beginnt die Besprechung?",
-    "Können Sie das bitte wiederholen?",
-  ] },
-  { icon: "🏠", sr: "Svakodnevica", de: "Alltag", prompts: [
-    "Heute habe ich viel zu tun.",
-    "Am Abend koche ich zu Hause.",
-    "Morgen treffe ich meine Freunde.",
-  ] },
+const topicGroups = [
+  { icon: "👋", sr: "Predstavljanje", de: "Vorstellung", sceneIds: [10], extras: ["Guten Tag! Ich heiße Alex und ich wohne in München."] },
+  { icon: "☕", sr: "U kafiću", de: "Im Café", sceneIds: [11], extras: ["Die Rechnung, bitte. Vielen Dank!"] },
+  { icon: "🛍️", sr: "Kupovina", de: "Einkaufen", sceneIds: [4], extras: ["Ich suche eine Jacke."] },
+  { icon: "🧭", sr: "Snalaženje", de: "Orientierung", sceneIds: [12, 13], extras: [] },
+  { icon: "💼", sr: "Na poslu", de: "Bei der Arbeit", sceneIds: [2, 3], extras: [] },
+  { icon: "🏠", sr: "Svakodnevica", de: "Alltag", sceneIds: [0, 1, 5, 6, 7, 8, 9], extras: [] },
 ];
+
+const topics: SpeakingTopic[] = topicGroups.map(group => {
+  const sentences: string[] = [...group.extras];
+  for (const sceneId of group.sceneIds) {
+    const scene = scenes[sceneId];
+    if (!scene) continue;
+    sentences.push(...scene.slice(2));
+    for (const [question, answer] of extraSceneDialogues[sceneId] || []) {
+      sentences.push(question, answer);
+    }
+  }
+  return {
+    icon: group.icon,
+    sr: group.sr,
+    de: group.de,
+    prompts: [...new Set(sentences.map(s => s.trim()).filter(Boolean))],
+  };
+});
 
 export default function Speaking({ lang }: { lang: Lang }) {
   const t = (sr: string, de: string) => choose(lang, sr, de);
