@@ -796,4 +796,56 @@ h1, h2, h3, .brand {
     padding: 8px 9px;
   }
 }
+/* Deutschly progress dashboard */
+.dm-progress-summary {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin: 0 0 20px;
+}
+.dm-progress-tile {
+  min-width: 0;
+  min-height: 155px;
+  padding: 14px 8px;
+  border: 1px solid #168b98;
+  border-radius: 20px;
+  background: linear-gradient(145deg, #084a5b, #052b3a);
+  box-shadow: 0 0 15px #00dede25;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  text-align: center;
+}
+.dm-progress-tile > span { font-size: 2.5rem; line-height: 1.2; }
+.dm-progress-tile > strong { font-size: 2rem; font-weight: 900; line-height: 1.1; }
+.dm-progress-tile > small { color: #d3eaf0; font-size: .87rem; font-weight: 750; }
+.dm-progress-ring {
+  width: 84px;
+  height: 84px;
+  border-radius: 50%;
+  background: conic-gradient(#00e7e5 var(--value), #12546a 0);
+  display: grid;
+  place-items: center;
+  position: relative;
+}
+.dm-progress-ring::before { content: ""; position: absolute; inset: 10px; border-radius: 50%; background: #052d3b; }
+.dm-progress-ring strong { position: relative; z-index: 1; font-size: 1.15rem; color: #fff; }
+@media (max-width: 740px) {
+  .dm-progress-summary { gap: 8px; }
+  .dm-progress-tile { min-height: 135px; padding: 12px 5px; border-radius: 16px; }
+  .dm-progress-tile > span { font-size: 2rem; }
+  .dm-progress-tile > strong { font-size: 1.55rem; }
+  .dm-progress-tile > small { font-size: .72rem; }
+  .dm-progress-ring { width: 72px; height: 72px; }
+}
+@media (max-width: 360px) {
+  .dm-progress-summary { gap: 5px; }
+  .dm-progress-tile { padding: 9px 3px; }
+  .dm-progress-tile > small { font-size: .65rem; }
+  .dm-progress-ring { width: 64px; height: 64px; }
+}
+:root[data-theme="light"] .dm-progress-tile { background: #fff; border-color: var(--border); color: var(--ink); }
+:root[data-theme="light"] .dm-progress-tile > small { color: var(--muted); }
 
