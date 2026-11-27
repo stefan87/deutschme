@@ -1012,3 +1012,38 @@ h1, h2, h3, .brand {
 @media(max-width:390px){.dm-listening-topics{gap:6px}.dm-listening-topic{min-height:113px;padding:8px 4px}.dm-listening-topic-icon{font-size:2rem}.dm-listening-topic strong{font-size:.78rem}.dm-listening-topic small{font-size:.62rem}.dm-listening-hero h2{font-size:1.2rem}.dm-listening-hero p{font-size:.82rem}}
 :root[data-theme="light"] .dm-listening-hero,:root[data-theme="light"] .dm-listening-topic,:root[data-theme="light"] .dm-listening-note,:root[data-theme="light"] .dm-listening-example{background:#f4fcfd;color:#10303b;border-color:#9bcdd1}
 :root[data-theme="light"] .dm-listening-hero p,:root[data-theme="light"] .dm-listening-topic small{color:#526a73}
+/* Deutschly grammar, consistent with Speaking and Listening */
+.dm-grammar{max-width:780px;margin:0 auto;display:grid;gap:15px;min-width:0}
+.dm-grammar-hero{display:grid;grid-template-columns:110px minmax(0,1fr);align-items:center;gap:15px;padding:20px;border:1px solid #168a93;border-radius:20px;background:linear-gradient(135deg,#0b6070,#063442 65%,#041f2e);box-shadow:0 0 18px #00dede22}
+.dm-grammar-hero-icon{width:105px;height:105px;display:grid;place-items:center;border-radius:24px;background:radial-gradient(circle,#0d7c8b,#06404d);font-size:3.6rem;box-shadow:inset 0 0 20px #00e5e530}
+.dm-grammar-hero h2{font-size:clamp(1.3rem,3.5vw,1.85rem);margin:6px 0}
+.dm-grammar-hero p{color:#d2edf1;font-size:.94rem;line-height:1.4}
+.dm-grammar-section-title{font-size:1.25rem}
+.dm-grammar-topics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:11px;align-items:start}
+.dm-grammar-topic{min-width:0;border:1px solid #177b88;border-radius:18px;background:linear-gradient(145deg,#0b5060,#052b3a);color:#f1fcff;overflow:hidden}
+.dm-grammar-topic:hover,.dm-grammar-topic:focus-within{border-color:#40fff5;box-shadow:0 0 16px #00e5e555}
+.dm-grammar-topic>summary{min-height:139px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;padding:12px 7px;text-align:center;list-style:none;cursor:pointer;overflow-wrap:anywhere}
+.dm-grammar-topic>summary::-webkit-details-marker{display:none}
+.dm-grammar-topic-icon{font-size:2.8rem;line-height:1.15}
+.dm-grammar-topic>summary strong{font-size:1rem;line-height:1.2}
+.dm-grammar-topic>summary small{font-size:.74rem;color:#c4e1e5}
+.dm-grammar-chevron{color:#76fff7;font-size:1.1rem;line-height:1}
+.dm-grammar-topic[open]{grid-column:1/-1;border-color:#40fff5}
+.dm-grammar-topic[open]>summary{min-height:80px;flex-direction:row;justify-content:flex-start;text-align:left;gap:12px;padding:13px 16px}
+.dm-grammar-topic[open] .dm-grammar-topic-icon{font-size:2rem}
+.dm-grammar-topic[open] .dm-grammar-chevron{margin-left:auto}
+.dm-grammar-topic-content{display:grid;gap:10px;padding:12px;border-top:1px solid #177b88}
+.dm-grammar-rule{padding:12px;border:1px solid #1a6875;border-radius:12px;background:#082f3d;min-width:0}
+.dm-grammar-rule strong{display:block;margin-bottom:5px}
+.dm-grammar-rule p{margin:5px 0;color:#d1e7eb;overflow-wrap:anywhere}
+.dm-grammar-example{font-weight:800;color:#9efff4!important}
+.dm-grammar-drill{padding-top:5px}
+.dm-grammar-drill .lesson-row{border-radius:11px;padding:12px}
+.dm-grammar-note{padding:13px 16px;border:1px solid #176f7d;border-radius:14px;background:#073442;color:#d4edf1;font-size:.9rem}
+@media(max-width:740px){.dm-grammar{gap:13px}.dm-grammar-hero{grid-template-columns:88px minmax(0,1fr);gap:10px;padding:13px}.dm-grammar-hero-icon{width:85px;height:85px;font-size:2.9rem}.dm-grammar-topics{gap:8px}.dm-grammar-topic>summary{min-height:122px;padding:10px 5px}.dm-grammar-topic-icon{font-size:2.3rem}.dm-grammar-topic>summary strong{font-size:.86rem}.dm-grammar-topic>summary small{font-size:.68rem}}
+@media(max-width:390px){.dm-grammar-topics{gap:6px}.dm-grammar-topic>summary{min-height:113px;padding:8px 4px}.dm-grammar-topic-icon{font-size:2rem}.dm-grammar-topic>summary strong{font-size:.78rem}.dm-grammar-topic>summary small{font-size:.62rem}.dm-grammar-hero h2{font-size:1.2rem}.dm-grammar-hero p{font-size:.82rem}}
+:root[data-theme="light"] .dm-grammar-hero,:root[data-theme="light"] .dm-grammar-topic,:root[data-theme="light"] .dm-grammar-note{background:#f4fcfd;color:#10303b;border-color:#9bcdd1}
+:root[data-theme="light"] .dm-grammar-hero p,:root[data-theme="light"] .dm-grammar-topic>summary small{color:#526a73}
+:root[data-theme="light"] .dm-grammar-rule{background:#edf9fa;color:#10303b;border-color:#9bcdd1}
+:root[data-theme="light"] .dm-grammar-rule p{color:#526a73}
+:root[data-theme="light"] .dm-grammar-example{color:#006f7b!important}
