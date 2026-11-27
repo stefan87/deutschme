@@ -912,3 +912,51 @@ h1, h2, h3, .brand {
   .dm-progress-skill strong { font-size: .78rem; }
 }
 :root[data-theme="light"] .dm-progress-skills { background: #fff; border-color: var(--border); }
+/* Deutschly - motivational progress card */
+.dm-progress-congrats {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  width: 100%;
+  margin: 22px 0 0;
+  padding: 22px 24px;
+  border: 2px solid #22dfe0;
+  border-radius: 22px;
+  background: linear-gradient(115deg, #0b6774, #073745 55%, #052633);
+  box-shadow: 0 0 20px #00e5e54a, inset 0 1px 0 #b5ffff30;
+  color: #f1fcff;
+}
+.dm-progress-trophy {
+  display: grid;
+  place-items: center;
+  flex: 0 0 76px;
+  width: 76px;
+  height: 76px;
+  font-size: 3.5rem;
+  filter: drop-shadow(0 5px 8px #0007);
+}
+.dm-progress-congrats-copy { min-width: 0; }
+.dm-progress-congrats-copy h2 {
+  margin: 0 0 7px;
+  color: #ffffff;
+  font-size: clamp(1.2rem, 3vw, 1.55rem);
+}
+.dm-progress-congrats-copy p {
+  margin: 0;
+  color: #d4f1f3;
+  font-size: .96rem;
+  line-height: 1.45;
+}
+@media (max-width: 740px) {
+  .dm-progress-congrats { gap: 12px; padding: 16px 13px; border-radius: 18px; }
+  .dm-progress-trophy { flex-basis: 58px; width: 58px; height: 58px; font-size: 2.8rem; }
+  .dm-progress-congrats-copy h2 { font-size: 1.14rem; }
+  .dm-progress-congrats-copy p { font-size: .83rem; }
+}
+:root[data-theme="light"] .dm-progress-congrats {
+  background: linear-gradient(115deg, #d9fafa, #f3fcfd);
+  border-color: #008e9b;
+  color: #10303b;
+}
+:root[data-theme="light"] .dm-progress-congrats-copy h2 { color: #10303b; }
+:root[data-theme="light"] .dm-progress-congrats-copy p { color: #526a73; }
