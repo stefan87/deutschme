@@ -786,135 +786,68 @@ const levelCards = (
               </div>
             </article>
           ) : page === "home" ? (
-            <>
-              <div className="hero">
-                <div className="hero-copy">
-                  <span className="tag">
-                    <span /> A1.1 · {t("TVOJ PUT UČENJA", "DEIN LERNWEG")}
-                  </span>
+           <>
+              <section className="dm-home-welcome">
+                <div className="dm-home-welcome-copy">
                   <h1>Hallo, {s.profile.name}!</h1>
-                  <p>
-                    {t(
-                      "Nekoliko minuta nemačkog danas. Više samopouzdanja u sledećem razgovoru.",
-                      "Heute ein paar Minuten Deutsch. Morgen mehr Sicherheit im Gespräch.",
-                    )}
-                  </p>
+                  <p>{t("Bravo! Nastavi da učiš, korak po korak.", "Weiter so – du machst tolle Fortschritte!")}</p>
+                </div>
+                <img src={`${import.meta.env.BASE_URL}deutschly-home-rabbit.png`} alt={t("Deutschly zec sa nemačkom zastavom", "Deutschly-Hase mit deutscher Flagge")} />
+              </section>
+
+              <section className="dm-home-stats" aria-label={t("Tvoj napredak", "Dein Fortschritt")}>
+                <div><span aria-hidden="true">🔥</span><strong>{run}</strong><small>{t("Dana u nizu", "Tage in Folge")}</small></div>
+                <div><span aria-hidden="true">🥕</span><strong>{s.xp}</strong><small>{t("Šargarepice", "Karotten")}</small></div>
+                <div><span aria-hidden="true">🎯</span><strong>{Math.min(100, Math.round(daily * 100 / (goal * 60)))}%</strong><small>{t("Dnevni cilj", "Tagesziel")}</small></div>
+              </section>
+
+              <section className="dm-home-continue">
+                <div className="dm-home-continue-copy">
+                  <span className="dm-home-pill">▶ {t("NASTAVI UČENJE", "WEITERLERNEN")}</span>
+                  <h2>{current?.title[k] || next?.title[k] || t("Tvoj sledeći korak", "Dein nächster Schritt")}</h2>
+                  <p>{t("A1.1 · Tvoj put učenja", "A1.1 · Dein Lernweg")}</p>
+                  <div className="dm-home-progress-line"><span style={{width:`${Math.max(0,Math.min(100,pct))}%`}} /></div>
+                  <small>{pct}% {t("nivoa završeno", "des Niveaus abgeschlossen")}</small>
                   {current || next ? (
-                    <button
-                      className="hero-btn"
-                      onClick={() => open((current || next)!)}
-                    >
-                      {current
-                        ? t("Nastavi gde si stao", "Weiterlernen")
-                        : finished
-                          ? t("Nastavi učenje", "Weiterlernen")
-                          : t("Započni prvu lekciju", "Erste Lektion starten")}
-                      <ArrowRight size={19} />
+                    <button type="button" className="primary" onClick={() => open((current || next)!)}>
+                      {t("Nastavi učenje", "Weiterlernen")} <ArrowRight size={19}/>
                     </button>
                   ) : (
-                    <button
-                      className="hero-btn"
-                      onClick={() => showCertificate(true)}
-                    >
-                      {t("Otvori sertifikat", "Zertifikat öffnen")}
-                      <ArrowRight size={19} />
+                    <button type="button" className="primary" onClick={() => showCertificate(true)}>
+                      {t("Otvori sertifikat", "Zertifikat öffnen")} <ArrowRight size={19}/>
                     </button>
                   )}
                 </div>
-                <div className="hero-art" aria-hidden="true">
-                  <div className="orbit one" />
-                  <div className="orbit two" />
-                  <div className="float a">
-                    Hallo<span>!</span>
-                  </div>
-                  <div className="float b">
-                    <MessageMotif /> Deutsch
-                  </div>
-                  <div className="float c">
-                    Ä <span>Ö</span> Ü
-                  </div>
+                <div className="dm-home-book" aria-hidden="true">📖<span>ABC</span></div>
+              </section>
+
+              <nav className="dm-home-shortcuts" aria-label={t("Brzi pristup", "Schnellzugriff")}>
+                <button type="button" onClick={() => go("vocab")}><span aria-hidden="true">📘</span><strong>{t("Vokabular", "Wortschatz")}</strong></button>
+                <button type="button" onClick={() => go("grammar")}><span aria-hidden="true">🏛️</span><strong>{t("Gramatika", "Grammatik")}</strong></button>
+                <button type="button" onClick={() => go("listen")}><span aria-hidden="true">🎧</span><strong>{t("Vežbe", "Übungen")}</strong></button>
+                <button type="button" onClick={() => go("speak")}><span aria-hidden="true">🎤</span><strong>{t("Govor", "Sprechen")}</strong></button>
+              </nav>
+
+              <section className="dm-home-roadmap">
+                <div className="dm-home-row"><h2>{t("Tvoj put u učenju", "Dein Lernweg")}</h2><button type="button" className="quiet" onClick={() => go("learn")}>{t("Pogledaj mapu", "Lernkarte ansehen")} <ArrowRight size={17}/></button></div>
+                <div className="dm-home-path">
+                  {levels.map((l, index) => {
+                    const percent = progress(s, l);
+                    return <button type="button" key={l} onClick={() => {setLevel(l);go("learn");}}>
+                      <span className={`dm-home-path-node ${percent >= 100 ? "done" : percent > 0 || (index === 0 && pct === 0) ? "active" : "locked"}`}>{percent >= 100 ? "✓" : percent > 0 || index === 0 ? "📖" : "🔒"}</span>
+                      <strong>{l}</strong>
+                    </button>;
+                  })}
                 </div>
-              </div>
-              <div className="stat-grid">
-                {stats.map(([I, value, label, color]) => (
-                  <article className="card stat" key={label}>
-                    <span className={`stat-icon ${color}`}>
-                      <I size={20} />
-                    </span>
-                    <div>
-                      <b>{value}</b>
-                      <small>{label}</small>
-                    </div>
-                  </article>
-                ))}
-              </div>
-              <div className="home-grid">
-                <article className="card">
-                  <div className="line">
-                    <span className="eyebrow">
-                      <Route size={17} /> {t("PUT UČENJA", "LERNWEG")}
-                    </span>
-                    <span className="chip">A1.1</span>
-                  </div>
-                  <h2>
-                    {current?.title[k] ||
-                      next?.title[k] ||
-                      t("A1.1 završen", "A1.1 abgeschlossen")}
-                  </h2>
-                  <p className="muted">
-                    {pct}% {t("nivoa završeno", "des Niveaus geschafft")}
-                  </p>
-                  <Bar value={pct} label="A1.1" />
-                  <button
-                    className="quiet"
-                    onClick={() => {
-                      setLevel("A1.1");
-                      go("learn");
-                    }}
-                  >
-                    {t("Otvori mapu učenja", "Lernkarte öffnen")}{" "}
-                    <ArrowRight size={16} />
-                  </button>
-                </article>
-                <article className="card">
-                  <span className="eyebrow">
-                    <Target size={17} /> {t("DNEVNI CILJ", "TAGESZIEL")}
-                  </span>
-                  <h2>
-                    {Math.floor(daily / 60)} / {goal} min
-                  </h2>
-                  <Bar
-                    value={Math.min(100, (daily * 100) / (goal * 60))}
-                    label={t("Dnevni cilj", "Tagesziel")}
-                  />
-                  <p className="muted">
-                    {daily >= goal * 60
-                      ? t("Cilj ostvaren", "Ziel erreicht")
-                      : t(
-                          "Vreme u aktivnim vežbama",
-                          "Zeit in aktiven Übungen",
-                        )}{" "}
-                    · +30 🥕
-                  </p>
-                  <small>
-                    {t(
-                      "Izazov: 3 različita tačna odgovora",
-                      "Challenge: 3 verschiedene richtige Antworten",
-                    )}{" "}
-                    · {Math.min(3, dailyCorrect)}/3
-                  </small>
-                </article>
-              </div>
-              <div className="line home-foot">
-                <small>
-                  {t("Rang", "Rang")}: {rank}
-                </small>
-                <small>
-                  {t("Poslednja aktivnost", "Letzte Aktivität")}:{" "}
-                  {s.activity ? dateTxt(s.activity, de) : "—"}
-                </small>
-              </div>
+              </section>
+
+              <section className="dm-home-challenge">
+                <span aria-hidden="true">🎯</span>
+                <div><h2>{t("Mali koraci, veliki rezultati!", "Kleine Schritte, große Erfolge!")}</h2><p>{t("Uči redovno i ostvari svoj dnevni cilj.", "Lerne regelmäßig und erreiche dein Tagesziel.")}</p></div>
+                <button type="button" className="primary" onClick={() => go("progress")}>{t("Moj napredak", "Mein Fortschritt")}</button>
+              </section>
             </>
+
           ) : page === "learn" ? (
             <>
               <section className="dm-map-hero">
