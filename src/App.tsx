@@ -1062,8 +1062,7 @@ const levelCards = (
               )}
               <section className="dm-grammar">
                 <div className="dm-grammar-hero">
-                  <span className="dm-grammar-hero-icon" aria-hidden="true">📚</span>
-                  <div>
+<img className="dm-grammar-hero-icon dm-rabbit-hero-image" src={`${import.meta.env.BASE_URL}deutschly-grammar-rabbit.png`} alt="" aria-hidden="true" />                  <div>
                     <span className="eyebrow">{t("NEMAČKA GRAMATIKA", "DEUTSCHE GRAMMATIK")}</span>
                     <h2>{t("Savladaj nemačku gramatiku", "Deutsche Grammatik meistern")}</h2>
                     <p>{t("Kratka pravila, jasni primeri i vežbe za svaku celinu.", "Kurze Regeln, klare Beispiele und Übungen für jede Einheit.")}</p>
@@ -1121,8 +1120,7 @@ const levelCards = (
               )}
               <section className="dm-germany">
                 <div className="dm-germany-hero">
-                  <span className="dm-germany-hero-icon" aria-hidden="true">🇩🇪</span>
-                  <div>
+<img className="dm-germany-hero-icon dm-rabbit-hero-image" src={`${import.meta.env.BASE_URL}deutschly-germany-rabbit.png`} alt="" aria-hidden="true" />                  <div>
                     <span className="eyebrow">{t("NEMAČKI U NEMAČKOJ", "DEUTSCH IN DEUTSCHLAND")}</span>
                     <h2>{t("Snalađi se u Nemačkoj", "Im deutschen Alltag zurechtkommen")}</h2>
                     <p>{t(
