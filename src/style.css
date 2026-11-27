@@ -991,3 +991,24 @@ h1, h2, h3, .brand {
 :root[data-theme="light"] .dm-speak-hero,:root[data-theme="light"] .dm-speak-topic,:root[data-theme="light"] .dm-speak-practice,:root[data-theme="light"] .dm-speak-note{background:#f4fcfd;color:#10303b;border-color:#9bcdd1}
 :root[data-theme="light"] .dm-speak-hero p,:root[data-theme="light"] .dm-speak-topic small{color:#526a73}
 :root[data-theme="light"] .dm-speak-sentence,:root[data-theme="light"] .dm-speak-playback{background:#edf9fa;color:#10303b}
+/* Deutschly Listening - same visual language as Speaking */
+.dm-listening{max-width:780px;margin:0 auto;display:grid;gap:16px;min-width:0}
+.dm-listening-hero{display:grid;grid-template-columns:110px minmax(0,1fr);align-items:center;gap:15px;padding:20px;border:1px solid #168a93;border-radius:20px;background:linear-gradient(135deg,#0b6070,#063442 65%,#041f2e);box-shadow:0 0 18px #00dede22}
+.dm-listening-hero-icon{width:105px;height:105px;display:grid;place-items:center;border-radius:24px;background:radial-gradient(circle,#0d7c8b,#06404d);font-size:3.6rem;box-shadow:inset 0 0 20px #00e5e530}
+.dm-listening-hero h2{font-size:clamp(1.3rem,3.5vw,1.85rem);margin:6px 0}
+.dm-listening-hero p{color:#d2edf1;font-size:.94rem;line-height:1.4}
+.dm-listening-heading{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.dm-listening-heading h2{font-size:1.25rem}
+.dm-listening-example{padding:14px;border:1px solid #168a93;border-radius:15px;background:#073442;display:grid;gap:10px}
+.dm-listening-topics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:11px}
+.dm-listening-topic{position:relative;min-width:0;min-height:142px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;padding:12px 7px;border:1px solid #177b88;border-radius:18px;background:linear-gradient(145deg,#0b5060,#052b3a);color:#f1fcff;text-align:center;overflow-wrap:anywhere}
+.dm-listening-topic:hover,.dm-listening-topic:focus-visible{border-color:#40fff5;box-shadow:0 0 16px #00e5e555}
+.dm-listening-topic-icon{font-size:2.8rem;line-height:1.15}
+.dm-listening-topic strong{font-size:1rem;line-height:1.2}
+.dm-listening-topic small{font-size:.74rem;color:#c4e1e5}
+.dm-listening-topic-arrow{position:absolute;right:9px;top:9px;color:#6ffbf3}
+.dm-listening-note{padding:13px 16px;border:1px solid #176f7d;border-radius:14px;background:#073442;color:#d4edf1;font-size:.9rem}
+@media(max-width:740px){.dm-listening{gap:13px}.dm-listening-hero{grid-template-columns:88px minmax(0,1fr);gap:10px;padding:13px}.dm-listening-hero-icon{width:85px;height:85px;font-size:2.9rem}.dm-listening-topics{gap:8px}.dm-listening-topic{min-height:122px;padding:10px 5px}.dm-listening-topic-icon{font-size:2.3rem}.dm-listening-topic strong{font-size:.86rem}.dm-listening-topic small{font-size:.68rem}}
+@media(max-width:390px){.dm-listening-topics{gap:6px}.dm-listening-topic{min-height:113px;padding:8px 4px}.dm-listening-topic-icon{font-size:2rem}.dm-listening-topic strong{font-size:.78rem}.dm-listening-topic small{font-size:.62rem}.dm-listening-hero h2{font-size:1.2rem}.dm-listening-hero p{font-size:.82rem}}
+:root[data-theme="light"] .dm-listening-hero,:root[data-theme="light"] .dm-listening-topic,:root[data-theme="light"] .dm-listening-note,:root[data-theme="light"] .dm-listening-example{background:#f4fcfd;color:#10303b;border-color:#9bcdd1}
+:root[data-theme="light"] .dm-listening-hero p,:root[data-theme="light"] .dm-listening-topic small{color:#526a73}
