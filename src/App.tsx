@@ -933,7 +933,7 @@ const levelCards = (
 
               <section className="dm-map-stats" aria-label={t("Statistika", "Statistik")}>
                 <div><span aria-hidden="true">🔥</span><strong>{run} {t("dana", "Tage")}</strong><small>{t("Dnevni niz", "Lernserie")}</small></div>
-                <div><span aria-hidden="true">🥕</span><strong>{s.xp}šargarepica </strong><small>{t("šargarepica", "Punkte")}</small></div>
+                <div><span aria-hidden="true">🥕</span><strong>{s.xp} šargarepica </strong><small>{t("šargarepica", "Punkte")}</small></div>
                 <div><span aria-hidden="true">🎯</span><strong>{Math.min(100, Math.floor(daily * 100 / (goal * 60)))}%</strong><small>{t("Dnevni cilj", "Tagesziel")}</small></div>
               </section>
 
