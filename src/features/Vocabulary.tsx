@@ -178,8 +178,7 @@ normalizeSearch(`${w.de} ${w.sr}`).includes(normalizeSearch(query)) &&
     {mode === "home" && <>
       <div className="dm-vocab-hero">
         <div className="dm-vocab-hero-main">
-<img className="dm-vocab-illustration" src={`${import.meta.env.BASE_URL}deutschly-vocab-cards.png`} alt="" aria-hidden="true" />
-          <div><h2>{t("Uči nove reči", "Neue Wörter lernen")}</h2><p>{t("Proširi svoj rečnik korak po korak.", "Erweitere deinen Wortschatz Schritt für Schritt.")}</p></div>
+<img className="dm-vocab-illustration dm-rabbit-hero-image" src={`${import.meta.env.BASE_URL}deutschly-vocabulary-rabbit.png`} alt="" aria-hidden="true" />          <div><h2>{t("Uči nove reči", "Neue Wörter lernen")}</h2><p>{t("Proširi svoj rečnik korak po korak.", "Erweitere deinen Wortschatz Schritt für Schritt.")}</p></div>
         </div>
         <button type="button" className="primary" onClick={() => start("quiz", "all")}>{t("Započni vežbu", "Übung starten")} <ArrowRight size={19}/></button>
       </div>
