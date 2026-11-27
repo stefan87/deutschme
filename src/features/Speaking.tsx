@@ -127,7 +127,7 @@ export default function Speaking({ lang }: { lang: Lang }) {
   return <section className="dm-speak">
     {topic === null ? <>
       <div className="dm-speak-hero">
-        <div className="dm-speak-hero-icon" aria-hidden="true">🎤</div>
+<img className="dm-speak-hero-icon dm-rabbit-hero-image" src={`${import.meta.env.BASE_URL}deutschly-speaking-rabbit.png`} alt="" aria-hidden="true" />
         <div><span className="eyebrow">{t("VEŽBA IZGOVORA", "AUSSPRACHE ÜBEN")}</span>
           <h2>{t("Vežbaj nemački govor", "Deutsch sprechen üben")}</h2>
           <p>{t("Slušaj, ponovi i snimi svoj glas. Vežbaj svojim tempom.", "Höre zu, sprich nach und nimm deine Stimme auf.")}</p>
