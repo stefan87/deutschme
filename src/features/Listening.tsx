@@ -20,8 +20,7 @@ export default function Listening({
   return (
     <section className="dm-listening">
       <div className="dm-listening-hero">
-        <span className="dm-listening-hero-icon" aria-hidden="true">🎧</span>
-        <div>
+<img className="dm-listening-hero-icon dm-rabbit-hero-image" src={`${import.meta.env.BASE_URL}deutschly-listening-rabbit.png`} alt="" aria-hidden="true" />        <div>
           <span className="eyebrow">{t("VEŽBA SLUŠANJA", "HÖRVERSTEHEN")}</span>
           <h2>{t("Vežbaj nemačko slušanje", "Deutsch hören üben")}</h2>
           <p>{t(
