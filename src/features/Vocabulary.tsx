@@ -175,34 +175,26 @@ normalizeSearch(`${w.de} ${w.sr}`).includes(normalizeSearch(query)) &&
 
     </div>}
 {mode === "home" && <>
-      <div
-  className="dm-listening-hero dm-vocab-banner-hero"
-  style={{
-    backgroundImage: `linear-gradient(90deg, #031d2c 0%, #031d2cf2 27%, #031d2c8c 52%, transparent 76%), url("${import.meta.env.BASE_URL}deutschly-vocabulary-banner.png")`,
-  }}
->
-  <div className="dm-vocab-banner-copy">
-    <span className="eyebrow">{t("VOKABULAR", "WORTSCHATZ")}</span>
-    <h2>{t("Uči nove reči", "Neue Wörter lernen")}</h2>
-    <p>{t("Proširi svoj rečnik korak po korak.", "Erweitere deinen Wortschatz Schritt für Schritt.")}</p>
+  <div
+    className="dm-listening-hero dm-vocab-banner-hero"
+    style={{
+      backgroundImage: `linear-gradient(90deg, #031d2c 0%, #031d2cf2 27%, #031d2c8c 52%, transparent 76%), url("${import.meta.env.BASE_URL}deutschly-vocabulary-banner.png")`,
+    }}
+  >
+    <div className="dm-vocab-banner-copy">
+      <span className="eyebrow">{t("VOKABULAR", "WORTSCHATZ")}</span>
+      <h2>{t("Uči nove reči", "Neue Wörter lernen")}</h2>
+      <p>{t("Proširi svoj rečnik korak po korak.", "Erweitere deinen Wortschatz Schritt für Schritt.")}</p>
+    </div>
   </div>
-</div>
-          <span className="eyebrow">{t("VOKABULAR", "WORTSCHATZ")}</span>
-          <h2>{t("Uči nove reči", "Neue Wörter lernen")}</h2>
-          <p>{t(
-            "Proširi svoj rečnik korak po korak.",
-            "Erweitere deinen Wortschatz Schritt für Schritt.",
-          )}</p>
-        </div>
-      </div>
-      <button
-        type="button"
-        className="primary dm-vocab-start"
-        onClick={() => start("quiz", "all")}
-      >
-        {t("Započni vežbu", "Übung starten")}
-        <ArrowRight size={19} />
-      </button>
+  <button
+    type="button"
+    className="primary dm-vocab-start"
+    onClick={() => start("quiz", "all")}
+  >
+    {t("Započni vežbu", "Übung starten")}
+    <ArrowRight size={19} />
+  </button>
       <div className="dm-vocab-section-title"><h2>{t("Kategorije", "Kategorien")}</h2><button type="button" onClick={() => setShowAllCategories(v => !v)}>{showAllCategories ? t("Manje", "Weniger") : t("Sve kategorije", "Alle Kategorien")} →</button></div>
       <div className="dm-vocab-categories">
         {(showAllCategories ? categoryItems : categoryItems.slice(0, 6)).map(c => {
