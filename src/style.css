@@ -1618,4 +1618,65 @@ h1, h2, h3, .brand {
   .dm-grammar .dm-grammar-hero h2 { font-size: 1.2rem; }
   .dm-grammar .dm-grammar-hero p { font-size: .82rem; }
 }
+/* Deutschly Speaking - integrated full rabbit banner */
+.dm-speak .dm-speak-hero.dm-speak-banner {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  align-items: center;
+  min-height: 205px;
+  padding: 20px;
+  overflow: hidden;
+  background: #031d2c;
+  border: 1px solid #168a93;
+  border-radius: 20px;
+}
+.dm-speak .dm-speak-banner-image {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: contain;
+  object-position: right center;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+.dm-speak .dm-speak-banner-fade {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(90deg, #031d2c 0%, #031d2cf5 30%, #031d2c99 53%, transparent 76%);
+}
+.dm-speak .dm-speak-banner-copy {
+  position: relative;
+  z-index: 2;
+  width: 56%;
+  min-width: 0;
+  color: #f1fcff;
+}
+.dm-speak .dm-speak-banner-copy .eyebrow { color: #65f7f1; }
+.dm-speak .dm-speak-banner-copy h2 {
+  margin: 6px 0;
+  color: #fff;
+  font-size: clamp(1.3rem, 3.5vw, 1.85rem);
+}
+.dm-speak .dm-speak-banner-copy p {
+  color: #d2edf1;
+  font-size: .94rem;
+  line-height: 1.4;
+}
+@media (max-width: 740px) {
+  .dm-speak .dm-speak-hero.dm-speak-banner { min-height: 170px; padding: 14px; }
+  .dm-speak .dm-speak-banner-copy { width: 58%; }
+}
+@media (max-width: 390px) {
+  .dm-speak .dm-speak-banner-copy h2 { font-size: 1.2rem; }
+  .dm-speak .dm-speak-banner-copy p { font-size: .82rem; }
+}
 
