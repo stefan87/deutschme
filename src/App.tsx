@@ -1122,7 +1122,7 @@ const levelCards = (
                 <div className="dm-germany-hero">
 <img className="dm-germany-hero-icon dm-rabbit-hero-image" src={`${import.meta.env.BASE_URL}deutschly-germany-rabbit.png`} alt="" aria-hidden="true" />                  <div>
                     <span className="eyebrow">{t("NEMAČKI U NEMAČKOJ", "DEUTSCH IN DEUTSCHLAND")}</span>
-                    <h2>{t("Snalađi se u Nemačkoj", "Im deutschen Alltag zurechtkommen")}</h2>
+                    <h2>{t("Snađi se u Nemačkoj", "Im deutschen Alltag zurechtkommen")}</h2>
                     <p>{t(
                       "Vežbaj razgovore u institucijama, na poslu, kod lekara i u drugim stvarnim situacijama.",
                       "Übe Gespräche bei Behörden, am Arbeitsplatz, beim Arzt und in weiteren Alltagssituationen.",
