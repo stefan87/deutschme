@@ -1186,7 +1186,26 @@ const levelCards = (
                   "Verfolge Lektionen, Punkte und deine Lernzeit.",
                 ),
               )}
-              {levelCards}
+<div className="dm-progress-summary">
+                <article className="dm-progress-tile">
+                  <span aria-hidden="true">🔥</span>
+                  <strong>{run}</strong>
+                  <small>{t("dana u nizu", "Tage in Folge")}</small>
+                </article>
+                <article className="dm-progress-tile">
+                  <span aria-hidden="true">🥕</span>
+                  <strong>{s.xp}</strong>
+                  <small>{t("šargarepice", "Karotten")}</small>
+                </article>
+                <article className="dm-progress-tile">
+                  <div className="dm-progress-ring" style={{
+                    "--value": `${Math.min(100, Math.round(daily * 100 / (goal * 60)))}%`
+                  } as React.CSSProperties}>
+                    <strong>{Math.min(100, Math.round(daily * 100 / (goal * 60)))}%</strong>
+                  </div>
+                  <small>{t("Dnevni cilj", "Tagesziel")}</small>
+                </article>
+              </div>
               <div className="home-grid">
                 <article className="card">
                   <h2>{t("Nedeljni cilj", "Wochenziel")}</h2>
