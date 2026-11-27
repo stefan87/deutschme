@@ -1159,13 +1159,13 @@ const levelCards = (
               {head(
                 t("Govor", "Sprechen"),
                 t(
-                  "Vežbaj naglas i probaj razgovor sa ponuđenim ili upisanim odgovorima.",
-                  "Übe laut und antworte im Gespräch durch Auswahl oder Texteingabe.",
+                  "Izaberi situaciju, poslušaj nemačku rečenicu i snimi svoj izgovor.",
+                  "Wähle eine Situation, höre den deutschen Satz und nimm deine Aussprache auf.",
                 ),
               )}
               <Speaking lang={lang} />
-              {cardList(practiceScenes.slice(10))}
             </>
+
           ) : page === "germany" ? (
             <>
               {head(
