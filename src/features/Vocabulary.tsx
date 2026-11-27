@@ -9,6 +9,14 @@ import Sound from "./Sound";
 import PronounceText from "./PronounceText";
 
 type CategorizedWord = Word & { category?: string };
+function normalizeSearch(value: string): string {
+  return value
+    .toLocaleLowerCase("de")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/đ/g, "d")
+    .replace(/ß/g, "ss");
+}
 const allVocabulary: CategorizedWord[] = (() => {
   const used = new Set<string>();
   return [...words, ...extraVocabulary].filter(word => {
@@ -82,7 +90,7 @@ export default function Vocabulary({ state, lang, onMark, onToggleFavorite }: {
   const eligible = useMemo(() => {
     const now = Date.now();
     return allVocabulary.filter(w =>
-      `${w.de} ${w.sr}`.toLocaleLowerCase("de").includes(query.toLocaleLowerCase("de")) &&
+normalizeSearch(`${w.de} ${w.sr}`).includes(normalizeSearch(query)) &&
       (category === "all" || (category === "original" ? !w.category : w.category === category)) &&
       (filter === "all" || (filter === "due" && (state.cards[w.id]?.due || 0) <= now) ||
         (filter === "favorites" && favorites.includes(w.id)) ||
