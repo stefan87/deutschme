@@ -1319,3 +1319,131 @@ h1, h2, h3, .brand {
 :root[data-theme="light"] .dm-profile-page .dm-profile-hero p,
 :root[data-theme="light"] .dm-profile-page .dm-profile-stats small,
 :root[data-theme="light"] .dm-profile-page .dm-profile-section > p { color: #526a73; }
+/* Deutschly - integrated rabbit heroes across all sections */
+.dm-listening-hero,
+.dm-speak-hero,
+.dm-grammar-hero,
+.dm-germany-hero,
+.dm-awards-hero,
+.dm-profile-hero {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(170px, 42%);
+  align-items: center;
+  gap: 12px;
+  min-height: 230px;
+  padding: 22px;
+  overflow: hidden;
+  isolation: isolate;
+  background: linear-gradient(105deg, #031e2d 10%, #064554 100%);
+  border-radius: 22px;
+}
+
+/* Text stays left, rabbit artwork fills the right side. */
+.dm-listening-hero > div,
+.dm-speak-hero > div,
+.dm-grammar-hero > div,
+.dm-germany-hero > div,
+.dm-awards-hero > div,
+.dm-profile-hero > div {
+  grid-column: 1;
+  grid-row: 1;
+  position: relative;
+  z-index: 2;
+  min-width: 0;
+}
+
+.dm-listening-hero > img.dm-listening-hero-icon,
+.dm-speak-hero > img.dm-speak-hero-icon,
+.dm-grammar-hero > img.dm-grammar-hero-icon,
+.dm-germany-hero > img.dm-germany-hero-icon,
+.dm-awards-hero > img.dm-awards-hero-image,
+.dm-profile-hero > img.dm-profile-hero-image {
+  grid-column: 2;
+  grid-row: 1;
+  display: block;
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 210px;
+  max-width: none;
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  filter: none;
+  object-fit: contain;
+  object-position: center;
+  -webkit-mask-image: radial-gradient(ellipse 75% 78% at center, #000 48%, transparent 100%);
+  mask-image: radial-gradient(ellipse 75% 78% at center, #000 48%, transparent 100%);
+}
+
+/* Vocabulary uses the same Listening hero class. */
+.dm-vocab .dm-listening-hero {
+  position: relative;
+  grid-template-columns: minmax(0, 1fr) minmax(170px, 42%);
+  min-height: 230px;
+}
+.dm-vocab .dm-listening-hero > img.dm-vocab-rabbit-image {
+  grid-column: 2;
+  grid-row: 1;
+  width: 100%;
+  height: 210px;
+  max-width: none;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  object-fit: contain;
+  -webkit-mask-image: radial-gradient(ellipse 75% 78% at center, #000 48%, transparent 100%);
+  mask-image: radial-gradient(ellipse 75% 78% at center, #000 48%, transparent 100%);
+}
+
+@media (max-width: 740px) {
+  .dm-listening-hero,
+  .dm-speak-hero,
+  .dm-grammar-hero,
+  .dm-germany-hero,
+  .dm-awards-hero,
+  .dm-profile-hero,
+  .dm-vocab .dm-listening-hero {
+    grid-template-columns: minmax(0, 1fr) minmax(105px, 40%);
+    min-height: 190px;
+    gap: 6px;
+    padding: 13px;
+  }
+  .dm-listening-hero > img.dm-listening-hero-icon,
+  .dm-speak-hero > img.dm-speak-hero-icon,
+  .dm-grammar-hero > img.dm-grammar-hero-icon,
+  .dm-germany-hero > img.dm-germany-hero-icon,
+  .dm-awards-hero > img.dm-awards-hero-image,
+  .dm-profile-hero > img.dm-profile-hero-image,
+  .dm-vocab .dm-listening-hero > img.dm-vocab-rabbit-image {
+    height: 175px;
+  }
+}
+@media (max-width: 390px) {
+  .dm-listening-hero,
+  .dm-speak-hero,
+  .dm-grammar-hero,
+  .dm-germany-hero,
+  .dm-awards-hero,
+  .dm-profile-hero,
+  .dm-vocab .dm-listening-hero {
+    grid-template-columns: minmax(0, 1fr) minmax(94px, 38%);
+    min-height: 175px;
+    padding: 10px;
+  }
+  .dm-listening-hero > img.dm-listening-hero-icon,
+  .dm-speak-hero > img.dm-speak-hero-icon,
+  .dm-grammar-hero > img.dm-grammar-hero-icon,
+  .dm-germany-hero > img.dm-germany-hero-icon,
+  .dm-awards-hero > img.dm-awards-hero-image,
+  .dm-profile-hero > img.dm-profile-hero-image,
+  .dm-vocab .dm-listening-hero > img.dm-vocab-rabbit-image {
+    height: 155px;
+  }
+}
