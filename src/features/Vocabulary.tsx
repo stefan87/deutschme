@@ -20,15 +20,20 @@ const allVocabulary: CategorizedWord[] = (() => {
 })();
 
 function categoryIcon(name: string) {
-  const c = name.toLocaleLowerCase("de");
-  if (/reise|put|travel|verkehr/.test(c)) return "🧳";
-  if (/haus|dom|wohn|famil/.test(c)) return "🏠";
-  if (/essen|trink|hran|food/.test(c)) return "🍽️";
-  if (/arbeit|beruf|posao|job/.test(c)) return "💼";
-  if (/gesund|arzt|körper|zdrav/.test(c)) return "❤️";
-  if (/zahl|broj/.test(c)) return "🔢";
-  if (/farb|boj/.test(c)) return "🎨";
-  return "💬";
+  const c = name.toLocaleLowerCase("de").trim();
+  if (/osnovne fraze|fraze|phrase|ausdruck/.test(c)) return "💬";
+  if (/putov|reise|travel|verkehr/.test(c)) return "🧳";
+  if (/^dom$|kuća|kuca|haus|wohn/.test(c)) return "🏠";
+  if (/hrana|essen|food|obrok/.test(c)) return "🍴";
+  if (/posao|arbeit|beruf|job/.test(c)) return "💼";
+  if (/zdrav|gesund|arzt|körper/.test(c)) return "❤️";
+  if (/reči iz lekcija|reci iz lekcija|wörter aus lektionen|lekcij/.test(c)) return "📚";
+  if (/porodic|famil/.test(c)) return "👨‍👩‍👧";
+  if (/nameštaj|namestaj|möbel|moebel/.test(c)) return "🛋️";
+  if (/piće|pice|getränk|getraenk|trink/.test(c)) return "🥤";
+  if (/broj|zahl/.test(c)) return "🔢";
+  if (/boj|farb/.test(c)) return "🎨";
+  return "📖";
 }
 
 export default function Vocabulary({ state, lang, onMark, onToggleFavorite }: {
