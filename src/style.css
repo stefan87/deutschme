@@ -764,6 +764,7 @@ h1, h2, h3, .brand {
   .dm-vocab-category { min-height: 118px; padding: 9px 4px; }
   .dm-vocab-category > span { font-size: 2.4rem; }
   .dm-vocab-category strong { font-size: .86rem; }
+}
 /* Vocabulary - extra compact reset filters button */
 .dm-vocab-filters > button.secondary {
   width: max-content;
