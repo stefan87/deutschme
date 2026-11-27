@@ -143,9 +143,8 @@ export default function Vocabulary({ state, lang, onMark, onToggleFavorite }: {
       <div className="dm-vocab-section-title"><h2>{t("Kategorije", "Kategorien")}</h2><button type="button" onClick={() => setShowAllCategories(v => !v)}>{showAllCategories ? t("Manje", "Weniger") : t("Sve kategorije", "Alle Kategorien")} →</button></div>
       <div className="dm-vocab-categories">
         {(showAllCategories ? categoryItems : categoryItems.slice(0, 6)).map(c => {
-          const count = allVocabulary.filter(w => c.id === "original" ? !w.category : w.category === c.id).length;
           return <button type="button" key={c.id} className="dm-vocab-category" onClick={() => start("cards", c.id)}>
-            <span aria-hidden="true">{categoryIcon(c.label)}</span><strong>{c.label}</strong><small>{count} {t("reči", "Wörter")}</small>
+            <span aria-hidden="true">{categoryIcon(c.label)}</span><strong>{c.label}</strong>
           </button>;
         })}
       </div>
