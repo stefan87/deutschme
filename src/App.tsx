@@ -1272,26 +1272,52 @@ const levelCards = (
             <>
               {head(
                 t("Dostignuća", "Erfolge"),
-                `${medalCount} / ${medals.length} · ${rank}`,
+                t("Prati osvojene nagrade i nastavi da učiš.", "Sieh dir deine Erfolge an und lerne weiter."),
               )}
-              <div className="medal-grid">
-                {medals.map(([title, desc, won, icon]) => (
-                  <article
-                    className={`card medal ${won ? "won" : ""}`}
-                    key={title}
-                  >
-                    <span>{won ? icon : <LockKeyhole size={24} />}</span>
-                    <h2>{title}</h2>
-                    <p>{desc}</p>
-                    <small>
-                      {won
-                        ? t("Osvojeno", "Erreicht")
-                        : t("Zaključano", "Gesperrt")}
-                    </small>
-                  </article>
-                ))}
-              </div>
+              <section className="dm-awards">
+                <div className="dm-awards-hero">
+                  <img
+                    className="dm-awards-hero-image"
+                    src={`${import.meta.env.BASE_URL}deutschly-awards-rabbit.png`}
+                    alt=""
+                    aria-hidden="true"
+                  />
+                  <div>
+                    <span className="eyebrow">{t("TVOJE NAGRADE", "DEINE AUSZEICHNUNGEN")}</span>
+                    <h2>{t("Svaki korak se računa!", "Jeder Schritt zählt!")}</h2>
+                    <p>{t("Uči redovno, skupljaj šargarepice i otključavaj dostignuća.", "Lerne regelmäßig, sammle Karotten und schalte Erfolge frei.")}</p>
+                  </div>
+                </div>
+
+                <div className="dm-awards-summary">
+                  <div><span aria-hidden="true">🏆</span><strong>{medalCount}/{medals.length}</strong><small>{t("Osvojene nagrade", "Erreichte Erfolge")}</small></div>
+                  <div><span aria-hidden="true">🥕</span><strong>{s.xp}</strong><small>{t("Šargarepice", "Karotten")}</small></div>
+                  <div><span aria-hidden="true">🎖️</span><strong>{rank}</strong><small>{t("Tvoj rang", "Dein Rang")}</small></div>
+                </div>
+
+                <div className="dm-awards-heading">
+                  <h2>{t("Tvoja dostignuća", "Deine Erfolge")}</h2>
+                  <small>{medalCount} / {medals.length}</small>
+                </div>
+                <div className="dm-awards-grid">
+                  {medals.map(([title, desc, won, icon]) => (
+                    <article className={`dm-awards-card ${won ? "won" : "locked"}`} key={title}>
+                      <span className="dm-awards-card-icon" aria-hidden="true">
+                        {won ? icon : <LockKeyhole size={28} />}
+                      </span>
+                      <h2>{title}</h2>
+                      <p>{desc}</p>
+                      <small>{won ? t("✓ Osvojeno", "✓ Erreicht") : t("🔒 Zaključano", "🔒 Gesperrt")}</small>
+                    </article>
+                  ))}
+                </div>
+                <div className="dm-awards-footer">
+                  <span aria-hidden="true">🥕</span>
+                  <p>{t("Nastavi da učiš! Nova dostignuća čekaju na tebe.", "Lerne weiter! Neue Erfolge warten auf dich.")}</p>
+                </div>
+              </section>
             </>
+
           ) : (
             <>
               {head(
