@@ -1281,7 +1281,16 @@ const levelCards = (
                   )}
                 </article>
               </div>
-              
+              <div className="dm-progress-congrats" role="note">
+                <span className="dm-progress-trophy" aria-hidden="true">🏆</span>
+                <div className="dm-progress-congrats-copy">
+                  <h2>{t("Odličan napredak!", "Toller Fortschritt!")}</h2>
+                  <p>{t(
+                    "Nastavi u istom ritmu! Svaka nova lekcija donosi te bliže cilju.",
+                    "Mach weiter so! Jede neue Lektion bringt dich deinem Ziel näher."
+                  )}</p>
+                </div>
+              </div>
             </>
           ) : page === "awards" ? (
             <>
