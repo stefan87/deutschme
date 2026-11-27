@@ -70,6 +70,7 @@ import Vocabulary from "./features/Vocabulary";
 import ProfileForm from "./features/Profile";
 import AccountSettings from "./features/AccountSettings";
 import Speaking from "./features/Speaking";
+import Listening from "./features/Listening";
 const nav = [
   ["home", "Početna", "Start", House],
   ["learn", "Učenje", "Lernen", Route],
@@ -1108,20 +1109,17 @@ const levelCards = (
   })
 } />
             </>
-          ) : page === "listen" ? (
+                   ) : page === "listen" ? (
             <>
               {head(
                 t("Slušanje", "Hörverstehen"),
-                t(
-                  "Izaberi temu i preslušaj rečenice koliko god puta želiš.",
-                  "Wähle ein Thema und höre die Sätze beliebig oft.",
-                ),
+                t("Izaberi temu i vežbaj razumevanje nemačkog.", "Wähle ein Thema und übe dein Hörverstehen."),
               )}
-              <article className="card">
-                <h2>{t("Brzi primer", "Kurzes Beispiel")}</h2>
-                <Sound clip="l19" lang={lang} />
-              </article>
-              {cardList(drills.filter((x) => x.id.endsWith("-listen")))}
+              <Listening
+                lang={lang}
+                sessions={drills.filter(x => x.id.endsWith("-listen"))}
+                onOpen={open}
+              />
             </>
           ) : page === "grammar" ? (
             <>
