@@ -1561,6 +1561,6 @@ h1, h2, h3, .brand {
 .dm-listening .dm-listening-banner-copy h2 { color: #fff; }
 .dm-listening .dm-listening-banner-copy p { color: #d2edf1; }
 @media (max-width: 740px) {
-  .dm-listening .dm-listening-banner-image { object-position: 70% center; }
+  .dm-listening .dm-listening-banner-image { object-position:  right center; }
   .dm-listening .dm-listening-banner-copy { width: 58%; }
 }
