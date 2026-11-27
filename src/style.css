@@ -881,3 +881,34 @@ h1, h2, h3, .brand {
   border-color: #9bcdd1;
 }
 :root[data-theme="light"] .dm-progress-summary .dm-progress-tile > small { color: #526a73; }
+/* Deutschly - skill progress bars */
+.dm-progress-skills {
+  display: grid;
+  gap: 15px;
+  margin: 8px 0 22px;
+  padding: 18px 12px;
+  border-radius: 18px;
+  background: linear-gradient(145deg, #073342, #041f2e);
+  border: 1px solid #147987;
+}
+.dm-progress-skills h2 { font-size: 1.16rem; margin: 0 0 5px; }
+.dm-progress-skill {
+  display: grid;
+  grid-template-columns: 38px minmax(90px, 125px) minmax(0, 1fr) 48px;
+  align-items: center;
+  gap: 11px;
+  min-width: 0;
+}
+.dm-progress-skill-icon { font-size: 1.65rem; text-align: center; }
+.dm-progress-skill-label { font-size: .93rem; font-weight: 750; }
+.dm-progress-skill .bar { height: 11px; }
+.dm-progress-skill strong { text-align: right; font-size: .87rem; }
+.dm-progress-skills > small { line-height: 1.35; }
+@media (max-width: 520px) {
+  .dm-progress-skills { padding: 14px 9px; gap: 12px; }
+  .dm-progress-skill { grid-template-columns: 27px minmax(80px, 98px) minmax(0, 1fr) 37px; gap: 6px; }
+  .dm-progress-skill-icon { font-size: 1.35rem; }
+  .dm-progress-skill-label { font-size: .79rem; }
+  .dm-progress-skill strong { font-size: .78rem; }
+}
+:root[data-theme="light"] .dm-progress-skills { background: #fff; border-color: var(--border); }
