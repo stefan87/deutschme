@@ -765,23 +765,35 @@ h1, h2, h3, .brand {
   .dm-vocab-category > span { font-size: 2.4rem; }
   .dm-vocab-category strong { font-size: .86rem; }
 }
-/* Vocabulary - extra compact reset filters button */
+* Vocabulary - reset button aligned with topic selector */
 .dm-vocab-filters > button.secondary {
-  width: max-content;
+  box-sizing: border-box;
+  width: 50%;
   max-width: 100%;
-  min-height: 32px;
-  padding: 4px 9px;
-  font-size: 0.72rem;
-  font-weight: 700;
-  line-height: 1.1;
+  min-height: 45px;
+  padding: 9px 12px;
+  font-size: 0.88rem;
+  font-weight: 750;
+  line-height: 1.2;
   justify-self: start;
-  align-self: center;
-  border-radius: 8px;
+  align-self: end;
+  border-radius: 11px;
+  white-space: nowrap;
 }
+
 @media (max-width: 740px) {
   .dm-vocab-filters > button.secondary {
-    min-height: 36px;
-    padding: 5px 10px;
-    font-size: 0.74rem;
+    min-height: 45px;
+    padding: 9px 10px;
+    font-size: 0.82rem;
   }
 }
+
+@media (max-width: 390px) {
+  .dm-vocab-filters > button.secondary {
+    width: 50%;
+    font-size: 0.8rem;
+    padding: 8px 9px;
+  }
+}
+
