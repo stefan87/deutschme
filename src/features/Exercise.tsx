@@ -326,7 +326,7 @@ const tokens = typeMode && isAssistedTranslation
             {cursor.graded?.points
               ? ` · +${cursor.graded.points} 🥕`
               : cursor.graded?.ok
-    t("Šargarepice već osvojene", "Karotten bereits erhalten")
+                ? ` · ${t("Šargarepice već osvojene", "Karotten bereits erhalten")}`
                 : ""}
           </small>
         </div>
