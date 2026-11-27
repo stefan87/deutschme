@@ -175,12 +175,21 @@ normalizeSearch(`${w.de} ${w.sr}`).includes(normalizeSearch(query)) &&
 
     </div>}
 {mode === "home" && <>
-  <div
-    className="dm-listening-hero dm-vocab-banner-hero"
-    style={{
-      backgroundImage: `linear-gradient(90deg, #031d2c 0%, #031d2cf2 27%, #031d2c8c 52%, transparent 76%), url("${import.meta.env.BASE_URL}deutschly-vocabulary-banner.png")`,
-    }}
-  >
+  <div className="dm-listening-hero dm-vocab-banner-hero" style={{ position: "relative", overflow: "hidden", minHeight: 205, display: "flex", alignItems: "center", background: "#031d2c", padding: 20 }}>
+  <img
+    src={`${import.meta.env.BASE_URL}deutschly-vocabulary-banner.png`}
+    alt=""
+    aria-hidden="true"
+    onError={(e) => { console.error("Vocabulary banner failed to load:", e.currentTarget.src); }}
+    style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "right center", border: 0, borderRadius: 0, maxWidth: "none" }}
+  />
+  <div aria-hidden="true" style={{ position: "absolute", inset: 0, background: "linear-gradient(90deg, #031d2c 0%, #031d2cf2 27%, #031d2c8c 52%, transparent 76%)" }} />
+  <div className="dm-vocab-banner-copy" style={{ position: "relative", zIndex: 1, width: "56%", minWidth: 0 }}>
+    <span className="eyebrow">{t("VOKABULAR", "WORTSCHATZ")}</span>
+    <h2>{t("Uči nove reči", "Neue Wörter lernen")}</h2>
+    <p>{t("Proširi svoj rečnik korak po korak.", "Erweitere deinen Wortschatz Schritt für Schritt.")}</p>
+  </div>
+</div>
     <div className="dm-vocab-banner-copy">
       <span className="eyebrow">{t("VOKABULAR", "WORTSCHATZ")}</span>
       <h2>{t("Uči nove reči", "Neue Wörter lernen")}</h2>
