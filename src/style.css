@@ -1207,3 +1207,15 @@ h1, h2, h3, .brand {
 :root[data-theme="light"] .dm-vocab-hero-matched .dm-vocab-hero-copy p {
   color: var(--muted);
 }
+/* Vocabulary uses the exact Listening hero layout */
+.dm-vocab-rabbit-image {
+  display: block;
+  object-fit: cover;
+  object-position: center;
+  padding: 0;
+}
+.dm-vocab-start {
+  width: 100%;
+  min-height: 45px;
+  border-radius: 999px;
+}
