@@ -411,7 +411,7 @@ export default function App() {
       </div>
     );
   const stats: [LucideIcon, string, string, string][] = [
-    [Zap, `${s.xp} XP`, t("Ukupno poena", "Gesamtpunkte"), "yellow"],
+    [Zap, `🥕 ${s.xp}`, t("Ukupno šargarepica", "Karotten gesamt"), "yellow"],
     [Flame, `${run}`, t("Dani u nizu", "Tage in Folge"), "orange"],
     [
       BookOpen,
@@ -738,7 +738,7 @@ const levelCards = (
                 {result.passed ? "Ausgezeichnet!" : "Keine Sorge, weiter üben!"}
               </h1>
               <p>
-                {result.score}% · +{result.earned} XP
+    {result.score}% · +{result.earned} 🥕
               </p>
               <p>
                 {result.passed
@@ -893,7 +893,7 @@ const levelCards = (
                           "Vreme u aktivnim vežbama",
                           "Zeit in aktiven Übungen",
                         )}{" "}
-                    · +30 XP
+                    · +30 🥕
                   </p>
                   <small>
                     {t(
@@ -933,7 +933,7 @@ const levelCards = (
 
               <section className="dm-map-stats" aria-label={t("Statistika", "Statistik")}>
                 <div><span aria-hidden="true">🔥</span><strong>{run} {t("dana", "Tage")}</strong><small>{t("Dnevni niz", "Lernserie")}</small></div>
-                <div><span aria-hidden="true">⭐</span><strong>{s.xp} XP</strong><small>{t("Poeni", "Punkte")}</small></div>
+                <div><span aria-hidden="true">🥕</span><strong>{s.xp}šargarepica </strong><small>{t("Poeni", "Punkte")}</small></div>
                 <div><span aria-hidden="true">🎯</span><strong>{Math.min(100, Math.floor(daily * 100 / (goal * 60)))}%</strong><small>{t("Dnevni cilj", "Tagesziel")}</small></div>
               </section>
 
