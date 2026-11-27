@@ -22,7 +22,7 @@ export default function Listening({
       <div className="dm-listening-hero dm-listening-banner">
   <img
     className="dm-listening-banner-image"
-    src={`${import.meta.env.BASE_URL}deutschly-listening-rabbit.png`}
+    src={`${import.meta.env.BASE_URL}deutschly-listening-banner.png`}
     alt=""
     aria-hidden="true"
   />
