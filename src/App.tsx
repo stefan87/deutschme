@@ -1132,7 +1132,7 @@ const levelCards = (
     <h2>{t("Snalađi se u Nemačkoj", "Im deutschen Alltag zurechtkommen")}</h2>
     <p>{t("Vežbaj razgovore iz svakodnevnog života u Nemačkoj.", "Übe Gespräche aus dem Alltag in Deutschland.")}</p>
   </div>
-</div>
+
 
                 </div>
                 <h2 className="dm-germany-section-title">{t("Izaberi situaciju", "Situation auswählen")}</h2>
