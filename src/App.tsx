@@ -1281,30 +1281,7 @@ const levelCards = (
                   )}
                 </article>
               </div>
-              <article className="card">
-                <h2>{t("Istorija učenja", "Lernverlauf")}</h2>
-                {Object.keys(s.results).length ? (
-                  Object.entries(s.results)
-                    .sort((a, b) => b[1].date.localeCompare(a[1].date))
-                    .map(([id, r]) => (
-                      <div className="history" key={id}>
-                        <span>
-                          {allSessions.find((x) => x.id === id)?.title[k]}
-                        </span>
-                        <small>
-                          {dateTxt(r.date, de)} · {r.score}%
-                        </small>
-                      </div>
-                    ))
-                ) : (
-                  <p className="muted">
-                    {t(
-                      "Još nema završenih sesija.",
-                      "Noch keine abgeschlossenen Sitzungen.",
-                    )}
-                  </p>
-                )}
-              </article>
+              
             </>
           ) : page === "awards" ? (
             <>
