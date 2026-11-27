@@ -1119,15 +1119,21 @@ const levelCards = (
                 ),
               )}
               <section className="dm-germany">
-                <div className="dm-germany-hero">
-<img className="dm-germany-hero-icon dm-rabbit-hero-image" src={`${import.meta.env.BASE_URL}deutschly-germany-rabbit.png`} alt="" aria-hidden="true" />                  <div>
-                    <span className="eyebrow">{t("NEMAČKI U NEMAČKOJ", "DEUTSCH IN DEUTSCHLAND")}</span>
-                    <h2>{t("Snađi se u Nemačkoj", "Im deutschen Alltag zurechtkommen")}</h2>
-                    <p>{t(
-                      "Vežbaj razgovore u institucijama, na poslu, kod lekara i u drugim stvarnim situacijama.",
-                      "Übe Gespräche bei Behörden, am Arbeitsplatz, beim Arzt und in weiteren Alltagssituationen.",
-                    )}</p>
-                  </div>
+                <div className="dm-germany-hero dm-germany-banner">
+  <img
+    className="dm-germany-banner-image"
+    src={`${import.meta.env.BASE_URL}deutschly-germany-banner.png`}
+    alt=""
+    aria-hidden="true"
+  />
+  <div className="dm-germany-banner-fade" aria-hidden="true" />
+  <div className="dm-germany-banner-copy">
+    <span className="eyebrow">GERMAN IN GERMANY</span>
+    <h2>{t("Snalađi se u Nemačkoj", "Im deutschen Alltag zurechtkommen")}</h2>
+    <p>{t("Vežbaj razgovore iz svakodnevnog života u Nemačkoj.", "Übe Gespräche aus dem Alltag in Deutschland.")}</p>
+  </div>
+</div>
+
                 </div>
                 <h2 className="dm-germany-section-title">{t("Izaberi situaciju", "Situation auswählen")}</h2>
                 <div className="dm-germany-topics">
