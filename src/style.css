@@ -764,4 +764,23 @@ h1, h2, h3, .brand {
   .dm-vocab-category { min-height: 118px; padding: 9px 4px; }
   .dm-vocab-category > span { font-size: 2.4rem; }
   .dm-vocab-category strong { font-size: .86rem; }
+  /* Vocabulary - compact reset filters button */
+.dm-vocab-filters > button.secondary {
+  width: fit-content;
+  max-width: 100%;
+  min-height: 38px;
+  padding: 7px 13px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  justify-self: start;
+  align-self: end;
+  border-radius: 11px;
+}
+
+@media (max-width: 740px) {
+  .dm-vocab-filters > button.secondary {
+    min-height: 42px;
+    padding: 8px 13px;
+  }
+}
 }
