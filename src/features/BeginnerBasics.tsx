@@ -173,7 +173,7 @@ export default function BeginnerBasics({state,onComplete}:{state:Study;onComplet
       </div>
     )}    <button type="button" className="primary" disabled={selected===null} onClick={()=>submitted?next():setSubmitted(true)} style={{marginTop:16}}>{submitted?"Nastavi":"Proveri odgovor"}</button>
   </>}
-  {stage==="done"&&<><h2>Sehr gut! 🎉</h2><p>Rezultat: {Math.round(correct*100/quiz.length)}%</p><p>Rezultat je sačuvan u tvom profilu. Ponovljeni test ne donosi dupli XP.</p><button className="primary" type="button" onClick={()=>chooseUnit((unitIndex+1)%units.length)}>Sledeća celina →</button></>}
+  {stage==="done"&&<><h2>Sehr gut! 🎉</h2><p>Rezultat: {Math.round(correct*100/quiz.length)}%</p><p>Rezultat je sačuvan u tvom profilu. Ponovljeni test ne donosi duple šargarepice.</p><button className="primary" type="button" onClick={()=>chooseUnit((unitIndex+1)%units.length)}>Sledeća celina →</button></>}
   {done&&stage!=="done"&&<p className="muted">Najbolji prethodni rezultat: {done.score}%</p>}
  </section>
 }
