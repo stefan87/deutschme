@@ -72,6 +72,12 @@ const tokens = typeMode && isAssistedTranslation
         ? [placed.map(i => tokens[i]).join(" ")]
         : [single];
   const feedbackValue = answers().filter(Boolean).join(" · ");
+  const sameAnswer = (a: string, b: string) =>
+    a.normalize("NFC").toLocaleLowerCase("de").trim()
+      .replace(/[\s.!?]+$/u, "").replace(/\s+/g, " ") ===
+    b.normalize("NFC").toLocaleLowerCase("de").trim()
+      .replace(/[\s.!?]+$/u, "").replace(/\s+/g, " ");
+
 
   const feedbackBox = (value: string) => (
     <span
@@ -184,7 +190,7 @@ const tokens = typeMode && isAssistedTranslation
         </div>
       )}
 
-      {disabled && !/_{3,}/.test(prompt) && feedbackValue && (
+      {disabled && !q.questions && !/_{3,}/.test(prompt) && feedbackValue && (
         <div className="prompt" role="status">
           {feedbackBox(feedbackValue)}
         </div>
@@ -203,15 +209,39 @@ const tokens = typeMode && isAssistedTranslation
       {q.text && <blockquote lang="de">{q.text}</blockquote>}
 
       <fieldset disabled={disabled}>
-        {q.questions?.map((sub, i) => (
-          <label className="selectrow" key={sub.prompt}>
-            <span lang="de">{sub.prompt}</span>
-            <select value={many[i] || ""} onChange={e => update(i, e.target.value)}>
-              <option value="">{t("Izaberi odgovor", "Antwort wählen")}</option>
-              {shuffle(sub.options, `${q.id}:${i}`).map(v => <option key={v}>{v}</option>)}
-            </select>
-          </label>
-        ))}
+        {q.questions?.map((sub, i) => {
+          const chosen = many[i] || "";
+          const isCorrect = sameAnswer(chosen, sub.answer);
+          return (
+            <div key={`${sub.prompt}-${i}`} className="dm-reading-question">
+              <label className="selectrow">
+                <span lang="de">{sub.prompt}</span>
+                <select value={chosen} onChange={e => update(i, e.target.value)}>
+                  <option value="">{t("Izaberi odgovor", "Antwort wählen")}</option>
+                  {shuffle(sub.options, `${q.id}:${i}`).map(v => <option key={v} value={v}>{v}</option>)}
+                </select>
+              </label>
+              {disabled && (
+                <div className={`dm-reading-answer ${isCorrect ? "ok" : "miss"}`} role="status">
+                  <span
+                    lang="de"
+                    className="dm-reading-answer-box"
+                    style={{ color: isCorrect ? "#167a43" : "#c62828" }}
+                  >
+                    {chosen}
+                  </span>
+                  <span>{isCorrect ? t("Tačno!", "Richtig!") : t("Nije tačno.", "Nicht richtig.")}</span>
+                  {!isCorrect && (
+                    <span>
+                      {t("Tačan odgovor:", "Richtige Antwort:")} <strong lang="de">{sub.answer}</strong>
+                    </span>
+                  )}
+                </div>
+              )}
+            </div>
+          );
+        })}
+
         {q.pairs?.map((w, i) => (
           <label className="selectrow match" key={w.id}>
             <Visual value={w.visual} />
@@ -312,10 +342,10 @@ const tokens = typeMode && isAssistedTranslation
           </strong>
 <div style={{display:"flex",alignItems:"center",gap:12,flexWrap:"wrap"}}>
             <p style={{margin:0,flex:"0 1 auto"}}>
-              {!cursor.graded?.ok && (
+              {!cursor.graded?.ok && !q.questions && (
                 <strong>{t("Tačan odgovor: ", "Richtige Antwort: ")}</strong>
               )}
-              {cursor.graded?.answer}
+              {!q.questions && cursor.graded?.answer}
             </p>
             {pronunciationText && (
               <PronounceText text={pronunciationText} />
