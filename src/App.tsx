@@ -1214,7 +1214,7 @@ const levelCards = (
                   { icon: "🏛️", sr: "Gramatika", de: "Grammatik", kind: "grammar" },
                   { icon: "💬", sr: "Konverzacija", de: "Konversation", kind: "conversation" },
                 ] as const).map(skill => {
-                  const questions = new Map<string, string>();
+                  const questions = new globalThis.Map<string, string>();
                   if (skill.kind !== "vocabulary") {
                     allSessions.forEach(session => session.items.forEach(q => {
                       const matches = skill.kind === "conversation"
