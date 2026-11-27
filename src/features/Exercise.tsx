@@ -324,9 +324,9 @@ const tokens = typeMode && isAssistedTranslation
           <small>
             {q.explain[de ? 1 : 0]}
             {cursor.graded?.points
-              ? ` · +${cursor.graded.points} XP`
+              ? ` · +${cursor.graded.points} 🥕`
               : cursor.graded?.ok
-                ? ` · ${t("XP već osvojen", "XP bereits erhalten")}`
+    t("Šargarepice već osvojene", "Karotten bereits erhalten")
                 : ""}
           </small>
         </div>
