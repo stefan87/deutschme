@@ -1134,3 +1134,76 @@ h1, h2, h3, .brand {
 @media (max-width: 390px) {
   .dm-rabbit-hero-image { width: 80px; height: 80px; }
 }
+/* Deutschly - Vocabulary hero aligned with Listening hero */
+.dm-vocab-hero.dm-vocab-hero-matched {
+  padding: 20px;
+  border: 1px solid #168a93;
+  border-radius: 20px;
+  background: linear-gradient(135deg,#0b6070,#063442 65%,#041f2e);
+  box-shadow: 0 0 18px #00dede22;
+}
+.dm-vocab-hero-matched .dm-vocab-hero-main {
+  display: grid;
+  grid-template-columns: 110px minmax(0,1fr);
+  align-items: center;
+  gap: 15px;
+  min-height: 0;
+  margin-bottom: 15px;
+}
+.dm-vocab-hero-matched .dm-vocab-illustration {
+  display: block;
+  width: 105px;
+  height: 105px;
+  object-fit: cover;
+  object-position: center;
+  border: 1px solid #168a93;
+  border-radius: 24px;
+  padding: 0;
+  box-shadow: inset 0 0 20px #00e5e530;
+  filter: none;
+}
+.dm-vocab-hero-matched .dm-vocab-hero-copy { min-width: 0; }
+.dm-vocab-hero-matched .dm-vocab-hero-copy .eyebrow {
+  display: inline-flex;
+  color: var(--primaryText);
+  font-size: .7rem;
+  font-weight: 850;
+  letter-spacing: .14em;
+}
+.dm-vocab-hero-matched .dm-vocab-hero-copy h2 {
+  font-size: clamp(1.3rem,3.5vw,1.85rem);
+  line-height: 1.22;
+  margin: 6px 0;
+}
+.dm-vocab-hero-matched .dm-vocab-hero-copy p {
+  color: #d2edf1;
+  font-size: .94rem;
+  line-height: 1.4;
+  max-width: none;
+}
+.dm-vocab-hero-matched > .primary {
+  width: 100%;
+  min-height: 45px;
+  margin: 0;
+  border-radius: 999px;
+}
+@media (max-width:740px) {
+  .dm-vocab-hero.dm-vocab-hero-matched { padding: 13px; }
+  .dm-vocab-hero-matched .dm-vocab-hero-main {
+    grid-template-columns: 88px minmax(0,1fr);
+    gap: 10px;
+    margin-bottom: 13px;
+  }
+  .dm-vocab-hero-matched .dm-vocab-illustration {
+    width: 85px;
+    height: 85px;
+    border-radius: 20px;
+  }
+}
+@media (max-width:390px) {
+  .dm-vocab-hero-matched .dm-vocab-hero-copy h2 { font-size: 1.2rem; }
+  .dm-vocab-hero-matched .dm-vocab-hero-copy p { font-size: .82rem; }
+}
+:root[data-theme="light"] .dm-vocab-hero-matched .dm-vocab-hero-copy p {
+  color: var(--muted);
+}
