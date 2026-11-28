@@ -1865,5 +1865,60 @@ h1, h2, h3, .brand {
 @media (max-width: 740px) {
   .exercise .dm-answer-choices { grid-template-columns: 1fr; gap: 10px; }
   .exercise .dm-answer-choices > .choice { min-height: 54px; }
+  /* Deutschly 78 - stable answer boxes and sound overlay */
+.exercise .dm-answer-choices {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  align-items: stretch;
+}
+.exercise .dm-answer-choices > .choice {
+  position: relative;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  min-width: 0;
+  height: 74px;
+  min-height: 74px;
+  max-height: 74px;
+  margin: 0;
+  padding: 10px 72px 10px 18px;
+  border-radius: 12px;
+  line-height: 1.25;
+  text-align: left;
+  overflow: hidden;
+}
+.exercise .dm-answer-choices > .choice > span:first-child {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.exercise .dm-answer-choices .dm-answer-sound {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+}
+.exercise .dm-answer-choices .dm-answer-sound button {
+  margin: 0;
+  min-width: 44px;
+  min-height: 44px;
+  max-height: 44px;
+}
+@media (max-width: 740px) {
+  .exercise .dm-answer-choices { grid-template-columns: 1fr; }
+  .exercise .dm-answer-choices > .choice { height: 74px; min-height: 74px; max-height: 74px; }
+}
+
+
 }
 
