@@ -309,7 +309,7 @@ normalizeSearch(`${w.de} ${w.sr}`).includes(normalizeSearch(query)) &&
     ) : (
       <strong>
         {t("Nije tačno. Tačan odgovor je ", "Nicht richtig. Die richtige Antwort ist ")}
-        <span className="dm-vocab-feedback-answer">{quizWord.sr}</span>
+<span style={{ textDecoration: "underline", textDecorationThickness: "2px", textUnderlineOffset: "3px" }}>{quizWord.sr}</span>
         {/[.!?]$/.test(quizWord.sr.trim()) ? "" : "."}
       </strong>
     )}
