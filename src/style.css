@@ -1792,4 +1792,26 @@ h1, h2, h3, .brand {
 :root[data-theme="light"] .dm-basics-feedback.ok { background: #dff8e9; color: #17634c; }
 :root[data-theme="light"] .dm-basics-feedback.miss { background: #ffedf1; color: #9c2949; }
 
+/* Deutschly: unified answer choices after grading */
+.exercise .dm-answer-choices .choice.dm-answer-correct,
+.exercise fieldset:disabled .dm-answer-choices .choice.dm-answer-correct {
+  background: #fff !important;
+  color: #167a43 !important;
+  border: 2px solid #48b779 !important;
+  opacity: 1 !important;
+  font-weight: 850;
+  box-shadow: none;
+}
+.exercise .dm-answer-choices .choice.dm-answer-wrong,
+.exercise fieldset:disabled .dm-answer-choices .choice.dm-answer-wrong {
+  background: #fff !important;
+  color: #c62828 !important;
+  border: 2px solid #e36a6a !important;
+  opacity: 1 !important;
+  font-weight: 850;
+  box-shadow: none;
+}
+.exercise fieldset:disabled .dm-answer-choices .choice:not(.dm-answer-correct):not(.dm-answer-wrong) {
+  opacity: .6;
+}
 
