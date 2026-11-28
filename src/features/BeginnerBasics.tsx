@@ -136,25 +136,42 @@ export default function BeginnerBasics({state,onComplete}:{state:Study;onComplet
     <progress className="bar" value={index} max={quiz.length} aria-label="Napredak testa"/>
     <div className="picture" style={{minHeight:110}}><span style={{fontSize:55}} aria-hidden="true">{question.pair.visual||"📘"}</span></div>
     <h2>{unit.id==="objects"?"Koja nemačka reč odgovara slici?":`Kako se na nemačkom kaže: ${question.pair.sr}?`}</h2>
-        {submitted && selected !== null && (
-      <div role="status" style={{margin:"10px 0",textAlign:"center"}}>
-        <span
+        <div className="choices dm-basics-quiz">
+  {choices.map((c, i) => {
+    const isCorrect = c.de === question.pair.de;
+    const isSelected = selected === i;
+    const showCorrect = submitted && isCorrect;
+    const showWrong = submitted && isSelected && !isCorrect;
+
+    return (
+      <div
+        key={c.de}
+        className={`dm-basics-answer ${
+          showCorrect ? "dm-basics-correct" :
+          showWrong ? "dm-basics-wrong" :
+          isSelected ? "dm-basics-selected" : ""
+        }`}
+      >
+        <button
+          type="button"
+          className="dm-basics-answer-button"
+          disabled={submitted}
+          aria-pressed={isSelected}
+          onClick={() => setSelected(i)}
           lang="de"
-          style={{
-            display:"inline-block",
-            backgroundColor:"#ffffff",
-            color:choices[selected].de === question.pair.de ? "#167a43" : "#c62828",
-            borderRadius:8,
-            padding:"7px 14px",
-            fontWeight:800,
-            overflowWrap:"anywhere",
-            maxWidth:"100%"
-          }}
         >
-          {choices[selected].de}
-        </span>
+          {c.de}
+        </button>
+        {showCorrect && (
+          <div className="dm-basics-answer-sound">
+            <Pronounce text={c.de} />
+          </div>
+        )}
       </div>
-    )}
+    );
+  })}
+</div>
+
     <div className="choices">{choices.map((c,i)=><div key={c.de} style={{display:"flex",alignItems:"center",gap:8,minWidth:0}}>
       <button type="button" className={`choice ${selected===i?"selected":""}`} style={{flex:"1 1 auto",minWidth:0}} disabled={submitted} aria-pressed={selected===i} onClick={()=>setSelected(i)} lang="de">{c.de}</button>
       <Pronounce text={c.de}/>
