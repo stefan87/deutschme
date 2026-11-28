@@ -265,13 +265,48 @@ normalizeSearch(`${w.de} ${w.sr}`).includes(normalizeSearch(query)) &&
       <progress className="bar" value={quizPos + 1} max={quizWords.length}/>
       <h2>{t("Šta znači reč", "Was bedeutet das Wort")} <span lang="de">„{quizWord.de}“</span>?</h2>
       <PronounceText text={quizWord.de}/>
-      <div className="dm-vocab-quiz-choices">{quizOptions.map((option, idx) => <button type="button" key={option.id}
-        className={`dm-vocab-quiz-option ${selected === idx ? "chosen" : ""} ${checked && option.id === quizWord.id ? "right" : ""} ${checked && selected === idx && option.id !== quizWord.id ? "wrong" : ""}`}
-        disabled={checked} aria-pressed={selected === idx} onClick={() => setSelected(idx)}><span aria-hidden="true">{option.visual || "📘"}</span>{option.sr}</button>)}</div>
-      {checked && <div className={`feedback ${selected !== null && quizOptions[selected]?.id === quizWord.id ? "ok" : "miss"}`} role="status">
-        <strong>{selected !== null && quizOptions[selected]?.id === quizWord.id ? "Sehr gut!" : t("Nije tačno.", "Nicht richtig.")}</strong>
-        <p>{t("Tačan odgovor", "Richtige Antwort")}: {quizWord.sr}</p>
-      </div>}
+      
+<div className="dm-vocab-quiz-choices">
+  {quizOptions.map((option, idx) => {
+    const isCorrect = option.id === quizWord.id;
+    const isSelected = selected === idx;
+    const stateClass = checked
+      ? isCorrect ? "dm-vocab-answer-correct" : isSelected ? "dm-vocab-answer-wrong" : ""
+      : isSelected ? "chosen" : "";
+    return (
+      <button
+        type="button"
+        key={option.id}
+        className={`dm-vocab-quiz-option ${stateClass}`}
+        disabled={checked}
+        aria-pressed={isSelected}
+        onClick={() => setSelected(idx)}
+      >
+        <span aria-hidden="true">{option.visual || "📘"}</span>
+        <span>{option.sr}</span>
+      </button>
+    );
+  })}
+</div>
+
+     
+      {checked && (
+  <div
+    className={`feedback ${selected !== null && quizOptions[selected]?.id === quizWord.id ? "ok" : "miss"}`}
+    role="status"
+  >
+    {selected !== null && quizOptions[selected]?.id === quizWord.id ? (
+      <strong>{t("Tačno!", "Richtig!")}</strong>
+    ) : (
+      <strong>
+        {t("Nije tačno. Tačan odgovor je ", "Nicht richtig. Die richtige Antwort ist ")}
+        <span className="dm-vocab-feedback-answer">{quizWord.sr}</span>
+        {/[.!?]$/.test(quizWord.sr.trim()) ? "" : "."}
+      </strong>
+    )}
+  </div>
+)}
+
       <button type="button" className="primary dm-vocab-next" disabled={selected === null} onClick={() => {
         if (!checked) { setChecked(true); return; }
         if (quizPos + 1 >= quizWords.length) { setMode("home"); reset(); return; }
