@@ -152,8 +152,12 @@ export const curriculum = units.map((unit, u) => {
     const full = cloze.replace(/[\[\]]/g, "");
     const [w, v] = r.words;
     const others = unit.rows.filter((x) => x.index !== i);
-    const choices = (a: string, rest: string[], tag: string) =>
-      shuffle([...new Set([a, ...rest])], `${id}:${tag}`);
+    const choices = (a: string, rest: string[], tag: string) => {
+      const unique = [a, ...rest.filter((v) => v.trim() && v !== a)]
+        .filter((v, i, arr) => arr.indexOf(v) === i);
+      const distractors = shuffle(unique.filter((v) => v !== a), `${id}:${tag}:pool`).slice(0, 3);
+      return shuffle([a, ...distractors], `${id}:${tag}:order`);
+    };
     const make = (
       kind: Kind,
       prompt: string,
@@ -216,9 +220,13 @@ export const curriculum = units.map((unit, u) => {
           accept: [b],
           options: choices(
             b,
-            others.slice(0, 2).map((x) => x.b),
+            [
+              ...others.map((x) => x.b),
+              ...units.flatMap((otherUnit) => otherUnit.rows.map((row) => row.b))
+                .filter((sentence) => sentence !== b),
+            ],
             "audio",
-          ),
+          ).slice(0, 4),
         },
       ),
       read: make("read", "", explanations.read, { ...readings[u], hard: true }),
