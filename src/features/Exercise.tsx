@@ -341,6 +341,13 @@ const tokens = typeMode && isAssistedTranslation
                   key={v}
                   type="button"
                   className={`choice ${!disabled && chosenOption ? "selected" : ""} ${resultClass}`.trim()}
+                   style={disabled && (correctOption || chosenOption) ? {
+                    background: "#ffffff",
+                    color: correctOption ? "#167a43" : "#c62828",
+                    border: `2px solid ${correctOption ? "#48b779" : "#e36a6a"}`,
+                    opacity: 1,
+                    fontWeight: 850,
+                  } : undefined}
                   aria-pressed={chosenOption}
                   onClick={() => setSingle(v)}
                 >
