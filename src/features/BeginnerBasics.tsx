@@ -183,7 +183,6 @@ export default function BeginnerBasics({state,onComplete}:{state:Study;onComplet
       ? "Sehr gut! Tačan odgovor!"
       : <>Nije tačno. Tačan odgovor je <strong lang="de">{question.pair.de}</strong>.</>}
   </div>
-)}
 
     )}    <button type="button" className="primary" disabled={selected===null} onClick={()=>submitted?next():setSubmitted(true)} style={{marginTop:16}}>{submitted?"Nastavi":"Proveri odgovor"}</button>
   </>}
