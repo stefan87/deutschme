@@ -273,11 +273,19 @@ normalizeSearch(`${w.de} ${w.sr}`).includes(normalizeSearch(query)) &&
     const stateClass = checked
       ? isCorrect ? "dm-vocab-answer-correct" : isSelected ? "dm-vocab-answer-wrong" : ""
       : isSelected ? "chosen" : "";
+    const resultStyle = checked ? {
+      opacity: 1,
+      background: isCorrect || isSelected ? "#ffffff" : "#062c3a",
+      color: isCorrect ? "#167a43" : isSelected ? "#c62828" : "#f1fcff",
+      border: isCorrect ? "2px solid #48b779" : isSelected ? "2px solid #e36a6a" : "1px solid #16808d",
+      fontWeight: 800,
+    } : undefined;
     return (
       <button
         type="button"
         key={option.id}
         className={`dm-vocab-quiz-option ${stateClass}`}
+        style={resultStyle}
         disabled={checked}
         aria-pressed={isSelected}
         onClick={() => setSelected(idx)}
@@ -288,6 +296,7 @@ normalizeSearch(`${w.de} ${w.sr}`).includes(normalizeSearch(query)) &&
     );
   })}
 </div>
+
 
      
       {checked && (
