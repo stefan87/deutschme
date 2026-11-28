@@ -33,29 +33,47 @@ export default function Placement({onDone}:{onDone:(r:PlacementResult)=>void}){
      onClick={() => setShowReview(v => !v)}>
      {showReview ? 'Sakrij odgovore' : 'Pregledaj svoje odgovore'}
    </button>
-   {showReview && <div style={{display:'grid',gap:12,margin:'14px 0',width:'100%'}}>
-     {placementItems.map((reviewItem,i) => {
-       const selectedIndex = answers[i];
-       const selectedText = selectedIndex === null ? 'Nije odgovoreno' : reviewItem.options[selectedIndex];
-       const isCorrect = selectedIndex === reviewItem.correct;
-       return <article key={i} className="card" style={{padding:14}}>
-         <small className="muted">Pitanje {i+1} / {placementItems.length} · {reviewItem.level}</small>
-         <p lang="de" style={{fontWeight:750,margin:'8px 0'}}>{reviewItem.prompt}</p>
-         <div>
-           <span lang="de" style={{display:'inline-block',background:'#fff',
-             color:isCorrect?'#167a43':'#c62828',borderRadius:8,
-             padding:'6px 12px',fontWeight:800,overflowWrap:'anywhere',maxWidth:'100%'}}>
-             {selectedText}
-           </span>
-         </div>
-         <p className={isCorrect?'muted':'callout'} style={{marginTop:9}}>
-           {isCorrect ? 'Tačno!' : 'Nije tačno.'}
-           {!isCorrect && <> Ispravan odgovor: <strong lang="de">{reviewItem.options[reviewItem.correct]}</strong>.</>}
-         </p>
-         {!isCorrect && <small>{reviewItem.explanation}</small>}
-       </article>;
-     })}
-   </div>}
+  {showReview && (
+  <div className="dm-placement-review">
+    {placementItems.map((reviewItem, i) => {
+      const selectedIndex = answers[i];
+      const isCorrect = selectedIndex === reviewItem.correct;
+      const correctText = reviewItem.options[reviewItem.correct] || "";
+      return (
+        <article key={i} className="card dm-placement-review-card">
+          <small className="muted">Pitanje {i + 1} / {placementItems.length} · {reviewItem.level}</small>
+          <p lang="de" className="dm-placement-review-prompt">{reviewItem.prompt}</p>
+          <div className="dm-placement-review-choices">
+            {reviewItem.options.map((option, optionIndex) => {
+              const correct = optionIndex === reviewItem.correct;
+              const wrong = optionIndex === selectedIndex && !correct;
+              return (
+                <div
+                  key={`${i}-${optionIndex}`}
+                  className={`dm-placement-review-choice ${correct ? "dm-placement-correct" : wrong ? "dm-placement-wrong" : ""}`}
+                >
+                  {option}
+                </div>
+              );
+            })}
+          </div>
+          <div className={`feedback ${isCorrect ? "ok" : "miss"}`} role="status">
+            {isCorrect ? (
+              <strong>Tačno!</strong>
+            ) : (
+              <strong>
+                Nije tačno. Tačan odgovor je {" "}
+                <span className="dm-placement-correct-text">{correctText}</span>
+                {/[.!?]$/.test(correctText.trim()) ? "" : "."}
+              </strong>
+            )}
+          </div>
+        </article>
+      );
+    })}
+  </div>
+)}
+
    <button className="primary" onClick={() => onDone(result)}>
      <GraduationCap size={18}/> Nastavi na podešavanje profila
    </button>
