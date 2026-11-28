@@ -1814,4 +1814,25 @@ h1, h2, h3, .brand {
 .exercise fieldset:disabled .dm-answer-choices .choice:not(.dm-answer-correct):not(.dm-answer-wrong) {
   opacity: .6;
 }
+/* Deutschly: correct answer with working sound button */
+.exercise .dm-answer-choices .choice.dm-answer-correct,
+.exercise .dm-answer-choices .choice.dm-answer-wrong {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  background: #fff !important;
+  opacity: 1 !important;
+  font-weight: 850;
+}
+.exercise .dm-answer-choices .choice.dm-answer-correct {
+  color: #167a43 !important;
+  border: 2px solid #48b779 !important;
+}
+.exercise .dm-answer-choices .choice.dm-answer-wrong {
+  color: #c62828 !important;
+  border: 2px solid #e36a6a !important;
+}
+.exercise .dm-answer-sound { display: inline-flex; align-items: center; flex: 0 0 auto; }
+.exercise .dm-answer-sound button { pointer-events: auto; }
 
