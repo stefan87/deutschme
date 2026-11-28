@@ -324,7 +324,9 @@ const tokens = typeMode && isAssistedTranslation
               ))}
             </div>
           </>
-       {q.options && !isWrite && !tokens.length && !q.questions && !q.pairs && (
+        ) : null}
+      </fieldset>
+      {q.options && !isWrite && !tokens.length && !q.questions && !q.pairs && (
         <div className="choices dm-answer-choices">
           {q.options.map(v => {
             const correctOption = grade(q, [v]).ok;
@@ -353,8 +355,6 @@ const tokens = typeMode && isAssistedTranslation
           })}
         </div>
       )}
-
-      </fieldset>
       <MiniConfetti active={!!cursor.graded?.ok} />
       {disabled && (
         <div className={`feedback ${cursor.graded?.ok ? "ok" : "miss"}`} role="status">
