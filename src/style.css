@@ -1767,4 +1767,29 @@ h1, h2, h3, .brand {
 :root[data-theme="light"] .dm-basics-answer:not(.dm-basics-correct):not(.dm-basics-wrong) .dm-basics-answer-button { color:#10303b; }
 :root[data-theme="light"] .dm-basics-selected:not(.dm-basics-correct):not(.dm-basics-wrong) { background:#dff8f8; border-color:#008e9b; }
 @media(max-width:740px) { .dm-basics-quiz { gap:10px; } .dm-basics-answer { min-height:60px; padding-left:15px; border-radius:14px; } .dm-basics-answer-button { font-size:1.08rem; } }
+/* BeginnerBasics: compact feedback with breathing room */
+.dm-basics-quiz { margin-bottom: 18px; }
+.dm-basics-feedback {
+  margin: 0 0 18px;
+  padding: 14px 17px;
+  border-radius: 14px;
+  font-size: 1rem;
+  font-weight: 800;
+  line-height: 1.5;
+  border: 1px solid transparent;
+}
+.dm-basics-feedback.ok {
+  background: #124a42;
+  border-color: #27c99d;
+  color: #b5ffe5;
+}
+.dm-basics-feedback.miss {
+  background: #492734;
+  border-color: #d76b86;
+  color: #ffd2dc;
+}
+.dm-basics-feedback strong { font-weight: 900; }
+:root[data-theme="light"] .dm-basics-feedback.ok { background: #dff8e9; color: #17634c; }
+:root[data-theme="light"] .dm-basics-feedback.miss { background: #ffedf1; color: #9c2949; }
+
 
