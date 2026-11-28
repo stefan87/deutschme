@@ -2033,6 +2033,16 @@ h1, h2, h3, .brand {
   text-decoration-thickness: 2px;
   text-underline-offset: 3px;
 }
+/* Vocabulary quiz: underline answer only in feedback message */
+.dm-vocab-quiz .dm-vocab-feedback-answer {
+  text-decoration-line: underline !important;
+  text-decoration-color: currentColor;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}
+.dm-vocab-quiz .dm-vocab-quiz-option.dm-vocab-answer-correct {
+  text-decoration: none !important;
+}
 
 
 }
