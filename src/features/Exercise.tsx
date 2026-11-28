@@ -190,7 +190,7 @@ const tokens = typeMode && isAssistedTranslation
         </div>
       )}
 
-      {disabled && !q.questions && !/_{3,}/.test(prompt) && feedbackValue && (
+      {disabled && !q.options && !q.questions && !/_{3,}/.test(prompt) && feedbackValue && (
         <div className="prompt" role="status">
           {feedbackBox(feedbackValue)}
         </div>
