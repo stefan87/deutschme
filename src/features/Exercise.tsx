@@ -325,11 +325,29 @@ const tokens = typeMode && isAssistedTranslation
             </div>
           </>
         ) : q.options && (
-          <div className="choices">
-            {q.options.map(v => (
-              <button key={v} type="button" className={single === v ? "choice selected" : "choice"}
-                aria-pressed={single === v} onClick={() => setSingle(v)}>{v}</button>
-            ))}
+          <div className="choices dm-answer-choices">
+            {q.options.map(v => {
+              const correctOption = grade(q, [v]).ok;
+              const chosenOption = single === v;
+              const resultClass = disabled
+                ? correctOption
+                  ? "dm-answer-correct"
+                  : chosenOption
+                    ? "dm-answer-wrong"
+                    : ""
+                : "";
+              return (
+                <button
+                  key={v}
+                  type="button"
+                  className={`choice ${!disabled && chosenOption ? "selected" : ""} ${resultClass}`.trim()}
+                  aria-pressed={chosenOption}
+                  onClick={() => setSingle(v)}
+                >
+                  {v}
+                </button>
+              );
+            })}
           </div>
         )}
       </fieldset>
