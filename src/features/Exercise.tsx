@@ -324,39 +324,36 @@ const tokens = typeMode && isAssistedTranslation
               ))}
             </div>
           </>
-        ) : q.options && (
-          <div className="choices dm-answer-choices">
-            {q.options.map(v => {
-              const correctOption = grade(q, [v]).ok;
-              const chosenOption = single === v;
-              const resultClass = disabled
-                ? correctOption
-                  ? "dm-answer-correct"
-                  : chosenOption
-                    ? "dm-answer-wrong"
-                    : ""
-                : "";
-              return (
-                <button
-                  key={v}
-                  type="button"
-                  className={`choice ${!disabled && chosenOption ? "selected" : ""} ${resultClass}`.trim()}
-                   style={disabled && (correctOption || chosenOption) ? {
-                    background: "#ffffff",
-                    color: correctOption ? "#167a43" : "#c62828",
-                    border: `2px solid ${correctOption ? "#48b779" : "#e36a6a"}`,
-                    opacity: 1,
-                    fontWeight: 850,
-                  } : undefined}
-                  aria-pressed={chosenOption}
-                  onClick={() => setSingle(v)}
-                >
-                  {v}
-                </button>
-              );
-            })}
-          </div>
-        )}
+       {q.options && !isWrite && !tokens.length && !q.questions && !q.pairs && (
+        <div className="choices dm-answer-choices">
+          {q.options.map(v => {
+            const correctOption = grade(q, [v]).ok;
+            const chosenOption = single === v;
+            const resultClass = disabled
+              ? correctOption ? "dm-answer-correct" : chosenOption ? "dm-answer-wrong" : ""
+              : chosenOption ? "selected" : "";
+            return disabled ? (
+              <div key={v} className={`choice ${resultClass}`}>
+                <span>{v}</span>
+                {correctOption && pronunciationText && (
+                  <span className="dm-answer-sound">
+                    <PronounceText text={pronunciationText} />
+                  </span>
+                )}
+              </div>
+            ) : (
+              <button
+                key={v}
+                type="button"
+                className={`choice ${resultClass}`}
+                aria-pressed={chosenOption}
+                onClick={() => setSingle(v)}
+              >{v}</button>
+            );
+          })}
+        </div>
+      )}
+
       </fieldset>
       <MiniConfetti active={!!cursor.graded?.ok} />
       {disabled && (
@@ -372,7 +369,7 @@ const tokens = typeMode && isAssistedTranslation
               )}
               {!q.questions && cursor.graded?.answer}
             </p>
-            {pronunciationText && (
+                        {pronunciationText && !q.options && (
               <PronounceText text={pronunciationText} />
             )}
           </div>
