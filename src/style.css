@@ -1983,6 +1983,56 @@ h1, h2, h3, .brand {
     gap: 10px !important;
   }
 }
+/* Deutschly 80 - vocabulary quiz answer states */
+.dm-vocab-quiz .dm-vocab-quiz-choices {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 9px;
+}
+.dm-vocab-quiz .dm-vocab-quiz-option {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  height: 76px;
+  min-height: 76px;
+  max-height: 76px;
+  margin: 0;
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 14px;
+  text-align: left;
+  line-height: 1.25;
+  overflow: hidden;
+}
+.dm-vocab-quiz .dm-vocab-quiz-option > span:last-child {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.dm-vocab-quiz .dm-vocab-quiz-option.dm-vocab-answer-correct {
+  background: #fff !important;
+  color: #167a43 !important;
+  border: 2px solid #48b779 !important;
+  opacity: 1 !important;
+}
+.dm-vocab-quiz .dm-vocab-quiz-option.dm-vocab-answer-wrong {
+  background: #fff !important;
+  color: #c62828 !important;
+  border: 2px solid #e36a6a !important;
+  opacity: 1 !important;
+}
+.dm-vocab-quiz .dm-vocab-quiz-option:disabled {
+  cursor: default;
+}
+.dm-vocab-quiz .dm-vocab-quiz-option:disabled:not(.dm-vocab-answer-correct):not(.dm-vocab-answer-wrong) {
+  opacity: .65;
+}
+.dm-vocab-quiz .dm-vocab-feedback-answer {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}
 
 
 }
