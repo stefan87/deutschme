@@ -2047,3 +2047,28 @@ h1, h2, h3, .brand {
 
 }
 
+/* Deutschly 84 - Placement review, consistent answer boxes */
+.dm-placement-review { display: grid; gap: 12px; width: 100%; margin: 14px 0; }
+.dm-placement-review-card { display: grid; gap: 12px; padding: 14px; }
+.dm-placement-review-prompt { font-weight: 750; margin: 0; }
+.dm-placement-review-choices { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.dm-placement-review-choice {
+  box-sizing: border-box; display: flex; align-items: center;
+  width: 100%; min-width: 0; min-height: 76px;
+  padding: 12px 16px; border: 1px solid #16808d; border-radius: 12px;
+  background: #062c3a; color: #f1fcff; font-weight: 750;
+  overflow-wrap: anywhere;
+}
+.dm-placement-review-choice.dm-placement-correct {
+  background: #fff; color: #167a43; border: 2px solid #48b779;
+}
+.dm-placement-review-choice.dm-placement-wrong {
+  background: #fff; color: #c62828; border: 2px solid #e36a6a;
+}
+.dm-placement-correct-text {
+  text-decoration: underline; text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}
+@media (max-width: 740px) {
+  .dm-placement-review-choices { grid-template-columns: 1fr; }
+}
