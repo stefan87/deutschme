@@ -232,7 +232,7 @@ export const curriculum = units.map((unit, u) => {
       read: make("read", "", explanations.read, { ...readings[u], hard: true }),
       grammar: make(
         "grammar",
-        `___ ${w.de.slice(4)}`,
+`Welcher bestimmte Artikel passt im Nominativ? ___ ${w.de.slice(4)}`,
         pair(
           `Uči oblik sa članom: ${w.de}.`,
           `Lerne den Artikel zusammen mit dem Nomen: ${w.de}.`,
@@ -241,7 +241,7 @@ export const curriculum = units.map((unit, u) => {
           accept: [w.de.split(" ")[0]],
           options: choices(
             w.de.split(" ")[0],
-            ["der", "die", "das"],
+            ["der", "die", "das", "den"],
             "article",
           ),
           word: w,
