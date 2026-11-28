@@ -359,10 +359,18 @@ const tokens = typeMode && isAssistedTranslation
       {disabled && (
         <div className={`feedback ${cursor.graded?.ok ? "ok" : "miss"}`} role="status">
           {q.options && !isWrite && !tokens.length && !q.questions && !q.pairs ? (
-            <strong>
-              {cursor.graded?.ok
-                ? t("Tačno!", "Richtig!")
-                : t(`Nije tačno. Tačan odgovor je ${cursor.graded?.answer || ""}.`, `Nicht richtig. Die richtige Antwort ist ${cursor.graded?.answer || ""}.`)}
+           <strong className="dm-choice-feedback-text">
+              {cursor.graded?.ok ? (
+                t("Tačno!", "Richtig!")
+              ) : (
+                <>
+                  {t("Nije tačno. Tačan odgovor je ", "Nicht richtig. Die richtige Antwort ist ")}
+                  <span className="dm-choice-feedback-answer">
+                    {(cursor.graded?.answer || "").trim()}
+                  </span>
+                  {/[.!?]$/.test((cursor.graded?.answer || "").trim()) ? "" : "."}
+                </>
+              )}
             </strong>
           ) : (
             <>
