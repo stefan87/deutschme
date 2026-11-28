@@ -136,7 +136,7 @@ export default function BeginnerBasics({state,onComplete}:{state:Study;onComplet
     <progress className="bar" value={index} max={quiz.length} aria-label="Napredak testa"/>
     <div className="picture" style={{minHeight:110}}><span style={{fontSize:55}} aria-hidden="true">{question.pair.visual||"📘"}</span></div>
     <h2>{unit.id==="objects"?"Koja nemačka reč odgovara slici?":`Kako se na nemačkom kaže: ${question.pair.sr}?`}</h2>
-        <div className="choices dm-basics-quiz">
+      <div className="choices dm-basics-quiz">
   {choices.map((c, i) => {
     const isCorrect = c.de === question.pair.de;
     const isSelected = selected === i;
@@ -172,22 +172,19 @@ export default function BeginnerBasics({state,onComplete}:{state:Study;onComplet
   })}
 </div>
 
-    <div className="choices">{choices.map((c,i)=><div key={c.de} style={{display:"flex",alignItems:"center",gap:8,minWidth:0}}>
-      <button type="button" className={`choice ${selected===i?"selected":""}`} style={{flex:"1 1 auto",minWidth:0}} disabled={submitted} aria-pressed={selected===i} onClick={()=>setSelected(i)} lang="de">{c.de}</button>
-      <Pronounce text={c.de}/>
-    </div>)}</div>
 {submitted && selected !== null && (
-      <div className={`feedback ${choices[selected].de === question.pair.de ? "ok" : "miss"}`}>
-        <strong>
-          {choices[selected].de === question.pair.de
-            ? "Sehr gut!"
-            : "Nije tačno. Pogledaj ispravan odgovor:"}
-        </strong>
-        <p>
-          {choices[selected].de === question.pair.de ? "Tačan odgovor: " : "Ispravan odgovor: "}
-          <strong lang="de">{question.pair.de}</strong>
-        </p>
-      </div>
+  <div
+    className={`dm-basics-feedback ${
+      choices[selected].de === question.pair.de ? "ok" : "miss"
+    }`}
+    role="status"
+  >
+    {choices[selected].de === question.pair.de
+      ? "Sehr gut! Tačan odgovor!"
+      : <>Nije tačno. Tačan odgovor je <strong lang="de">{question.pair.de}</strong>.</>}
+  </div>
+)}
+
     )}    <button type="button" className="primary" disabled={selected===null} onClick={()=>submitted?next():setSubmitted(true)} style={{marginTop:16}}>{submitted?"Nastavi":"Proveri odgovor"}</button>
   </>}
   {stage==="done"&&<><h2>Sehr gut! 🎉</h2><p>Rezultat: {Math.round(correct*100/quiz.length)}%</p><p>Rezultat je sačuvan u tvom profilu. Ponovljeni test ne donosi duple šargarepice.</p><button className="primary" type="button" onClick={()=>chooseUnit((unitIndex+1)%units.length)}>Sledeća celina →</button></>}
