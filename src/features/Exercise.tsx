@@ -358,31 +358,38 @@ const tokens = typeMode && isAssistedTranslation
       <MiniConfetti active={!!cursor.graded?.ok} />
       {disabled && (
         <div className={`feedback ${cursor.graded?.ok ? "ok" : "miss"}`} role="status">
-          <strong>
-            {cursor.graded?.ok ? <Check size={20} /> : <X size={19} />}{" "}
-            {cursor.graded?.ok ? "Sehr gut!" : "Keine Sorge, weiter üben!"}
-          </strong>
-<div style={{display:"flex",alignItems:"center",gap:12,flexWrap:"wrap"}}>
-            <p style={{margin:0,flex:"0 1 auto"}}>
-              {!cursor.graded?.ok && !q.questions && (
-                <strong>{t("Tačan odgovor: ", "Richtige Antwort: ")}</strong>
-              )}
-              {!q.questions && cursor.graded?.answer}
-            </p>
-                        {pronunciationText && !q.options && (
-              <PronounceText text={pronunciationText} />
-            )}
-          </div>
-          <small>
-            {q.explain[de ? 1 : 0]}
-            {cursor.graded?.points
-              ? ` · +${cursor.graded.points} 🥕`
-              : cursor.graded?.ok
-                ? ` · ${t("Šargarepice već osvojene", "Karotten bereits erhalten")}`
-                : ""}
-          </small>
+          {q.options && !isWrite && !tokens.length && !q.questions && !q.pairs ? (
+            <strong>
+              {cursor.graded?.ok
+                ? t("Tačno!", "Richtig!")
+                : t(`Nije tačno. Tačan odgovor je ${cursor.graded?.answer || ""}.`, `Nicht richtig. Die richtige Antwort ist ${cursor.graded?.answer || ""}.`)}
+            </strong>
+          ) : (
+            <>
+              <strong>
+                {cursor.graded?.ok ? <Check size={20} /> : <X size={19} />}{" "}
+                {cursor.graded?.ok ? "Sehr gut!" : "Keine Sorge, weiter üben!"}
+              </strong>
+              <div style={{ display: "flex", alignItems: "center", gap: 12, flexWrap: "wrap" }}>
+                <p style={{ margin: 0, flex: "0 1 auto" }}>
+                  {!cursor.graded?.ok && !q.questions && (
+                    <strong>{t("Tačan odgovor: ", "Richtige Antwort: ")}</strong>
+                  )}
+                  {!q.questions && cursor.graded?.answer}
+                </p>
+                {pronunciationText && !q.options && <PronounceText text={pronunciationText} />}
+              </div>
+              <small>{q.explain[de ? 1 : 0]}</small>
+            </>
+          )}
+          {cursor.graded?.points ? (
+            <small>{`+${cursor.graded.points} 🥕`}</small>
+          ) : cursor.graded?.ok ? (
+            <small>{t("Šargarepice već osvojene", "Karotten bereits erhalten")}</small>
+          ) : null}
         </div>
       )}
+
       <button type="submit" className="primary exercise-action" disabled={!disabled && !valid}>
         {disabled
           ? t("Nastavi", "Weiter")
